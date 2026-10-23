@@ -1,0 +1,12 @@
+{
+  "name": "Gameu Controller",
+  "short_name": "Gameu",
+  "start_url": "/c",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#0d1021",
+  "theme_color": "#0d1021",
+  "lang": "he",
+  "dir": "rtl",
+  "icons": [{ "src": "/c/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

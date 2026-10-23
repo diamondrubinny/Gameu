@@ -1,0 +1,22 @@
+/* Base styles for Gameu games (TV, 16:9, 10-foot UI). */
+:root { --text-scale: 1; --bg: #0d1021; --panel: #1d2244; --text: #f4f5ff; --muted: #b7bbe0; --accent: #ffcc33; --good: #4ee59a; --bad: #ff5d73; color-scheme: dark; }
+:root.high-contrast { --bg: #000; --panel: #000; --text: #fff; --muted: #fff; --accent: #ff0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); }
+body { font: 400 calc(clamp(16px, 1.2vw, 30px) * var(--text-scale))/1.4 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Hebrew', Arial, sans-serif; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.center { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
+.big { font-size: 3em; font-weight: 900; }
+.panel { background: var(--panel); border-radius: 1em; padding: 1em 1.4em; }
+:root.high-contrast .panel { border: 2px solid #fff; }
+.scoreboard { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .35em; }
+.scoreboard li { display: flex; align-items: center; gap: .5em; padding: .25em .6em; border-radius: .5em; background: rgba(255,255,255,.06); border-inline-start: .3em solid var(--c, #fff); }
+.scoreboard .n { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.scoreboard .s { font-weight: 800; color: var(--accent); }
+.timer { height: .5em; background: rgba(255,255,255,.15); border-radius: 999px; overflow: hidden; }
+.timer > div { height: 100%; background: var(--accent); width: 100%; transform-origin: left; }
+[dir="rtl"] .timer > div { transform-origin: right; }
+@keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.pop { animation: pop .35s ease-out; }
+:root.reduce-motion * { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

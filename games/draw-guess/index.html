@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Draw &amp; Guess</title>
+  <link rel="stylesheet" href="/sdk/game-base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <section class="board">
+      <div class="top">
+        <h1 id="title"></h1>
+        <p id="hint" class="hint" dir="auto"></p>
+      </div>
+      <canvas id="canvas" role="img"></canvas>
+      <div class="timer"><div id="timer"></div></div>
+    </section>
+    <aside class="side panel">
+      <ol class="scoreboard" id="scores"></ol>
+      <h2 id="feed-title"></h2>
+      <ul class="feed" id="feed"></ul>
+    </aside>
+  </main>
+  <div id="overlay" class="center"></div>
+  <div id="live" class="sr-only" aria-live="polite"></div>
+  <script src="main.js"></script>
+</body>
+</html>

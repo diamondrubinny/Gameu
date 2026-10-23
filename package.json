@@ -1,0 +1,37 @@
+{
+  "name": "gameu",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turn any TV into a game console, run from USB, with phones as controllers.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "start": "node dist/server/server.cjs",
+    "start:kiosk": "node dist/server/server.cjs --kiosk",
+    "typecheck": "tsc -p tsconfig.node.json && tsc -p tsconfig.web.json && tsc -p tsconfig.e2e.json",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "build:usb": "node scripts/build-usb.mjs",
+    "check": "npm run typecheck && npm run test && npm run build && npm run test:e2e"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4",
+    "ws": "^8.22.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22.20.5",
+    "@types/qrcode": "^1.5.6",
+    "@types/ws": "^8.18.2",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}
