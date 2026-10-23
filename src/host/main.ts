@@ -191,7 +191,9 @@ class HostApp {
       Backspace: 'back',
       Home: 'home',
     };
-    const action = map[e.key];
+    // TV remotes: older TV browsers report legacy key names / codes (webOS Back = 461, Tizen Back = 10009).
+    const legacy: Record<number, Action> = { 37: 'left', 38: 'up', 39: 'right', 40: 'down', 13: 'ok', 461: 'back', 10009: 'back', 8: 'back', 27: 'back' };
+    const action = map[e.key] ?? map[{ Left: 'ArrowLeft', Right: 'ArrowRight', Up: 'ArrowUp', Down: 'ArrowDown', Esc: 'Escape', XF86Back: 'Escape', GoBack: 'Escape', BrowserBack: 'Escape' }[e.key] ?? ''] ?? legacy[e.keyCode];
     if (!action) return;
     if (this.screen === 'game' && !this.overlay) {
       if (action === 'back' || action === 'home') {
