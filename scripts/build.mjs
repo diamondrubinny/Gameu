@@ -78,7 +78,7 @@ async function buildOptions() {
     {
       ...common,
       entryPoints: [
-        { in: path.join(root, 'src/host/main.ts'), out: 'public/host/host' },
+        { in: path.join(root, 'src/host/entry.ts'), out: 'public/host/host' },
         { in: path.join(root, 'src/controller/main.ts'), out: 'public/c/controller' },
         { in: path.join(root, 'src/sdk/standalone.ts'), out: 'public/sdk/gameu' },
         ...games,

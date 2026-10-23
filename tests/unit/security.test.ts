@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { FailureLimiter, TokenBucket } from '../../src/server/rate-limit';
+import { FailureLimiter, TokenBucket } from '../../src/core/rate-limit';
 import { isAllowedHostHeader } from '../../src/server/security';
 import { safeResolve } from '../../src/server/static';
 import { isLoopback, lanAddresses } from '../../src/server/network';

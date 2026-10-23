@@ -1,6 +1,5 @@
 import type { HostToServer, ServerToHost } from '../shared/protocol';
-
-export type HostConnectionState = 'connecting' | 'open' | 'forbidden' | 'replaced';
+import type { HostConnectionState } from './platform';
 
 /**
  * TV-side connection: obtains the per-run host secret (loopback or host key only),

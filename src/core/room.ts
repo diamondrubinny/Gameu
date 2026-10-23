@@ -1,4 +1,3 @@
-import { randomUUID } from 'node:crypto';
 import {
   ControllerLayoutSchema,
   LIMITS,
@@ -13,7 +12,7 @@ import {
 } from '../shared/protocol';
 import type { Logger } from './logger';
 import { TokenBucket } from './rate-limit';
-import { randomRoomCode, randomToken, safeEqual } from './tokens';
+import { randomRoomCode, randomToken, safeEqual, uuid } from './random';
 
 /** Transport-agnostic connection (a WebSocket in production, a fake in tests). */
 export interface Peer<T> {
@@ -30,7 +29,7 @@ export interface Clock {
 export const realClock: Clock = {
   now: () => Date.now(),
   setTimeout: (fn, ms) => setTimeout(fn, ms),
-  clearTimeout: (h) => clearTimeout(h as NodeJS.Timeout),
+  clearTimeout: (h) => clearTimeout(h as ReturnType<typeof setTimeout>),
 };
 
 interface Player {
@@ -159,7 +158,7 @@ export class Room {
     if (this.players.size >= LIMITS.maxPlayers) return { ok: false, code: 'room_full' };
 
     const player: Player = {
-      id: randomUUID(),
+      id: uuid(),
       nickname: this.uniqueNickname(msg.nickname),
       avatar: msg.avatar,
       reconnectToken: randomToken(),

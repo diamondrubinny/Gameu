@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { ServerToController, ServerToHost } from '../../src/shared/protocol';
 import { silentLogger } from '../../src/server/logger';
-import { Room, type Clock, type Peer } from '../../src/server/room';
+import { Room, type Clock, type Peer } from '../../src/core/room';
 
 class FakePeer<T> implements Peer<T> {
   sent: T[] = [];

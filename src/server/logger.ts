@@ -1,17 +1,10 @@
+import type { Logger } from '../core/logger';
 import type { LogLevel } from './config';
 
-const ORDER: Record<LogLevel, number> = { debug: 10, info: 20, warn: 30, error: 40 };
+export type { Logger } from '../core/logger';
+export { silentLogger } from '../core/logger';
 
-/**
- * Minimal structured logger. Callers must never pass secrets, tokens,
- * nicknames, IP addresses or raw message payloads.
- */
-export interface Logger {
-  debug(event: string, fields?: Record<string, unknown>): void;
-  info(event: string, fields?: Record<string, unknown>): void;
-  warn(event: string, fields?: Record<string, unknown>): void;
-  error(event: string, fields?: Record<string, unknown>): void;
-}
+const ORDER: Record<LogLevel, number> = { debug: 10, info: 20, warn: 30, error: 40 };
 
 export function createLogger(level: LogLevel, sink: (line: string) => void = (l) => process.stdout.write(l + '\n')): Logger {
   const min = ORDER[level];
@@ -21,5 +14,3 @@ export function createLogger(level: LogLevel, sink: (line: string) => void = (l)
   };
   return { debug: log('debug'), info: log('info'), warn: log('warn'), error: log('error') };
 }
-
-export const silentLogger: Logger = { debug() {}, info() {}, warn() {}, error() {} };

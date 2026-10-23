@@ -1,24 +1,19 @@
 import http, { type IncomingMessage, type ServerResponse } from 'node:http';
 import path from 'node:path';
-import QRCode from 'qrcode';
 import { WebSocketServer, type WebSocket, type RawData } from 'ws';
-import {
-  ControllerToServerSchema,
-  HostToServerSchema,
-  LIMITS,
-  type GameManifest,
-  type ServerToController,
-  type ServerToHost,
-} from '../shared/protocol';
+import { LIMITS, type GameManifest, type ServerToHost } from '../shared/protocol';
+import { ConnectionGate, ControllerSession } from '../core/controller-session';
+import { HostSession } from '../core/host-session';
+import { randomToken, safeEqual } from '../core/random';
+import { Room, type Peer } from '../core/room';
+import { buildRoomInfo } from '../core/room-info';
+import type { TextTransport } from '../core/transport';
 import type { AppConfig } from './config';
 import type { Logger } from './logger';
 import { lanAddresses, isLoopback } from './network';
-import { FailureLimiter } from './rate-limit';
-import { createMessageBudget, Room, type Peer } from './room';
 import { applySecurityHeaders, clientIp, isAllowedHostHeader, isSameOrigin } from './security';
 import type { SettingsStore } from './settings';
 import { safeResolve, serveFile } from './static';
-import { randomToken, safeEqual } from './tokens';
 
 export interface AppDeps {
   config: AppConfig;
@@ -39,18 +34,13 @@ export interface App {
 }
 
 const MAX_BODY = 4 * 1024;
-const MAX_CONTROLLER_CONNECTIONS = 32;
-const MAX_CONNECTIONS_PER_IP = 6;
-const MAX_INVALID_MESSAGES = 20;
 const HEARTBEAT_MS = 15_000;
-const HOST_AUTH_TIMEOUT_MS = 5_000;
 
 export function createApp(deps: AppDeps): App {
   const { config, logger: log, settings, games } = deps;
   const room = deps.room ?? new Room({ logger: log });
   const hostSecret = randomToken();
-  const joinLimiter = new FailureLimiter(8, 60_000, 60_000);
-  const connectionsPerIp = new Map<string, number>();
+  const gate = new ConnectionGate();
   const publicDir = path.join(config.appRoot, 'public');
   const gamesDir = path.join(config.appRoot, 'games');
   const getLanIps = deps.lanIps ?? (() => lanAddresses());
@@ -179,21 +169,20 @@ export function createApp(deps: AppDeps): App {
       return;
     }
     if (url.pathname === '/ws/controller') {
-      const count = connectionsPerIp.get(ip) ?? 0;
-      if (count >= MAX_CONNECTIONS_PER_IP || totalControllers() >= MAX_CONTROLLER_CONNECTIONS) return reject(429);
-      if (joinLimiter.isBlocked(ip)) return reject(429);
-      connectionsPerIp.set(ip, count + 1);
-      wss.handleUpgrade(req, socket, head, (ws) => onController(ws, ip));
+      if (!gate.admit(ip)) return reject(429);
+      // Release the reserved slot if the handshake fails before a session exists.
+      let upgraded = false;
+      socket.once('close', () => {
+        if (!upgraded) gate.release(ip);
+      });
+      wss.handleUpgrade(req, socket, head, (ws) => {
+        upgraded = true;
+        onController(ws, ip);
+      });
       return;
     }
     reject(404);
   });
-
-  function totalControllers(): number {
-    let n = 0;
-    for (const v of connectionsPerIp.values()) n += v;
-    return n;
-  }
 
   function track(ws: WebSocket): void {
     alive.set(ws, true);
@@ -216,123 +205,32 @@ export function createApp(deps: AppDeps): App {
   }, HEARTBEAT_MS);
   heartbeat.unref();
 
-  function peerOf<T>(ws: WebSocket): Peer<T> {
+  function transportOf(ws: WebSocket): TextTransport {
     return {
-      send: (msg: T) => {
-        if (ws.readyState === ws.OPEN) ws.send(JSON.stringify(msg));
+      send: (text) => {
+        if (ws.readyState === ws.OPEN) ws.send(text);
       },
       close: (code, reason) => ws.close(code, reason),
     };
   }
 
-  function onHost(ws: WebSocket): void {
-    track(ws);
-    const peer = peerOf<ServerToHost>(ws);
-    let authed = false;
-    const authTimer = setTimeout(() => {
-      if (!authed) ws.close(4401, 'auth timeout');
-    }, HOST_AUTH_TIMEOUT_MS);
-
-    ws.on('message', (data: RawData, isBinary: boolean) => {
-      const parsed = isBinary ? null : parseJson(data);
-      const result = parsed === null ? null : HostToServerSchema.safeParse(parsed);
-      if (!result || !result.success) {
-        peer.send({ type: 'error', code: 'invalid' });
-        if (!authed) ws.close(4400, 'invalid');
-        return;
-      }
-      const msg = result.data;
-      if (!authed) {
-        if (msg.type !== 'auth' || !safeEqual(msg.secret, hostSecret)) {
-          peer.send({ type: 'error', code: 'unauthorized' });
-          ws.close(4401, 'unauthorized');
-          return;
-        }
-        authed = true;
-        clearTimeout(authTimer);
-        room.attachHost(peer);
-        void sendRoom(peer);
-        return;
-      }
-      if (msg.type === 'auth') return;
-      room.handleHostMessage(msg);
-      if (msg.type === 'new_code' || msg.type === 'lock') void sendRoom(peer);
-    });
-    ws.on('close', () => {
-      clearTimeout(authTimer);
-      if (authed) room.detachHost(peer);
-    });
-    ws.on('error', () => ws.terminate());
+  function sendRoom(peer: Peer<ServerToHost>): void {
+    void buildRoomInfo(room, getLanIps(), boundPort).then((info) => peer.send(info));
   }
 
-  async function sendRoom(peer: Peer<ServerToHost>): Promise<void> {
-    const url = joinUrl();
-    const qrSvg = await QRCode.toString(url, { type: 'svg', margin: 1, errorCorrectionLevel: 'M', color: { dark: '#000000', light: '#ffffff' } });
-    const urls = getLanIps().map((ip) => `http://${ip}:${boundPort}/c`);
-    peer.send({ type: 'room', code: room.code, urls, joinUrl: url, qrSvg, locked: room.locked });
+  function onHost(ws: WebSocket): void {
+    track(ws);
+    const session = new HostSession(room, transportOf(ws), hostSecret, sendRoom);
+    ws.on('message', (data: RawData, isBinary: boolean) => session.handleText(isBinary ? null : rawToText(data)));
+    ws.on('close', () => session.handleClose());
+    ws.on('error', () => ws.terminate());
   }
 
   function onController(ws: WebSocket, ip: string): void {
     track(ws);
-    const peer = peerOf<ServerToController>(ws);
-    const budget = createMessageBudget();
-    let playerId: string | null = null;
-    let invalid = 0;
-    let lastRateNotice = 0;
-
-    ws.on('message', (data: RawData, isBinary: boolean) => {
-      if (!budget.take()) {
-        const t = Date.now();
-        if (t - lastRateNotice > 1000) {
-          peer.send({ type: 'error', code: 'rate_limited' });
-          lastRateNotice = t;
-        }
-        return;
-      }
-      const parsed = isBinary ? null : parseJson(data);
-      const result = parsed === null ? null : ControllerToServerSchema.safeParse(parsed);
-      if (!result || !result.success) {
-        invalid += 1;
-        peer.send({ type: 'error', code: 'invalid' });
-        if (invalid > MAX_INVALID_MESSAGES) ws.close(1008, 'too many invalid messages');
-        return;
-      }
-      const msg = result.data;
-      switch (msg.type) {
-        case 'ping':
-          peer.send({ type: 'pong', t: msg.t });
-          return;
-        case 'join': {
-          if (playerId) return;
-          if (joinLimiter.isBlocked(ip)) {
-            peer.send({ type: 'error', code: 'rate_limited' });
-            ws.close(4029, 'rate limited');
-            return;
-          }
-          const out = room.join(peer, msg);
-          if (out.ok) {
-            playerId = out.playerId;
-          } else {
-            if (out.code === 'bad_room') joinLimiter.fail(ip);
-            peer.send({ type: 'error', code: out.code });
-          }
-          return;
-        }
-        case 'input':
-          if (!playerId) {
-            peer.send({ type: 'error', code: 'not_joined' });
-            return;
-          }
-          room.handleInput(playerId, msg.input);
-          return;
-      }
-    });
-    ws.on('close', () => {
-      const n = (connectionsPerIp.get(ip) ?? 1) - 1;
-      if (n <= 0) connectionsPerIp.delete(ip);
-      else connectionsPerIp.set(ip, n);
-      if (playerId) room.disconnect(playerId, peer);
-    });
+    const session = new ControllerSession(room, transportOf(ws), ip, gate);
+    ws.on('message', (data: RawData, isBinary: boolean) => session.handleText(isBinary ? null : rawToText(data)));
+    ws.on('close', () => session.handleClose());
     ws.on('error', () => ws.terminate());
   }
 
@@ -359,13 +257,8 @@ export function createApp(deps: AppDeps): App {
 
 // ---------------- helpers ----------------
 
-function parseJson(data: RawData): unknown {
-  try {
-    const text = Array.isArray(data) ? Buffer.concat(data).toString('utf8') : Buffer.from(data as ArrayBuffer).toString('utf8');
-    return JSON.parse(text) as unknown;
-  } catch {
-    return null;
-  }
+function rawToText(data: RawData): string {
+  return Array.isArray(data) ? Buffer.concat(data).toString('utf8') : Buffer.from(data as ArrayBuffer).toString('utf8');
 }
 
 function headerValue(req: IncomingMessage, name: string): string | null {

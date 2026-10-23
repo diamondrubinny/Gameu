@@ -15,7 +15,7 @@ import {
   type Settings,
 } from '../shared/protocol';
 import { $, clear, h } from '../ui/dom';
-import { HostConnection, type HostConnectionState } from './connection';
+import type { HostConnectionState, HostPlatform } from './platform';
 import { lang, setLang, t } from './i18n';
 import { sfx, setVolume } from './sfx';
 import { nextInDirection, type Direction } from './spatial';
@@ -40,8 +40,7 @@ interface Overlay {
 const GAME_READY_TIMEOUT_MS = 10_000;
 const RESULTS_AUTO_CLOSE_MS = 20_000;
 
-class HostApp {
-  private readonly conn: HostConnection;
+export class HostApp {
   private readonly root = $('#app');
   private readonly live = $('#live');
   private readonly toastEl = $('#toast');
@@ -56,11 +55,7 @@ class HostApp {
   private toastTimer = 0;
   private connState: HostConnectionState = 'connecting';
 
-  constructor() {
-    this.conn = new HostConnection(
-      (m) => this.onServer(m),
-      (s) => this.onConnState(s),
-    );
+  constructor(private readonly platform: HostPlatform) {
     window.addEventListener('keydown', (e) => this.onKey(e));
     window.addEventListener('message', (e) => this.onGameMessage(e));
   }
@@ -68,27 +63,40 @@ class HostApp {
   async start(): Promise<void> {
     await Promise.all([this.loadSettings(), this.loadGames()]);
     this.render();
-    await this.conn.start();
+    await this.platform.start(
+      (m) => this.onServer(m),
+      (s) => this.onConnState(s),
+    );
+  }
+
+  /**
+   * Hardware Back (e.g. Android TV remote). Returns false when there is nothing
+   * left to go back to, so the app may exit.
+   */
+  handleBack(): boolean {
+    if (this.overlay) {
+      this.overlay.handle('back');
+      return true;
+    }
+    if (this.screen === 'game') {
+      this.confirmExitGame();
+      return true;
+    }
+    if (this.screen === 'settings') {
+      this.go('home');
+      return true;
+    }
+    return false;
   }
 
   // ---------------- data ----------------
 
   private async loadSettings(): Promise<void> {
-    try {
-      const res = await fetch('/api/settings', { cache: 'no-store' });
-      this.applySettings(((await res.json()) as { settings: Settings }).settings);
-    } catch {
-      this.applySettings(DEFAULT_SETTINGS);
-    }
+    this.applySettings(await this.platform.loadSettings());
   }
 
   private async loadGames(): Promise<void> {
-    try {
-      const res = await fetch('/api/games', { cache: 'no-store' });
-      this.games = ((await res.json()) as { games: GameManifest[] }).games;
-    } catch {
-      this.games = [];
-    }
+    this.games = await this.platform.loadGames();
   }
 
   private applySettings(s: Settings): void {
@@ -102,20 +110,9 @@ class HostApp {
   }
 
   private async saveSettings(patch: Partial<Settings>): Promise<void> {
-    const secret = this.conn.hostSecret;
-    const optimistic = { ...this.settings, ...patch };
-    this.applySettings(optimistic);
-    if (!secret) return;
-    try {
-      const res = await fetch('/api/settings', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'X-Gameu-Host': secret },
-        body: JSON.stringify(patch),
-      });
-      if (res.ok) this.applySettings(((await res.json()) as { settings: Settings }).settings);
-    } catch {
-      /* keep optimistic value */
-    }
+    this.applySettings({ ...this.settings, ...patch }); // optimistic
+    const saved = await this.platform.saveSettings(patch);
+    if (saved) this.applySettings(saved);
   }
 
   // ---------------- server events ----------------
@@ -264,7 +261,7 @@ class HostApp {
   // ---------------- controller layouts ----------------
 
   private sendLayout(layout: ControllerLayout, target: 'all' | string = 'all'): void {
-    this.conn.send({ type: 'layout', target, layout });
+    this.platform.send({ type: 'layout', target, layout });
   }
 
   /** Admin phone gets the d-pad; everyone else waits. */
@@ -367,14 +364,14 @@ class HostApp {
       });
     });
     const locked = this.room?.locked ?? false;
-    row('lock', t.roomLock, onOff(locked), () => this.conn.send({ type: 'lock', locked: !locked }), locked);
+    row('lock', t.roomLock, onOff(locked), () => this.platform.send({ type: 'lock', locked: !locked }), locked);
     row('code', t.newCode, this.room?.code ?? '', () => {
-      this.conn.send({ type: 'new_code' });
+      this.platform.send({ type: 'new_code' });
       this.announce(t.codeChanged);
     });
     for (const p of this.players) {
       if (p.isAdmin) continue;
-      row(`kick:${p.id}`, t.kick(p.nickname), null, () => this.conn.send({ type: 'kick', playerId: p.id }));
+      row(`kick:${p.id}`, t.kick(p.nickname), null, () => this.platform.send({ type: 'kick', playerId: p.id }));
     }
     row('a11y', t.accessibility, null, () => this.openDocument('/legal/accessibility.html', t.accessibility));
     row('privacy', t.privacy, null, () => this.openDocument('/legal/privacy.html', t.privacy));
@@ -637,10 +634,10 @@ class HostApp {
         this.postToGame({ gameu: 1, type: 'init', players: this.gamePlayers(), settings: this.settings });
         break;
       case 'layout':
-        if (knownTarget(msg.target)) this.conn.send({ type: 'layout', target: msg.target, layout: msg.layout });
+        if (knownTarget(msg.target)) this.platform.send({ type: 'layout', target: msg.target, layout: msg.layout });
         break;
       case 'haptic':
-        if (knownTarget(msg.target)) this.conn.send({ type: 'haptic', target: msg.target, pattern: msg.pattern });
+        if (knownTarget(msg.target)) this.platform.send({ type: 'haptic', target: msg.target, pattern: msg.pattern });
         break;
       case 'end':
         this.showResults(msg.results);
@@ -659,4 +656,3 @@ class HostApp {
   }
 }
 
-void new HostApp().start();
