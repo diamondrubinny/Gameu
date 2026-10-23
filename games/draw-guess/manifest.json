@@ -1,0 +1,12 @@
+{
+  "id": "draw-guess",
+  "version": "1.0.0",
+  "name": { "he": "צייר ונחש", "en": "Draw & Guess" },
+  "description": { "he": "שחקן אחד מצייר בטלפון, כל השאר מנחשים. כל אחד מצייר פעם אחת.", "en": "One player draws on their phone, everyone else guesses. Everyone draws once." },
+  "minPlayers": 2,
+  "maxPlayers": 8,
+  "entry": "index.html",
+  "icon": "icon.svg",
+  "controller": "mixed",
+  "accessibility": { "colorIndependent": true, "extendedTime": true, "noFlashing": true }
+}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snakes</title>
+  <link rel="stylesheet" href="/sdk/game-base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <canvas id="board" role="img" aria-label="Snake board"></canvas>
+    <aside class="side panel">
+      <h1 id="title">🐍</h1>
+      <p class="clock" id="clock" aria-live="off"></p>
+      <ol class="scoreboard" id="scores"></ol>
+    </aside>
+  </main>
+  <div id="overlay" class="center"></div>
+  <div id="live" class="sr-only" aria-live="polite"></div>
+  <script src="main.js"></script>
+</body>
+</html>

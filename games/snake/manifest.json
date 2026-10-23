@@ -1,0 +1,12 @@
+{
+  "id": "snake",
+  "version": "1.0.0",
+  "name": { "he": "נחשים", "en": "Snakes" },
+  "description": { "he": "אספו פירות, התארכו והתחמקו מהנחשים של כולם. עד 8 שחקנים.", "en": "Eat fruit, grow longer and dodge everyone else's snake. Up to 8 players." },
+  "minPlayers": 1,
+  "maxPlayers": 8,
+  "entry": "index.html",
+  "icon": "icon.svg",
+  "controller": "dpad",
+  "accessibility": { "colorIndependent": true, "extendedTime": true, "noFlashing": true }
+}
