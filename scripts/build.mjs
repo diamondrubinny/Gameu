@@ -48,9 +48,20 @@ async function copyStatic() {
     await copyFile(path.join(root, 'src/controller', f), path.join(pub, 'c', f));
   }
   await copyFile(path.join(root, 'src/sdk/game-base.css'), path.join(pub, 'sdk/game-base.css'));
+  await copyFile(path.join(root, 'src/tv/index.html'), path.join(pub, 'tv/index.html'));
   await copyDir(path.join(root, 'src/public'), pub);
   // Game assets (everything except TypeScript sources).
   await copyDir(path.join(root, 'games'), path.join(dist, 'games'), (f) => !f.endsWith('.ts'));
+  // Static game index for the Android TV app (no server API there); validated at runtime.
+  const manifests = [];
+  for (const id of await gameIds()) {
+    try {
+      manifests.push(JSON.parse(await fs.readFile(path.join(root, 'games', id, 'manifest.json'), 'utf8')));
+    } catch {
+      /* skipped: invalid or missing manifest */
+    }
+  }
+  await fs.writeFile(path.join(dist, 'games', 'index.json'), JSON.stringify(manifests));
 }
 
 async function buildOptions() {
@@ -80,6 +91,7 @@ async function buildOptions() {
       entryPoints: [
         { in: path.join(root, 'src/host/entry.ts'), out: 'public/host/host' },
         { in: path.join(root, 'src/controller/main.ts'), out: 'public/c/controller' },
+        { in: path.join(root, 'src/tv/entry.ts'), out: 'public/tv/tv' },
         { in: path.join(root, 'src/sdk/standalone.ts'), out: 'public/sdk/gameu' },
         ...games,
       ],

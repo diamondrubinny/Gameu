@@ -7,7 +7,7 @@ import type { Logger } from './logger';
 export async function loadGames(gamesDir: string, log: Logger): Promise<GameManifest[]> {
   let entries: string[];
   try {
-    entries = await fs.readdir(gamesDir);
+    entries = (await fs.readdir(gamesDir, { withFileTypes: true })).filter((e) => e.isDirectory()).map((e) => e.name);
   } catch {
     log.warn('games_dir_missing', { gamesDir });
     return [];

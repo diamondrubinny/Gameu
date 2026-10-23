@@ -52,6 +52,17 @@ The script downloads official Node.js 22 LTS runtimes from nodejs.org and **veri
 
 At runtime nothing is installed on the host computer. Settings and an isolated browser profile are stored in `Gameu/data` on the drive.
 
+## Android TV / Google TV app (in progress)
+
+The console can also run as an app on the TV itself. The web UI and room logic run in a WebView, and Kotlin serves the assets (and, from T3, the phone connections).
+
+```bash
+export ANDROID_HOME=~/android-sdk     # platforms;android-36 + build-tools;36.0.0, JDK 17+
+npm run build:apk                     # → release/android/Gameu-debug.apk (unit tests + lint + build)
+```
+
+Install guide (Hebrew): [docs/ANDROID-TV-INSTALL.md](docs/ANDROID-TV-INSTALL.md). Plan and status: [docs/ANDROID-TV-PLAN.md](docs/ANDROID-TV-PLAN.md).
+
 ## Configuration
 
 All environment variables are optional. See `.env.example`.

@@ -1,6 +1,6 @@
 # Gameu לטלוויזיה — אפליקציית Android TV / Google TV
 
-> סטטוס: **טיוטת תוכנית — ממתינה לאישור לפני בנייה**
+> סטטוס: **אושר (23.10.2026). T1 ✅ · T2 ✅ · T3 — הבא בתור**
 > תאריך: 2026-10-23 · ענף: `diamond-rubinny`
 
 ## 1. מה נבנה
@@ -78,5 +78,14 @@
 ## 9. מה כבר עובד היום (בלי אפליקציה)
 מצב "מחשב + דפדפן הטלוויזיה" נבדק: מריצים את Gameu על מחשב ברשת עם `GAMEU_HOST_KEY`, ופותחים בדפדפן הטלוויזיה `http://<IP>:8080/?key=<KEY>`. נוספה תמיכה במקשי Back של שלטי טלוויזיה.
 
-## 10. הצעד הבא
-באישורך — אתחיל ב־**T1 + T2**.
+## 10. סטטוס
+| שלב | סטטוס | פרטים |
+|---|---|---|
+| T1 | ✅ | `src/core/*` (Room, ControllerSession, HostSession, ConnectionGate, room info) ללא Node; `HostPlatform` במסך; בדיקות ליבה |
+| T2 | ✅ | `android/` (Kotlin, AGP 8.13.2, minSdk 26, compileSdk 36): WebView במסך מלא, נכסים מ־`https://appassets.androidplatform.net` עם כותרות אבטחה, Bridge מאובטח (WebMessageListener, origin+main-frame בלבד), מקש Back, IP של הרשת, התאוששות מקריסת WebView, באנר TV. `src/tv/*`: חדר in-process. בדיקות: 6 JVM, 5 e2e מדמי-WebView, lint נקי (warnings=errors) |
+| T3 | ⬜ | שרת HTTP + WebSocket ב־Kotlin (Ktor CIO) שמעביר חיבורי טלפונים ל־`ControllerSession` בדף |
+
+החלטות ב־T2: גרסאות androidx הוצמדו לגרסאות שתומכות ב־compileSdk 36 (החדשות דורשות 37 ו־AGP 9). Gradle 8.14.6.
+
+## 11. הצעד הבא
+**T3** — שרת הטלפונים בתוך האפליקציה.

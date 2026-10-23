@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gameu</string>
+    <string name="webview_too_old">Gameu needs a newer Android System WebView. Update it from Google Play and try again.\n\nGameu דורש גרסה חדשה יותר של Android System WebView. עדכנו אותה מ־Google Play ונסו שוב.</string>
+</resources>
