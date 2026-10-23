@@ -4,10 +4,20 @@
  * sandboxed game iframes (opaque origin) never see it.
  */
 export type NativeToJs =
-  | { t: 'info'; lanIps: string[]; port: number; version: string }
-  | { t: 'back' };
+  | { t: 'info'; lanIps: string[]; port: number; version: string; serverError?: string }
+  | { t: 'back' }
+  // Phone sockets (native server → page)
+  | { t: 'open'; id: number; ip: string }
+  | { t: 'msg'; id: number; data: string }
+  | { t: 'bad'; id: number }
+  | { t: 'closed'; id: number };
 
-export type JsToNative = { t: 'hello' } | { t: 'exit' };
+export type JsToNative =
+  | { t: 'hello' }
+  | { t: 'exit' }
+  // Phone sockets (page → native server)
+  | { t: 'send'; id: number; data: string }
+  | { t: 'close'; id: number; code: number; reason: string };
 
 interface NativeObject {
   postMessage(message: string): void;

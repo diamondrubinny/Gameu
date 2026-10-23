@@ -16,8 +16,8 @@ android {
         applicationId = "net.rubinny.gameu"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "0.2.0"
+        versionCode = 3
+        versionName = "0.3.0"
     }
 
     buildTypes {
@@ -70,6 +70,10 @@ dependencies {
     implementation("androidx.core:core-ktx:1.18.0")
     implementation("androidx.activity:activity-ktx:1.12.4")
     implementation("androidx.webkit:webkit:1.18.0")
+    implementation("io.ktor:ktor-server-cio:3.6.0")
+    implementation("io.ktor:ktor-server-websockets:3.6.0")
 
     testImplementation("junit:junit:4.13.2")
+    testImplementation("io.ktor:ktor-client-cio:3.6.0")
+    testImplementation("io.ktor:ktor-client-websockets:3.6.0")
 }

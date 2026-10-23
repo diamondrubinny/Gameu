@@ -14,16 +14,18 @@ import {
 } from '../shared/protocol';
 import type { HostConnectionState, HostPlatform } from '../host/platform';
 import type { NativeBridge } from './bridge';
+import { PhoneHub } from './phone-hub';
 
 const SETTINGS_KEY = 'gameu.settings';
 const INFO_TIMEOUT_MS = 3000;
 
 /**
  * Android TV: the room lives in this page (in-process host, no network host channel).
- * Phones connect to the app's native server, which forwards sockets here (T3).
+ * Phones connect to the app's native server, which forwards their sockets to PhoneHub.
  */
 export class TvHostPlatform implements HostPlatform {
   readonly room: Room;
+  readonly phones: PhoneHub;
   private onMessage: (msg: ServerToHost) => void = () => {};
   private lanIps: string[] = [];
   private port = 8080;
@@ -34,6 +36,7 @@ export class TvHostPlatform implements HostPlatform {
     logger: Logger = silentLogger,
   ) {
     this.room = new Room({ logger });
+    this.phones = new PhoneHub(this.room, bridge);
     this.hostPeer = { send: (msg) => this.onMessage(msg), close: () => {} };
   }
 
@@ -44,6 +47,8 @@ export class TvHostPlatform implements HostPlatform {
         if (msg.t !== 'info') return;
         this.lanIps = msg.lanIps;
         this.port = msg.port;
+        // Phone server could not start (e.g. no free port): show the "connecting" banner instead of a dead QR.
+        if (this.room.hostOnline) onState(msg.serverError ? 'connecting' : 'open');
         resolve();
         void this.refreshRoomInfo();
       });

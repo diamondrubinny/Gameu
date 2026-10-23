@@ -52,9 +52,9 @@ The script downloads official Node.js 22 LTS runtimes from nodejs.org and **veri
 
 At runtime nothing is installed on the host computer. Settings and an isolated browser profile are stored in `Gameu/data` on the drive.
 
-## Android TV / Google TV app (in progress)
+## Android TV / Google TV app
 
-The console can also run as an app on the TV itself. The web UI and room logic run in a WebView, and Kotlin serves the assets (and, from T3, the phone connections).
+The console can also run as an app on the TV itself. The web UI and room logic run in a WebView, and Kotlin serves the assets and runs the phone server (Ktor). Phones connect straight to the TV; no computer is needed.
 
 ```bash
 export ANDROID_HOME=~/android-sdk     # platforms;android-36 + build-tools;36.0.0, JDK 17+

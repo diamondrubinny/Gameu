@@ -96,7 +96,7 @@ test.describe('Android TV app (simulated WebView)', () => {
   test('a sandboxed game starts with a player from the in-process room and cannot see the native bridge', async ({ page }) => {
     await openTvApp(page);
     await expect(page.locator('.code')).toHaveText(/^[A-Z2-9]{4}$/);
-    // Stand-in for a phone until the native socket server lands (T3): join the in-process room directly.
+    // Join the in-process room directly (the bridge path is covered by the next test).
     const playerId = await page.evaluate(() => {
       const tv = (window as unknown as { gameuTv: { platform: { room: { code: string; join: (p: unknown, m: unknown) => { ok: boolean; playerId: string }; handleInput: (id: string, i: unknown) => void } } } }).gameuTv;
       const room = tv.platform.room;
@@ -115,6 +115,49 @@ test.describe('Android TV app (simulated WebView)', () => {
     const gameFrame = page.frames().find((f) => f.url().includes('/games/snake/'))!;
     expect(await gameFrame.evaluate(() => typeof (window as unknown as { gameuNative?: unknown }).gameuNative)).toBe('undefined');
     expect(await gameFrame.evaluate(() => String(window.origin))).toBe('null');
+  });
+
+  test('phones over the native socket bridge: join, navigate the TV menu, get kicked', async ({ page }) => {
+    await openTvApp(page);
+    await expect(page.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);
+    const code = (await page.locator('.code').textContent())!;
+    type Sent = { t: string; id?: number; data?: string; code?: number };
+    const sentTo = async (id: number) =>
+      (await page.evaluate(() => ((window as unknown as { __nativeOut: string[] }).__nativeOut).map((m) => JSON.parse(m))) as Sent[])
+        .filter((m) => m.id === id);
+    const phoneMsgs = async (id: number) => (await sentTo(id)).filter((m) => m.t === 'send').map((m) => JSON.parse(m.data!) as { type: string; [k: string]: unknown });
+
+    await sendNative(page, { t: 'open', id: 7, ip: '192.168.1.50' });
+    await sendNative(page, { t: 'msg', id: 7, data: JSON.stringify({ type: 'join', room: code, nickname: 'Phone', avatar: 2 }) });
+    await expect.poll(async () => (await phoneMsgs(7)).find((m) => m.type === 'welcome')?.isAdmin).toBe(true);
+    await expect(page.locator('#players .player .name')).toHaveText(['Phone']);
+    // The admin phone gets the menu pad.
+    await expect.poll(async () => (await phoneMsgs(7)).some((m) => m.type === 'layout' && (m.layout as { type: string }).type === 'menu')).toBe(true);
+
+    // Navigate with the phone d-pad.
+    const before = await page.evaluate(() => (document.activeElement as HTMLElement).dataset.id);
+    for (const pressed of [true, false]) {
+      await sendNative(page, { t: 'msg', id: 7, data: JSON.stringify({ type: 'input', input: { kind: 'button', id: 'left', pressed } }) });
+    }
+    await expect.poll(() => page.evaluate(() => (document.activeElement as HTMLElement).dataset.id)).not.toBe(before);
+
+    // Invalid frames are rejected by the shared ControllerSession.
+    await sendNative(page, { t: 'bad', id: 7 });
+    await expect.poll(async () => (await phoneMsgs(7)).some((m) => m.type === 'error' && m.code === 'invalid')).toBe(true);
+
+    // A second phone; then kick it from the TV settings.
+    await sendNative(page, { t: 'open', id: 8, ip: '192.168.1.51' });
+    await sendNative(page, { t: 'msg', id: 8, data: JSON.stringify({ type: 'join', room: code, nickname: 'Guest', avatar: 3 }) });
+    await expect(page.locator('#players .player')).toHaveCount(2);
+    await page.locator('[data-id="settings"]').click();
+    await page.locator('[data-nav][data-id^="kick:"]').click();
+    await expect.poll(async () => (await sentTo(8)).find((m) => m.t === 'close')?.code).toBe(4003);
+    await sendNative(page, { t: 'closed', id: 8 });
+    await expect(page.locator('#players .player')).toHaveCount(1);
+
+    // Phone disconnect → shown as disconnected (slot kept for reconnect).
+    await sendNative(page, { t: 'closed', id: 7 });
+    await expect(page.locator('#players .player.offline')).toHaveCount(1);
   });
 
   test('TV page has no WCAG 2.1 AA violations (axe)', async ({ page }) => {

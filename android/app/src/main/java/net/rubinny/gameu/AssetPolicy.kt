@@ -50,6 +50,28 @@ object AssetPolicy {
     fun encodingFor(mime: String): String? =
         if (mime.startsWith("text/") || mime.endsWith("json") || mime == "image/svg+xml") "utf-8" else null
 
+    /** Paths phones may fetch over the LAN: the controller, legal pages and the 404 page only. */
+    fun isNetworkPath(urlPath: String): Boolean =
+        urlPath.startsWith("/c/") || urlPath.startsWith("/legal/") || urlPath == "/404.html"
+
+    /** Headers for responses to phones (src/server/security.ts: 'controller' and 'static'). */
+    fun networkHeadersFor(urlPath: String): Map<String, String> {
+        val headers = mutableMapOf(
+            "X-Content-Type-Options" to "nosniff",
+            "Referrer-Policy" to "no-referrer",
+            "Cache-Control" to "no-cache",
+            "Permissions-Policy" to "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        )
+        if (urlPath.startsWith("/c/")) {
+            headers["Content-Security-Policy"] = "$COMMON_CSP; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'"
+            headers["X-Frame-Options"] = "DENY"
+            headers["Cross-Origin-Resource-Policy"] = "same-origin"
+        } else {
+            headers["Content-Security-Policy"] = "$COMMON_CSP; connect-src 'none'; frame-ancestors 'self'"
+        }
+        return headers
+    }
+
     fun headersFor(urlPath: String): Map<String, String> {
         val headers = mutableMapOf(
             "X-Content-Type-Options" to "nosniff",

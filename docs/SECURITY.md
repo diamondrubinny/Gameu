@@ -46,8 +46,16 @@ Headers on every response: `X-Content-Type-Options: nosniff`, `Referrer-Policy: 
 4. **Mode C** (`GAMEU_HOST_KEY`) exposes host control to anyone on the LAN who knows the key. Use a long random key.
 5. **Live‑USB OS image (mode A)** is not built yet; Secure Boot, firmware and driver behaviour are untested.
 
+## Android TV app
+
+- The TV screen and room logic run inside a WebView at `https://appassets.androidplatform.net` (a secure context). There is no network host channel: the host is in‑process.
+- The native bridge uses `WebMessageListener`, restricted to that origin and to the main frame. Sandboxed game iframes (opaque origin) cannot reach it; this is asserted in e2e.
+- The phone server (Ktor CIO, ports 8080–8090) serves only `/c/*`, `/legal/*` and `/404.html`. It applies the same Host/Origin guards, an 8 KB frame limit, connection caps (32 total, 6 per IP) and the same security headers. Every message is validated and rate‑limited by the shared `ControllerSession` in the page.
+- WebView: no file or content access, no popups, no navigation outside the bundled origin. The renderer is recreated if it crashes. No cloud backup of app data.
+- The server runs only while the app is in the foreground.
+
 ## Supply chain
-- Runtime dependencies: `ws`, `zod`, `qrcode`, all bundled into `dist/server/server.cjs` by esbuild.
+- Runtime dependencies: `ws`, `zod`, `qrcode`, all bundled into `dist/server/server.cjs` by esbuild. Android: `androidx.core`, `androidx.activity`, `androidx.webkit` and Ktor server (CIO + WebSockets).
 - Run `npm audit --omit=dev` before each release (current: 0 vulnerabilities). Consider generating an SBOM with `npm sbom --sbom-format cyclonedx` for distribution.
 
 **Not verified by a penetration test.** A professional security review is recommended before commercial distribution.

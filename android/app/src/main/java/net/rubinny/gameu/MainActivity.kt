@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.WindowManager
 import android.webkit.RenderProcessGoneDetail
@@ -20,8 +22,12 @@ import androidx.webkit.JavaScriptReplyProxy
 import androidx.webkit.WebViewClientCompat
 import androidx.webkit.WebViewCompat
 import androidx.webkit.WebViewFeature
+import net.rubinny.gameu.server.PhoneEvents
+import net.rubinny.gameu.server.PhoneServer
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 /**
  * Full-screen TV console. The web UI (TV screen + room logic) runs in a WebView;
@@ -32,6 +38,21 @@ class MainActivity : ComponentActivity() {
     private var webView: WebView? = null
     private var replyProxy: JavaScriptReplyProxy? = null
     private lateinit var connectivity: ConnectivityManager
+
+    private val main = Handler(Looper.getMainLooper())
+    private val serverExecutor: ExecutorService = Executors.newSingleThreadExecutor()
+    private var phoneServer: PhoneServer? = null
+    private var serverStarting = false
+    private var serverError: String? = null
+    private var pageReady = false
+
+    /** Socket events arrive on server threads; the page is only touched on the main thread (FIFO keeps order). */
+    private val phoneEvents = object : PhoneEvents {
+        override fun onOpen(id: Int, ip: String) = toPage(JSONObject().put("t", "open").put("id", id).put("ip", ip))
+        override fun onText(id: Int, text: String) = toPage(JSONObject().put("t", "msg").put("id", id).put("data", text))
+        override fun onInvalidFrame(id: Int) = toPage(JSONObject().put("t", "bad").put("id", id))
+        override fun onClosed(id: Int) = toPage(JSONObject().put("t", "closed").put("id", id))
+    }
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) = sendInfoOnUiThread()
@@ -111,17 +132,62 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         connectivity.registerDefaultNetworkCallback(networkCallback)
+        if (pageReady) ensureServer()
     }
 
+    /** Leaving the app (Home button) stops the phone server; phones reconnect when it returns. */
     override fun onStop() {
         super.onStop()
         runCatching { connectivity.unregisterNetworkCallback(networkCallback) }
+        stopServer()
     }
 
     override fun onDestroy() {
+        stopServer()
+        serverExecutor.shutdown()
         webView?.destroy()
         webView = null
         super.onDestroy()
+    }
+
+    private fun ensureServer() {
+        if (phoneServer != null || serverStarting) return
+        serverStarting = true
+        val assetManager = assets
+        serverExecutor.execute {
+            val server = PhoneServer(
+                assets = { path -> runCatching { assetManager.open(path) }.getOrNull() },
+                events = phoneEvents,
+            )
+            val error = runCatching { server.start() }.exceptionOrNull()
+            main.post {
+                serverStarting = false
+                if (error == null && !isFinishing && !isDestroyed) {
+                    phoneServer = server
+                    serverError = null
+                } else {
+                    if (error == null) serverExecutor.execute { server.stop() }
+                    serverError = "phone_server_unavailable"
+                }
+                sendInfo()
+            }
+        }
+    }
+
+    private fun stopServer() {
+        val server = phoneServer ?: return
+        phoneServer = null
+        serverExecutor.execute { server.stop() }
+    }
+
+    private fun toPage(obj: JSONObject) {
+        val text = obj.toString()
+        main.post { postToPage(text) }
+    }
+
+    @SuppressLint("RequiresFeature")
+    private fun postToPage(text: String) {
+        replyProxy?.postMessage(text)
     }
 
     @SuppressLint("RequiresFeature")
@@ -130,8 +196,14 @@ class MainActivity : ComponentActivity() {
         when (msg.optString("t")) {
             "hello" -> {
                 replyProxy = proxy
+                pageReady = true
+                // A (re)loaded page has an empty room: make phones reconnect and re-join.
+                phoneServer?.closeAll(CLOSE_SERVICE_RESTART, "console restarted")
+                ensureServer()
                 sendInfo()
             }
+            "send" -> phoneServer?.send(msg.optInt("id"), msg.optString("data"))
+            "close" -> phoneServer?.close(msg.optInt("id"), msg.optInt("code", 1000).coerceIn(1000, 4999).toShort(), msg.optString("reason"))
             "exit" -> finish()
         }
     }
@@ -144,8 +216,9 @@ class MainActivity : ComponentActivity() {
         val info = JSONObject()
             .put("t", "info")
             .put("lanIps", JSONArray(LanAddresses.current(connectivity)))
-            .put("port", SERVER_PORT)
+            .put("port", phoneServer?.port ?: DEFAULT_PORT)
             .put("version", BuildConfig.VERSION_NAME)
+        serverError?.let { info.put("serverError", it) }
         proxy.postMessage(info.toString())
     }
 
@@ -159,6 +232,7 @@ class MainActivity : ComponentActivity() {
     }
 
     companion object {
-        const val SERVER_PORT = 8080
+        const val DEFAULT_PORT = 8080
+        const val CLOSE_SERVICE_RESTART: Short = 1012
     }
 }

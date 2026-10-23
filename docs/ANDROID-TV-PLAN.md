@@ -1,6 +1,6 @@
 # Gameu לטלוויזיה — אפליקציית Android TV / Google TV
 
-> סטטוס: **אושר (23.10.2026). T1 ✅ · T2 ✅ · T3 — הבא בתור**
+> סטטוס: **אושר (23.10.2026). T1 ✅ · T2 ✅ · T3 ✅ · T4/T5 — הבא בתור**
 > תאריך: 2026-10-23 · ענף: `diamond-rubinny`
 
 ## 1. מה נבנה
@@ -83,9 +83,13 @@
 |---|---|---|
 | T1 | ✅ | `src/core/*` (Room, ControllerSession, HostSession, ConnectionGate, room info) ללא Node; `HostPlatform` במסך; בדיקות ליבה |
 | T2 | ✅ | `android/` (Kotlin, AGP 8.13.2, minSdk 26, compileSdk 36): WebView במסך מלא, נכסים מ־`https://appassets.androidplatform.net` עם כותרות אבטחה, Bridge מאובטח (WebMessageListener, origin+main-frame בלבד), מקש Back, IP של הרשת, התאוששות מקריסת WebView, באנר TV. `src/tv/*`: חדר in-process. בדיקות: 6 JVM, 5 e2e מדמי-WebView, lint נקי (warnings=errors) |
-| T3 | ⬜ | שרת HTTP + WebSocket ב־Kotlin (Ktor CIO) שמעביר חיבורי טלפונים ל־`ControllerSession` בדף |
+| T3 | ✅ | `server/PhoneServer.kt` (Ktor CIO 3.6): מגיש רק `/c`, `/legal`, `/404`; `/` מפנה ל־`/c`; מסך הטלוויזיה והמשחקים **לא** נגישים ברשת. בדיקות Host (DNS rebinding) ו־Origin (CSWSH), מסגרת ≤8KB, 32 חיבורים / 6 ל־IP, ping 15s. `src/tv/phone-hub.ts` מעביר כל חיבור ל־`ControllerSession` המשותף. השרת עולה כשהדף מוכן, נעצר ברקע, פורט 8080–8090. בדיקות: 18 JVM (כולל סוקטים אמיתיים ו־mutation check), 6 e2e מדמי-WebView, lint נקי, R8 release עובר |
 
 החלטות ב־T2: גרסאות androidx הוצמדו לגרסאות שתומכות ב־compileSdk 36 (החדשות דורשות 37 ו־AGP 9). Gradle 8.14.6.
 
+החלטות ב־T3: Kotlin 2.2.21 (תואם ל־R8 של AGP 8.13; 2.4 הפיק אזהרות metadata ב־R8).
+
+**לא נבדק על מכשיר אמיתי:** אין אמולטור בסביבת הבנייה (אין KVM). שכבת ה־Activity (חיבור בין Ktor ל־WebView) היא הקוד היחיד שלא מכוסה בבדיקות אוטומטיות.
+
 ## 11. הצעד הבא
-**T3** — שרת הטלפונים בתוך האפליקציה.
+בדיקה על הטלוויזיה שלך, ואז T4 (ליטוש לפי מה שנמצא) ו־T5 (חתימה ל־release, מדריך הפצה).
