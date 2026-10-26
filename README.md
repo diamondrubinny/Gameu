@@ -1,3 +1,7 @@
+
+## License
+
+Gameu is free software under the [GNU AGPL-3.0](LICENSE).
 # Gameu 🎮
 
 Turn any TV into a party game console that runs from a USB drive, with players' phones as controllers. No phone app needed; players just scan a QR code.
