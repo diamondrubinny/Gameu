@@ -11,6 +11,14 @@ Turn any TV into a party game console that runs from a USB drive, with players' 
          📱 📱 📱  phone controllers (browser, no install)
 ```
 
+![The Gameu TV screen with the game menu, a QR code and three joined players, next to a phone joining the room and the admin's phone d-pad](docs/screenshots/showcase.webp)
+
+| Trivia: everyone answers on their phone | Snakes: steer with the phone d-pad |
+|---|---|
+| ![A trivia question on the TV with four colored answers, and the same four answers on a phone](docs/screenshots/trivia.webp) | ![The Snakes game on the TV with three players and a score board, next to a phone showing arrow buttons](docs/screenshots/snakes.webp) |
+
+<sub>Real screenshots of the current build, in English. The TV UI also runs in Hebrew (RTL).</sub>
+
 ## Features (MVP)
 
 - **TV host**: a 10‑foot UI in Hebrew (RTL) or English, a QR code and room code, a player list, and a game menu you navigate from the admin's phone (👑).
