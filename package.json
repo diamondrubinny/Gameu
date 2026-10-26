@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Turn any TV into a game console, run from USB, with phones as controllers.",
-  "license": "UNLICENSED",
+  "license": "AGPL-3.0-only",
   "type": "module",
   "engines": {
     "node": ">=20.11"
