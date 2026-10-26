@@ -1,7 +1,3 @@
-
-## License
-
-Gameu is free software under the [GNU AGPL-3.0](LICENSE).
 # Gameu 🎮
 
 Turn any TV into a party game console that runs from a USB drive, with players' phones as controllers. No phone app needed; players just scan a QR code.
@@ -108,3 +104,7 @@ The privacy policy and accessibility statement pages are **technical drafts** an
 - **Phone can't connect**: the phone must be on the same network as the computer. Guest Wi‑Fi or "client isolation" on the router blocks device‑to‑device traffic. On Windows, allow Node.js on *Private networks* when the firewall asks.
 - **The TV screen opens on the phone instead of the controller**: `/` redirects phones to `/c`. The TV screen only works on the console computer itself, unless `GAMEU_HOST_KEY` is set.
 - **Port in use**: set `PORT=8090` (or another free port).
+
+## License
+
+Gameu is free software under the [GNU AGPL-3.0](LICENSE).
