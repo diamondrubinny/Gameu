@@ -36,15 +36,24 @@ console.log(`Android assets staged → ${path.relative(root, www)}`);
 
 if (wantApk) {
   const gradlew = path.join(androidDir, process.platform === 'win32' ? 'gradlew.bat' : 'gradlew');
-  const tasks = release ? ['testReleaseUnitTest', 'lintRelease', 'assembleRelease'] : ['testDebugUnitTest', 'lintDebug', 'assembleDebug'];
+  const tasks = release
+    ? ['testReleaseUnitTest', 'lintRelease', 'assembleRelease', 'bundleRelease']
+    : ['testDebugUnitTest', 'lintDebug', 'assembleDebug'];
   execFileSync(gradlew, ['--no-daemon', ...tasks], { cwd: androidDir, stdio: 'inherit' });
   const variant = release ? 'release' : 'debug';
   const apkDir = path.join(androidDir, 'app', 'build', 'outputs', 'apk', variant);
   const apk = (await fs.readdir(apkDir)).find((f) => f.endsWith('.apk'));
   if (!apk) throw new Error(`No APK found in ${apkDir}`);
+  const unsigned = apk.includes('unsigned');
   const out = path.join(root, 'release', 'android');
   await fs.mkdir(out, { recursive: true });
-  const dest = path.join(out, `Gameu-${variant}.apk`);
+  const dest = path.join(out, `Gameu-${variant}${unsigned ? '-unsigned' : ''}.apk`);
   await fs.copyFile(path.join(apkDir, apk), dest);
   console.log(`APK ready → ${path.relative(root, dest)}`);
+  if (release) {
+    const aab = path.join(androidDir, 'app', 'build', 'outputs', 'bundle', 'release', 'app-release.aab');
+    await fs.copyFile(aab, path.join(out, 'Gameu-release.aab'));
+    console.log(`App bundle (Google Play) → release/android/Gameu-release.aab`);
+    if (unsigned) console.warn('⚠ Release is UNSIGNED: set GAMEU_KEYSTORE_* or android/keystore.properties (see docs/ANDROID-RELEASE.md).');
+  }
 }

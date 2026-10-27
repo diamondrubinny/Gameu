@@ -6,9 +6,9 @@ const bridge = new NativeBridge();
 const platform = new TvHostPlatform(bridge);
 const app = new HostApp(platform);
 
-// Remote Back key: the app asks the page first; exit only when there is nothing to go back to.
+// Remote Back key: the page decides (close dialog, leave game/settings, or confirm exit).
 bridge.onMessage((msg) => {
-  if (msg.t === 'back' && !app.handleBack()) bridge.post({ t: 'exit' });
+  if (msg.t === 'back' && !app.handleBack()) platform.exitApp();
 });
 
 void app.start();

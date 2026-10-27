@@ -10,6 +10,13 @@ Status legend: ✅ done and automated · 🟡 partially done / manual step requi
 - 🟡 Manual test on real hardware: Windows laptop, Mac, Linux and Raspberry Pi 5 connected to a TV over HDMI; Android Chrome, iOS Safari and Samsung Internet phones
 - 🟡 Kiosk launch with real Chrome/Edge on each OS (not testable in CI)
 
+## Android TV app
+- ✅ Debug/release builds, unit tests (JVM), lint with warnings as errors, R8 release build
+- ✅ Release signing kept outside Git (env or `keystore.properties`); signed in CI only for `v*` tags
+- 🟡 Manual test of the **release** APK on a real Android TV (R8 issues can only show at runtime)
+- ⬜ Create and back up the real release keystore (owner action, see docs/ANDROID-RELEASE.md)
+- ⬜ Google Play: Data safety form, public privacy‑policy URL, TV quality review (requires verification and legal review)
+
 ## Roles and permissions
 - ✅ Host channel loopback‑only + per‑run secret; settings writes need the secret
 - ✅ Admin‑only menu control and quit; kick and lock from the TV settings

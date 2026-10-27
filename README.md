@@ -61,6 +61,8 @@ export ANDROID_HOME=~/android-sdk     # platforms;android-36 + build-tools;36.0.
 npm run build:apk                     # → release/android/Gameu-debug.apk (unit tests + lint + build)
 ```
 
+Signed release builds (APK + Google Play AAB): `npm run build:apk:release`. Signing is read from environment variables or `android/keystore.properties` (never committed); see [docs/ANDROID-RELEASE.md](docs/ANDROID-RELEASE.md). `npm run build:usb` also copies the APK into the USB folder (`Android-TV/`).
+
 Install guide (Hebrew): [docs/ANDROID-TV-INSTALL.md](docs/ANDROID-TV-INSTALL.md). Plan and status: [docs/ANDROID-TV-PLAN.md](docs/ANDROID-TV-PLAN.md).
 
 ## Configuration

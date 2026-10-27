@@ -30,6 +30,8 @@ export class TvHostPlatform implements HostPlatform {
   private lanIps: string[] = [];
   private port = 8080;
   private readonly hostPeer: Peer<ServerToHost>;
+  appVersion: string | undefined;
+  private serverError = false;
 
   constructor(
     private readonly bridge: NativeBridge,
@@ -48,7 +50,9 @@ export class TvHostPlatform implements HostPlatform {
         this.lanIps = msg.lanIps;
         this.port = msg.port;
         // Phone server could not start (e.g. no free port): show the "connecting" banner instead of a dead QR.
-        if (this.room.hostOnline) onState(msg.serverError ? 'connecting' : 'open');
+        this.appVersion = msg.version;
+        this.serverError = !!msg.serverError;
+        if (this.room.hostOnline) onState(msg.serverError ? 'unavailable' : 'open');
         resolve();
         void this.refreshRoomInfo();
       });
@@ -57,8 +61,12 @@ export class TvHostPlatform implements HostPlatform {
     this.bridge.post({ t: 'hello' });
     await firstInfo;
     this.room.attachHost(this.hostPeer);
-    onState('open');
+    onState(this.serverError ? 'unavailable' : 'open');
     await this.refreshRoomInfo();
+  }
+
+  exitApp(): void {
+    this.bridge.post({ t: 'exit' });
   }
 
   send(msg: HostToServer): void {

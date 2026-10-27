@@ -2,7 +2,8 @@ name: CI
 
 on:
   push:
-    branches: [main, 'claude/**']
+    branches: [main, 'claude/**', 'diamond-rubinny']
+    tags: ['v*']
   pull_request:
 
 permissions:
@@ -55,3 +56,47 @@ jobs:
           name: Gameu-debug-apk
           path: release/android/Gameu-debug.apk
           retention-days: 14
+
+  android-release:
+    # Signed builds only for version tags, and only when the signing secrets exist.
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HAS_KEYSTORE: ${{ secrets.GAMEU_KEYSTORE_BASE64 != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: npm ci
+      - name: Install Android SDK packages
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" > /dev/null
+      - name: Restore signing key
+        if: env.HAS_KEYSTORE == 'true'
+        env:
+          KEYSTORE_B64: ${{ secrets.GAMEU_KEYSTORE_BASE64 }}
+        run: |
+          echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/gameu-release.jks"
+          echo "GAMEU_KEYSTORE_FILE=$RUNNER_TEMP/gameu-release.jks" >> "$GITHUB_ENV"
+      - name: Build signed release (APK + AAB)
+        env:
+          GAMEU_KEYSTORE_PASSWORD: ${{ secrets.GAMEU_KEYSTORE_PASSWORD }}
+          GAMEU_KEY_ALIAS: ${{ secrets.GAMEU_KEY_ALIAS }}
+          GAMEU_KEY_PASSWORD: ${{ secrets.GAMEU_KEY_PASSWORD }}
+        run: npm run build:apk:release
+      - name: Remove signing key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/gameu-release.jks"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Gameu-release
+          path: |
+            release/android/Gameu-release*.apk
+            release/android/Gameu-release.aab
+          retention-days: 30

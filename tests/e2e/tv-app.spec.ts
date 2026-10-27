@@ -34,9 +34,16 @@ async function serveAsset(route: Route): Promise<void> {
   }
 }
 
-async function openTvApp(page: Page): Promise<void> {
+interface NativeInfo {
+  lanIps: string[];
+  port: number;
+  version: string;
+  serverError?: string;
+}
+
+async function openTvApp(page: Page, info: NativeInfo = { lanIps: ['192.168.1.44'], port: 8080, version: '0.4.0' }): Promise<void> {
   await page.route(`${ORIGIN}/**`, serveAsset);
-  await page.addInitScript(() => {
+  await page.addInitScript((nativeInfo) => {
     if (!location.pathname.startsWith('/tv/')) return; // the real bridge is main-frame/origin only
     const listeners: ((e: { data: string }) => void)[] = [];
     const w = window as unknown as Record<string, unknown>;
@@ -45,13 +52,13 @@ async function openTvApp(page: Page): Promise<void> {
     w.gameuNative = {
       postMessage(m: string) {
         (w.__nativeOut as string[]).push(m);
-        if (JSON.parse(m).t === 'hello') setTimeout(() => (w.__nativeSend as (o: unknown) => void)({ t: 'info', lanIps: ['192.168.1.44'], port: 8080, version: '0.2.0' }), 10);
+        if (JSON.parse(m).t === 'hello') setTimeout(() => (w.__nativeSend as (o: unknown) => void)({ t: 'info', ...nativeInfo }), 10);
       },
       addEventListener(_type: string, l: (e: { data: string }) => void) {
         listeners.push(l);
       },
     };
-  });
+  }, info);
   await page.goto(`${ORIGIN}/tv/index.html`);
 }
 
@@ -158,6 +165,42 @@ test.describe('Android TV app (simulated WebView)', () => {
     // Phone disconnect → shown as disconnected (slot kept for reconnect).
     await sendNative(page, { t: 'closed', id: 7 });
     await expect(page.locator('#players .player.offline')).toHaveCount(1);
+  });
+
+  test('without a network the TV explains what to do instead of showing a useless QR', async ({ page }) => {
+    await openTvApp(page, { lanIps: [], port: 8080, version: '0.4.0' });
+    await expect(page.getByRole('alert')).toContainText('אין חיבור לרשת');
+    await expect(page.locator('.qr')).toHaveCount(0);
+  });
+
+  test('phone server failure shows a clear banner', async ({ page }) => {
+    await openTvApp(page, { lanIps: ['192.168.1.44'], port: 8080, version: '0.4.0', serverError: 'phone_server_unavailable' });
+    await expect(page.locator('.conn-banner')).toContainText('הטלפונים לא יכולים להתחבר');
+  });
+
+  test('Back on the home screen asks before disconnecting players, and settings show the version', async ({ page }) => {
+    await openTvApp(page);
+    await expect(page.locator('.code')).toHaveText(/^[A-Z2-9]{4}$/);
+    const code = (await page.locator('.code').textContent())!;
+    await sendNative(page, { t: 'open', id: 1, ip: '192.168.1.60' });
+    await sendNative(page, { t: 'msg', id: 1, data: JSON.stringify({ type: 'join', room: code, nickname: 'P1', avatar: 1 }) });
+    await expect(page.locator('#players .player')).toHaveCount(1);
+
+    await sendNative(page, { t: 'back' });
+    const dialog = page.getByRole('alertdialog');
+    await expect(dialog).toContainText('לצאת מ־Gameu?');
+    expect(await nativeOut(page)).not.toContain('exit');
+    await sendNative(page, { t: 'back' }); // Back again = "stay"
+    await expect(dialog).toHaveCount(0);
+    expect(await nativeOut(page)).not.toContain('exit');
+
+    await page.locator('[data-id="settings"]').click();
+    await expect(page.locator('.version')).toHaveText('גרסה 0.4.0');
+    await sendNative(page, { t: 'back' });
+
+    await sendNative(page, { t: 'back' });
+    await page.getByRole('button', { name: 'כן, לצאת' }).click();
+    await expect.poll(() => nativeOut(page)).toContain('exit');
   });
 
   test('TV page has no WCAG 2.1 AA violations (axe)', async ({ page }) => {

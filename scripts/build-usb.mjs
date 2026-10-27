@@ -14,6 +14,7 @@
  */
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -180,6 +181,18 @@ Gameu — game console from a USB drive
 Requires Chrome, Edge or Chromium for full-screen kiosk mode.
 `;
 
+const ANDROID_README = `Gameu לטלוויזיית Android TV / Google TV
+=====================================
+
+1. בטלוויזיה: הגדרות ← מערכת ← אודות ← לחיצה 7 פעמים על "Android TV OS build".
+2. התקינו מנהל קבצים מ־Google Play (למשל File Commander או X-plore).
+3. חברו את ה־USB לטלוויזיה, פתחו את Android-TV/Gameu.apk ואשרו התקנה ממקור לא מוכר.
+4. פתחו את Gameu ממסך הבית וסרקו את ה־QR בטלפון (באותה רשת Wi‑Fi).
+
+Install on Android TV: enable Developer options (About → click "Android TV OS build" 7 times),
+open Android-TV/Gameu.apk from this drive with a file manager app, allow the install, then launch Gameu.
+`;
+
 async function main() {
   console.log('Building app…');
   execFileSync(process.execPath, [path.join(root, 'scripts', 'build.mjs')], { stdio: 'inherit' });
@@ -198,6 +211,18 @@ async function main() {
   if (targets.some((t) => t.startsWith('darwin'))) await fs.writeFile(path.join(out, 'Start-Gameu-Mac.command'), POSIX_LAUNCHER('darwin'), { mode: 0o755 });
   if (targets.some((t) => t.startsWith('linux'))) await fs.writeFile(path.join(out, 'start-gameu-linux.sh'), POSIX_LAUNCHER('linux'), { mode: 0o755 });
   await fs.writeFile(path.join(out, 'README.txt'), README);
+
+  // Android TV: ship the APK too when one was built (prefer a signed release).
+  const apkDir = path.join(root, 'release', 'android');
+  const apk = ['Gameu-release.apk', 'Gameu-debug.apk'].find((f) => existsSync(path.join(apkDir, f)));
+  if (apk) {
+    await fs.mkdir(path.join(out, 'Android-TV'), { recursive: true });
+    await fs.copyFile(path.join(apkDir, apk), path.join(out, 'Android-TV', 'Gameu.apk'));
+    await fs.writeFile(path.join(out, 'Android-TV', 'README.txt'), ANDROID_README);
+    console.log(`  ✓ Android TV app included (${apk})`);
+  } else {
+    console.log('  (no APK found — run `npm run build:apk` first to include the Android TV app)');
+  }
 
   // Integrity manifest for the whole folder.
   const lines = [];

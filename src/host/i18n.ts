@@ -54,6 +54,14 @@ const he = {
   codeChanged: 'קוד החדר הוחלף',
   locked: 'החדר נעול',
   close: 'סגירה (חזרה)',
+  noNetworkTitle: 'אין חיבור לרשת',
+  noNetworkBody: 'חברו את הטלוויזיה לרשת ה־Wi‑Fi הביתית (או בכבל רשת), ואז הקוד להצטרפות יופיע כאן. הטלפונים צריכים להיות באותה רשת.',
+  phoneServerDown: 'הטלפונים לא יכולים להתחבר כרגע. סגרו את Gameu ופתחו שוב.',
+  exitAppTitle: 'לצאת מ־Gameu?',
+  exitAppBody: (n: number) => (n === 1 ? 'שחקן/ית אחד/ת מחובר/ת וינותק/ו.' : `${n} שחקנים מחוברים וינותקו.`),
+  exitAppYes: 'כן, לצאת',
+  exitAppNo: 'הישארו',
+  version: (v: string) => `גרסה ${v}`,
 };
 
 type Dict = typeof he;
@@ -111,6 +119,14 @@ const en: Dict = {
   codeChanged: 'Room code changed',
   locked: 'Room locked',
   close: 'Close (back)',
+  noNetworkTitle: 'No network connection',
+  noNetworkBody: 'Connect the TV to your home Wi‑Fi (or Ethernet) and the join code will appear here. Phones must be on the same network.',
+  phoneServerDown: 'Phones cannot connect right now. Close Gameu and open it again.',
+  exitAppTitle: 'Exit Gameu?',
+  exitAppBody: (n) => (n === 1 ? '1 connected player will be disconnected.' : `${n} connected players will be disconnected.`),
+  exitAppYes: 'Yes, exit',
+  exitAppNo: 'Stay',
+  version: (v) => `Version ${v}`,
 };
 
 let current: Dict = he;

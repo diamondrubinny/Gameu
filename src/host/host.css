@@ -131,6 +131,9 @@ img.card-icon { width: 4.5em; height: 4.5em; font-size: inherit; display: block;
 .toast { position: fixed; top: 3vh; left: 50%; transform: translate(-50%, -250%); background: var(--panel-2); padding: .7em 1.4em; border-radius: 999px; box-shadow: 0 1em 2em rgba(0,0,0,.5); transition: transform .3s ease; z-index: 30; font-weight: 600; }
 .toast.show { transform: translate(-50%, 0); }
 .conn-banner { position: fixed; top: 0; left: 0; right: 0; background: var(--danger); color: #000; text-align: center; padding: .4em; font-weight: 700; z-index: 40; }
+.no-network { background: var(--panel-2); border-radius: .8em; padding: 1em 1.2em; text-align: start; border-inline-start: .35em solid var(--accent); }
+.no-network-title { font-size: 1.3em; font-weight: 800; margin: 0 0 .4em; }
+.version { color: var(--muted); margin-top: 1.2em; }
 .center-message { margin: auto; max-width: 40em; text-align: center; font-size: 1.5em; }
 
 :root.reduce-motion *, :root.reduce-motion *::before { transition: none !important; animation: none !important; }

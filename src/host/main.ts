@@ -86,7 +86,33 @@ export class HostApp {
       this.go('home');
       return true;
     }
-    return false;
+    if (!this.platform.exitApp) return false;
+    // Home screen of the TV app: confirm before disconnecting everyone.
+    const connected = this.players.filter((p) => p.connected).length;
+    if (connected > 0) this.confirmExitApp(connected);
+    else this.platform.exitApp();
+    return true;
+  }
+
+  private confirmExitApp(connected: number): void {
+    this.openOverlay((close) => {
+      const no = h('button', { class: 'btn', 'data-nav': true }, t.exitAppNo);
+      const yes = h('button', { class: 'btn danger', 'data-nav': true }, t.exitAppYes);
+      no.addEventListener('click', close);
+      yes.addEventListener('click', () => {
+        close();
+        this.platform.exitApp?.();
+      });
+      return {
+        el: h(
+          'div',
+          { class: 'dialog', role: 'alertdialog', 'aria-modal': 'true', 'aria-labelledby': 'exit-app-title', 'aria-describedby': 'exit-app-body' },
+          h('h2', { id: 'exit-app-title' }, t.exitAppTitle),
+          h('p', { id: 'exit-app-body' }, t.exitAppBody(connected)),
+          h('div', { class: 'actions' }, no, yes),
+        ),
+      };
+    });
   }
 
   // ---------------- data ----------------
@@ -118,8 +144,9 @@ export class HostApp {
   // ---------------- server events ----------------
 
   private onConnState(s: HostConnectionState): void {
+    const changed = s !== this.connState;
     this.connState = s;
-    if (s !== 'open') this.render();
+    if (s !== 'open' || (changed && this.screen !== 'game')) this.render();
   }
 
   private onServer(msg: ServerToHost): void {
@@ -287,8 +314,8 @@ export class HostApp {
     this.renderPlayers();
     this.renderCardMeta();
     this.renderHint();
-    if (this.connState === 'connecting') {
-      this.root.append(h('div', { class: 'conn-banner', role: 'status' }, t.connecting));
+    if (this.connState === 'connecting' || this.connState === 'unavailable') {
+      this.root.append(h('div', { class: 'conn-banner', role: 'status' }, this.connState === 'connecting' ? t.connecting : t.phoneServerDown));
     }
     this.restoreFocus();
     this.syncMenuLayouts();
@@ -377,7 +404,8 @@ export class HostApp {
     row('privacy', t.privacy, null, () => this.openDocument('/legal/privacy.html', t.privacy));
     row('back', t.back, null, () => this.go('home'));
 
-    return h('section', { class: 'panel settings', 'aria-labelledby': 'settings-title' }, h('h1', { id: 'settings-title' }, t.settings), list);
+    const version = this.platform.appVersion ? h('p', { class: 'version' }, t.version(this.platform.appVersion)) : null;
+    return h('section', { class: 'panel settings', 'aria-labelledby': 'settings-title' }, h('h1', { id: 'settings-title' }, t.settings), list, version);
   }
 
   private renderJoinPanel(): HTMLElement {
@@ -389,6 +417,17 @@ export class HostApp {
       if (svg.nodeName.toLowerCase() === 'svg') qr.append(document.importNode(svg, true));
     }
     const url = this.room?.urls[0] ?? '';
+    if (this.room && this.room.urls.length === 0) {
+      // No LAN address: a QR pointing at "localhost" would only confuse phones.
+      return h(
+        'aside',
+        { class: 'panel join', 'aria-labelledby': 'join-title' },
+        h('h2', { id: 'join-title' }, t.joinTitle),
+        h('div', { class: 'no-network', role: 'alert' }, h('p', { class: 'no-network-title' }, '📶 ', t.noNetworkTitle), h('p', {}, t.noNetworkBody)),
+        h('h2', { class: 'players-title', id: 'players-title' }),
+        h('ul', { class: 'players', id: 'players', 'aria-labelledby': 'players-title' }),
+      );
+    }
     return h(
       'aside',
       { class: 'panel join', 'aria-labelledby': 'join-title' },
