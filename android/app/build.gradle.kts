@@ -69,8 +69,9 @@ android {
     lint {
         abortOnError = true
         warningsAsErrors = true
-        // Newer androidx releases require compileSdk 37, which AGP 8.13 does not support yet.
-        disable += setOf("GradleDependency", "AndroidGradlePluginVersion", "NewerVersionAvailable")
+        // Newer androidx releases and targetSdk 37 need compileSdk 37, which AGP 8.13 does not support.
+        // Tracked as a separate AGP 9 migration; OldTargetApi otherwise fails CI runners that ship SDK 37.
+        disable += setOf("GradleDependency", "AndroidGradlePluginVersion", "NewerVersionAvailable", "OldTargetApi")
     }
 }
 
