@@ -330,7 +330,7 @@ export class HostApp {
     return h(
       'header',
       { class: 'topbar' },
-      h('div', { class: 'logo', 'aria-label': 'Gameu' }, h('span', { 'aria-hidden': 'true' }, '🎮'), ' Gameu'),
+      h('img', { class: 'logo', src: '/brand/logo.svg', alt: 'Rubinny Gameu', width: 300, height: 82 }),
       this.room?.locked ? h('div', { class: 'badge' }, '🔒 ', t.locked) : null,
     );
   }

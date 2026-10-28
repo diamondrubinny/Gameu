@@ -44,7 +44,7 @@ async function copyStatic() {
   const pub = path.join(dist, 'public');
   await copyFile(path.join(root, 'src/host/index.html'), path.join(pub, 'host/index.html'));
   await copyFile(path.join(root, 'src/host/host.css'), path.join(pub, 'host/host.css'));
-  for (const f of ['index.html', 'controller.css', 'manifest.webmanifest', 'icon.svg']) {
+  for (const f of ['index.html', 'controller.css', 'manifest.webmanifest']) {
     await copyFile(path.join(root, 'src/controller', f), path.join(pub, 'c', f));
   }
   await copyFile(path.join(root, 'src/sdk/game-base.css'), path.join(pub, 'sdk/game-base.css'));

@@ -50,9 +50,9 @@ object AssetPolicy {
     fun encodingFor(mime: String): String? =
         if (mime.startsWith("text/") || mime.endsWith("json") || mime == "image/svg+xml") "utf-8" else null
 
-    /** Paths phones may fetch over the LAN: the controller, legal pages and the 404 page only. */
+    /** Paths phones may fetch over the LAN: the controller, legal pages, brand images and the 404 page only. */
     fun isNetworkPath(urlPath: String): Boolean =
-        urlPath.startsWith("/c/") || urlPath.startsWith("/legal/") || urlPath == "/404.html"
+        urlPath.startsWith("/c/") || urlPath.startsWith("/legal/") || urlPath.startsWith("/brand/") || urlPath == "/404.html"
 
     /** Headers for responses to phones (src/server/security.ts: 'controller' and 'static'). */
     fun networkHeadersFor(urlPath: String): Map<String, String> {

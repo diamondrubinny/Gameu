@@ -1,5 +1,5 @@
 {
-  "name": "Gameu Controller",
+  "name": "Rubinny Gameu",
   "short_name": "Gameu",
   "start_url": "/c",
   "display": "fullscreen",
@@ -8,5 +8,24 @@
   "theme_color": "#0d1021",
   "lang": "he",
   "dir": "rtl",
-  "icons": [{ "src": "/c/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+  "icons": [
+    {
+      "src": "/brand/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }

@@ -19,6 +19,7 @@ button { font: inherit; color: inherit; }
 .sheet .lang-row { justify-content: flex-start; margin: 8px 0 12px; }
 
 /* join */
+.join-logo { display: block; height: 56px; width: auto; margin: 4px auto 8px; }
 .join-screen { padding: 20px 16px 32px; max-width: 480px; width: 100%; margin: 0 auto; }
 .join-form { display: flex; flex-direction: column; gap: 6px; }
 .join-form h1 { font-size: 1.6rem; margin: 0 0 12px; }

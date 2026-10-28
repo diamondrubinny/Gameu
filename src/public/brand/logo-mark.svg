@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="t">
+  <title id="t">Rubinny Gameu</title>
+  <polygon points="24,20 42,46 6,46" fill="#FF6B86"/>
+  <polygon points="24,20 60,20 42,46" fill="#FF8FA3"/>
+  <polygon points="60,20 78,46 42,46" fill="#FFB3C1"/>
+  <polygon points="60,20 96,20 78,46" fill="#FF8FA3"/>
+  <polygon points="96,20 114,46 78,46" fill="#F0476A"/>
+  <polygon points="6,46 42,46 60,112" fill="#C70F52"/>
+  <polygon points="42,46 78,46 60,112" fill="#E0115F"/>
+  <polygon points="78,46 114,46 60,112" fill="#9E0A42"/>
+  <polygon points="24,20 96,20 114,46 60,112 6,46" fill="none" stroke="#5E0428" stroke-opacity=".35" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="31" y="56" width="22" height="7" rx="2" fill="#FFFFFF"/>
+  <rect x="38.5" y="48.5" width="7" height="22" rx="2" fill="#FFFFFF"/>
+  <circle cx="75" cy="55" r="5.2" fill="#FFCC33"/>
+  <circle cx="86" cy="62" r="5.2" fill="#FFFFFF"/>
+</svg>

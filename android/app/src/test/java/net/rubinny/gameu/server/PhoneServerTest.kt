@@ -30,6 +30,7 @@ class PhoneServerTest {
         "www/c/controller.js" to "console.log(1)",
         "www/legal/privacy.html" to "<!doctype html><title>privacy</title>",
         "www/404.html" to "<!doctype html><title>404</title>",
+        "www/brand/logo.svg" to "<svg xmlns='http://www.w3.org/2000/svg'/>",
         "www/tv/index.html" to "<!doctype html><title>tv</title>",
         "www/games/snake/index.html" to "<!doctype html><title>game</title>",
     )
@@ -103,6 +104,9 @@ class PhoneServerTest {
         assertTrue(res.headers["Content-Type"]!!.startsWith("text/html"))
         assertEquals(200, get("/c/controller.js").status.value)
         assertEquals(200, get("/legal/privacy.html").status.value)
+        val logo = get("/brand/logo.svg")
+        assertEquals(200, logo.status.value)
+        assertTrue(logo.headers["Content-Type"]!!.startsWith("image/svg+xml"))
     }
 
     @Test

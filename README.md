@@ -1,4 +1,11 @@
-# Gameu 🎮
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="src/public/brand/logo.svg">
+    <img src="src/public/brand/logo-on-light.svg" alt="Rubinny Gameu" width="360">
+  </picture>
+</p>
+
+# Rubinny Gameu
 
 Turn any TV into a party game console that runs from a USB drive, with players' phones as controllers. No phone app needed; players just scan a QR code.
 
@@ -65,6 +72,10 @@ npm run build:apk                     # → release/android/Gameu-debug.apk (uni
 Signed release builds (APK + Google Play AAB): `npm run build:apk:release`. Signing is read from environment variables or `android/keystore.properties` (never committed); see [docs/ANDROID-RELEASE.md](docs/ANDROID-RELEASE.md). `npm run build:usb` also copies the APK into the USB folder (`Android-TV/`).
 
 Install guide (Hebrew): [docs/ANDROID-TV-INSTALL.md](docs/ANDROID-TV-INSTALL.md). Plan and status: [docs/ANDROID-TV-PLAN.md](docs/ANDROID-TV-PLAN.md).
+
+## Brand assets
+
+The logo is generated from one definition: `tools/brand/build_logo.py` (needs `fonttools` + `pillow`; text is Inter, SIL OFL, embedded as outlines). It writes `src/public/brand/*` (SVG logos, app icon, PWA PNGs) and the Android launcher icon and TV banners.
 
 ## Configuration
 

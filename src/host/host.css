@@ -46,7 +46,7 @@ h2 { font-size: 1.4em; }
 
 .app { height: 100vh; display: flex; flex-direction: column; padding: 2vh 3vw; gap: 2vh; }
 .topbar { display: flex; align-items: center; justify-content: space-between; }
-.logo { font-weight: 800; font-size: 1.8em; letter-spacing: .02em; }
+.logo { height: 3.2em; width: auto; display: block; }
 .badge { background: var(--panel-2); padding: .3em .8em; border-radius: 999px; }
 .layout { flex: 1; display: grid; grid-template-columns: 1fr minmax(18em, 26vw); gap: 2.5vw; min-height: 0; }
 .panel { background: var(--panel); background: color-mix(in srgb, var(--panel) 85%, transparent); border-radius: var(--radius); padding: 2vh 2vw; min-height: 0; overflow: auto; }
