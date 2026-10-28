@@ -57,6 +57,7 @@ test('TV host + two phones: join, navigate, play trivia, exit, play snake', asyn
   await expect(game.locator('.setup')).toBeVisible({ timeout: 10_000 });
   await expect(guest.locator('.message-text')).toContainText('בוחר/ת נושאים');
   await expect(game.locator('#opt-start')).toHaveClass(/focused/);
+  await expect(game.locator('#setup-hint')).toContainText('Noa');
   for (let i = 0; i < 12 && !(await game.locator('.cat.focused').count()); i++) await press(admin, 'למעלה');
   const topic = game.locator('.cat.focused');
   await expect(topic).toHaveCount(1);

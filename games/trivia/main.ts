@@ -55,8 +55,7 @@ sdk.onPlayers((p) => {
   players = p;
   for (const pl of p) ensurePlayer(pl.id);
   if (phase === 'setup') {
-    const before = controllerId;
-    if (pickController() !== before) setupLayouts();
+    if (pickController() !== controllerId) setupLayouts();
     renderSetupHint();
   } else {
     renderAnswered();
@@ -105,8 +104,8 @@ function setupLayouts(): void {
 
 async function runSetup(): Promise<void> {
   phase = 'setup';
+  setupLayouts(); // assigns the controller before the hint is drawn
   renderSetup();
-  setupLayouts();
   announce(t('הגדרת תחרות טריוויה. בחרו נושאים, מספר שאלות ורמת קושי.', 'Trivia contest setup. Choose topics, number of questions and difficulty.'));
   await new Promise<void>((resolve) => (startContest = resolve));
   startContest = null;
