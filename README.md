@@ -116,3 +116,14 @@ The privacy policy and accessibility statement pages are **technical drafts** an
 ## License
 
 Gameu is free software under the [GNU AGPL-3.0](LICENSE).
+
+
+---
+
+## 💼 Commercial license & rights acquisition
+
+Gameu is free and open source under the AGPL-3.0. If you are interested in a **commercial license** (use without AGPL obligations), **white-label / exclusive rights**, or **acquiring full rights to the code**, send your proposal to **[d@rubinny.net](mailto:d@rubinny.net)**.
+
+Please include: who you are (company / contact), how you intend to use the code, and your offer.
+
+> 🇮🇱 מעוניינים ברישיון מסחרי, בזכויות בלעדיות או ברכישת הזכויות בקוד? שלחו הצעה ל-**[d@rubinny.net](mailto:d@rubinny.net)** — כולל פרטי קשר, אופן השימוש המתוכנן וההצעה שלכם.
