@@ -1,0 +1,577 @@
+[
+  {
+    "id": "israel-001",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מה שמו של ההמנון הלאומי של ישראל?",
+      "a": [
+        "התקווה",
+        "ירושלים של זהב",
+        "הבה נגילה",
+        "אנו באנו ארצה"
+      ]
+    },
+    "en": {
+      "q": "What is the name of Israel's national anthem?",
+      "a": [
+        "Hatikvah",
+        "Jerusalem of Gold",
+        "Hava Nagila",
+        "Anu Banu Artza"
+      ]
+    }
+  },
+  {
+    "id": "israel-002",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "איזה מקום בישראל הוא הנמוך ביותר על פני היבשה בכדור הארץ?",
+      "a": [
+        "הכנרת",
+        "מפרץ אילת",
+        "ים המלח",
+        "עמק החולה"
+      ]
+    },
+    "en": {
+      "q": "Which place in Israel is the lowest point on land on Earth?",
+      "a": [
+        "Sea of Galilee",
+        "Gulf of Eilat",
+        "Dead Sea",
+        "Hula Valley"
+      ]
+    }
+  },
+  {
+    "id": "israel-003",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "איזו עיר ישראלית שוכנת לחוף ים סוף?",
+      "a": [
+        "אשדוד",
+        "אילת",
+        "חיפה",
+        "נתניה"
+      ]
+    },
+    "en": {
+      "q": "Which Israeli city lies on the Red Sea coast?",
+      "a": [
+        "Ashdod",
+        "Eilat",
+        "Haifa",
+        "Netanya"
+      ]
+    }
+  },
+  {
+    "id": "israel-004",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "איזו ציפור נבחרה ב-2008 לציפור הלאומית של ישראל?",
+      "a": [
+        "עורב",
+        "חסידה",
+        "בולבול",
+        "דוכיפת"
+      ]
+    },
+    "en": {
+      "q": "Which bird was chosen in 2008 as Israel's national bird?",
+      "a": [
+        "Crow",
+        "Stork",
+        "Bulbul",
+        "Hoopoe"
+      ]
+    }
+  },
+  {
+    "id": "israel-005",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מהו אגם המים המתוקים הגדול בישראל?",
+      "a": [
+        "הכנרת",
+        "אגמון החולה",
+        "ברכת רם",
+        "אגם מונפורט"
+      ]
+    },
+    "en": {
+      "q": "What is the largest freshwater lake in Israel?",
+      "a": [
+        "Sea of Galilee (Kinneret)",
+        "Agamon Hula",
+        "Lake Ram",
+        "Lake Monfort"
+      ]
+    }
+  },
+  {
+    "id": "israel-006",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "איזה מדבר משתרע על רוב דרום ישראל?",
+      "a": [
+        "סהרה",
+        "גובי",
+        "הנגב",
+        "קלהארי"
+      ]
+    },
+    "en": {
+      "q": "Which desert covers most of southern Israel?",
+      "a": [
+        "Sahara",
+        "Gobi",
+        "Negev",
+        "Kalahari"
+      ]
+    }
+  },
+  {
+    "id": "israel-007",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "באיזה חג נהוג בישראל לאכול סופגניות?",
+      "a": [
+        "פורים",
+        "חנוכה",
+        "פסח",
+        "שבועות"
+      ]
+    },
+    "en": {
+      "q": "On which holiday is it customary in Israel to eat sufganiyot (doughnuts)?",
+      "a": [
+        "Purim",
+        "Hanukkah",
+        "Passover",
+        "Shavuot"
+      ]
+    }
+  },
+  {
+    "id": "israel-008",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "באיזה חג נהוג להתחפש?",
+      "a": [
+        "סוכות",
+        "ל״ג בעומר",
+        "ט״ו בשבט",
+        "פורים"
+      ]
+    },
+    "en": {
+      "q": "On which holiday is it customary to dress up in costumes?",
+      "a": [
+        "Sukkot",
+        "Lag BaOmer",
+        "Tu BiShvat",
+        "Purim"
+      ]
+    }
+  },
+  {
+    "id": "israel-009",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "באיזה חג נהוג לנטוע עצים?",
+      "a": [
+        "ל״ג בעומר",
+        "שבועות",
+        "ט״ו בשבט",
+        "חנוכה"
+      ]
+    },
+    "en": {
+      "q": "On which holiday is it customary to plant trees?",
+      "a": [
+        "Lag BaOmer",
+        "Shavuot",
+        "Tu BiShvat",
+        "Hanukkah"
+      ]
+    }
+  },
+  {
+    "id": "israel-010",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "איזה ים שוכן לאורך החוף המערבי של ישראל?",
+      "a": [
+        "ים המלח",
+        "הים התיכון",
+        "ים סוף",
+        "הים השחור"
+      ]
+    },
+    "en": {
+      "q": "Which sea lies along Israel's western coast?",
+      "a": [
+        "Dead Sea",
+        "Mediterranean Sea",
+        "Red Sea",
+        "Black Sea"
+      ]
+    }
+  },
+  {
+    "id": "israel-011",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "איזה פרח נבחר ב-2013 לפרח הלאומי של ישראל?",
+      "a": [
+        "כלנית",
+        "רקפת",
+        "נרקיס",
+        "חרצית"
+      ]
+    },
+    "en": {
+      "q": "Which flower was chosen in 2013 as Israel's national flower?",
+      "a": [
+        "Anemone (Kalanit)",
+        "Cyclamen",
+        "Narcissus",
+        "Chrysanthemum"
+      ]
+    }
+  },
+  {
+    "id": "israel-012",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "איזה מכתש בנגב הוא הגדול מסוגו בעולם?",
+      "a": [
+        "המכתש הגדול",
+        "המכתש הקטן",
+        "בקעת צין",
+        "מכתש רמון"
+      ]
+    },
+    "en": {
+      "q": "Which crater in the Negev is the largest of its kind in the world?",
+      "a": [
+        "HaMakhtesh HaGadol",
+        "HaMakhtesh HaKatan",
+        "Zin Valley",
+        "Makhtesh Ramon"
+      ]
+    }
+  },
+  {
+    "id": "israel-013",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מה מופיע במרכז סמל מדינת ישראל?",
+      "a": [
+        "מגן דוד",
+        "מנורה",
+        "אריה",
+        "יונה"
+      ]
+    },
+    "en": {
+      "q": "What appears at the center of the emblem of the State of Israel?",
+      "a": [
+        "Star of David",
+        "Menorah",
+        "Lion",
+        "Dove"
+      ]
+    }
+  },
+  {
+    "id": "israel-014",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "איזה נהר זורם אל ים המלח?",
+      "a": [
+        "הירקון",
+        "הקישון",
+        "הירדן",
+        "נחל אלכסנדר"
+      ]
+    },
+    "en": {
+      "q": "Which river flows into the Dead Sea?",
+      "a": [
+        "Yarkon",
+        "Kishon",
+        "Jordan",
+        "Alexander"
+      ]
+    }
+  },
+  {
+    "id": "israel-015",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "איזו עיר מכונה \"העיר ללא הפסקה\"?",
+      "a": [
+        "תל אביב",
+        "חיפה",
+        "אילת",
+        "באר שבע"
+      ]
+    },
+    "en": {
+      "q": "Which city is nicknamed \"the city that never stops\"?",
+      "a": [
+        "Tel Aviv",
+        "Haifa",
+        "Eilat",
+        "Beersheba"
+      ]
+    }
+  },
+  {
+    "id": "israel-016",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "איזו טכנולוגיה חקלאית, שפיתחה חברת נטפים, היא המצאה ישראלית מפורסמת?",
+      "a": [
+        "הידרופוניקה",
+        "מחרשה ממונעת",
+        "חממת זכוכית",
+        "השקיה בטפטוף"
+      ]
+    },
+    "en": {
+      "q": "Which farming technology, developed by Netafim, is a famous Israeli innovation?",
+      "a": [
+        "Hydroponics",
+        "Motorized plow",
+        "Glass greenhouse",
+        "Drip irrigation"
+      ]
+    }
+  },
+  {
+    "id": "israel-017",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "איזו אפליקציית ניווט פותחה בישראל ונרכשה על ידי גוגל ב-2013?",
+      "a": [
+        "Google Maps",
+        "Waze",
+        "Apple Maps",
+        "TomTom"
+      ]
+    },
+    "en": {
+      "q": "Which navigation app was developed in Israel and bought by Google in 2013?",
+      "a": [
+        "Google Maps",
+        "Waze",
+        "Apple Maps",
+        "TomTom"
+      ]
+    }
+  },
+  {
+    "id": "israel-018",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "מי נחשב למחייה השפה העברית המודרנית?",
+      "a": [
+        "חיים נחמן ביאליק",
+        "בנימין זאב הרצל",
+        "אליעזר בן-יהודה",
+        "ש״י עגנון"
+      ]
+    },
+    "en": {
+      "q": "Who is considered the reviver of the modern Hebrew language?",
+      "a": [
+        "Hayim Nahman Bialik",
+        "Theodor Herzl",
+        "Eliezer Ben-Yehuda",
+        "S. Y. Agnon"
+      ]
+    }
+  },
+  {
+    "id": "israel-019",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "באיזו עיר נמצאים הגנים הבהאיים המדורגים המפורסמים?",
+      "a": [
+        "חיפה",
+        "תל אביב",
+        "אילת",
+        "טבריה"
+      ]
+    },
+    "en": {
+      "q": "In which city are the famous terraced Bahá'í Gardens?",
+      "a": [
+        "Haifa",
+        "Tel Aviv",
+        "Eilat",
+        "Tiberias"
+      ]
+    }
+  },
+  {
+    "id": "israel-020",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "איזו שמורת טבע ליד ים המלח מפורסמת במפלים וביעלים?",
+      "a": [
+        "נחל שורק",
+        "עין גדי",
+        "עין אפק",
+        "חוף דור"
+      ]
+    },
+    "en": {
+      "q": "Which nature reserve near the Dead Sea is famous for its waterfalls and ibexes?",
+      "a": [
+        "Nahal Sorek",
+        "Ein Gedi",
+        "Ein Afek",
+        "Dor Beach"
+      ]
+    }
+  },
+  {
+    "id": "israel-021",
+    "d": 3,
+    "c": 1,
+    "he": {
+      "q": "מי כתב את מילות \"התקווה\"?",
+      "a": [
+        "חיים נחמן ביאליק",
+        "נפתלי הרץ אימבר",
+        "שאול טשרניחובסקי",
+        "נעמי שמר"
+      ]
+    },
+    "en": {
+      "q": "Who wrote the lyrics of \"Hatikvah\"?",
+      "a": [
+        "Hayim Nahman Bialik",
+        "Naftali Herz Imber",
+        "Shaul Tchernichovsky",
+        "Naomi Shemer"
+      ]
+    }
+  },
+  {
+    "id": "israel-022",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "איזה מדען ישראלי זכה בפרס נובל לכימיה ב-2011 על גילוי הקוואזי-גבישים?",
+      "a": [
+        "דן שכטמן",
+        "עדה יונת",
+        "אהרן צ׳חנובר",
+        "דניאל כהנמן"
+      ]
+    },
+    "en": {
+      "q": "Which Israeli scientist won the 2011 Nobel Prize in Chemistry for discovering quasicrystals?",
+      "a": [
+        "Dan Shechtman",
+        "Ada Yonath",
+        "Aaron Ciechanover",
+        "Daniel Kahneman"
+      ]
+    }
+  },
+  {
+    "id": "israel-023",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "איזו ציפור גדולה חורפת באלפיה בעמק החולה?",
+      "a": [
+        "פלמינגו",
+        "שקנאי",
+        "חסידה",
+        "עגור אפור"
+      ]
+    },
+    "en": {
+      "q": "Which large bird spends the winter by the thousands in the Hula Valley?",
+      "a": [
+        "Flamingo",
+        "Pelican",
+        "Stork",
+        "Common crane"
+      ]
+    }
+  },
+  {
+    "id": "israel-024",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "באיזו עיר נמצא מכון ויצמן למדע?",
+      "a": [
+        "חיפה",
+        "הרצליה",
+        "רחובות",
+        "באר שבע"
+      ]
+    },
+    "en": {
+      "q": "In which city is the Weizmann Institute of Science located?",
+      "a": [
+        "Haifa",
+        "Herzliya",
+        "Rehovot",
+        "Beersheba"
+      ]
+    }
+  },
+  {
+    "id": "israel-025",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "מה זה ה'פילקאם' (PillCam), המצאה ישראלית ברפואה?",
+      "a": [
+        "מצלמה שבולעים כמו כדור",
+        "מכשיר שמיעה זעיר",
+        "מד חום חכם",
+        "עט לזריקת אינסולין"
+      ]
+    },
+    "en": {
+      "q": "What is the PillCam, an Israeli medical invention?",
+      "a": [
+        "A camera you swallow like a pill",
+        "A tiny hearing aid",
+        "A smart thermometer",
+        "An insulin injection pen"
+      ]
+    }
+  }
+]

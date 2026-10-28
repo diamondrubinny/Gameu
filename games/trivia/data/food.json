@@ -1,0 +1,577 @@
+[
+  {
+    "id": "food-001",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "מהו המרכיב העיקרי של החומוס?",
+      "a": [
+        "שעועית לבנה",
+        "עדשים",
+        "גרגרי חומוס",
+        "אפונה"
+      ]
+    },
+    "en": {
+      "q": "What is the main ingredient of hummus?",
+      "a": [
+        "White beans",
+        "Lentils",
+        "Chickpeas",
+        "Peas"
+      ]
+    }
+  },
+  {
+    "id": "food-002",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "איזה פרי הוא המרכיב העיקרי של הגוואקמולי?",
+      "a": [
+        "אבוקדו",
+        "מלפפון",
+        "קישוא",
+        "ליים"
+      ]
+    },
+    "en": {
+      "q": "Which fruit is the main ingredient of guacamole?",
+      "a": [
+        "Avocado",
+        "Cucumber",
+        "Zucchini",
+        "Lime"
+      ]
+    }
+  },
+  {
+    "id": "food-003",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "סושי הוא מאכל מסורתי של איזו מדינה?",
+      "a": [
+        "סין",
+        "יפן",
+        "תאילנד",
+        "וייטנאם"
+      ]
+    },
+    "en": {
+      "q": "Sushi is a traditional dish of which country?",
+      "a": [
+        "China",
+        "Japan",
+        "Thailand",
+        "Vietnam"
+      ]
+    }
+  },
+  {
+    "id": "food-004",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "ממה עשויה הטחינה?",
+      "a": [
+        "בוטנים",
+        "שקדים",
+        "גרעיני חמנייה",
+        "שומשום"
+      ]
+    },
+    "en": {
+      "q": "What is tahini made from?",
+      "a": [
+        "Peanuts",
+        "Almonds",
+        "Sunflower seeds",
+        "Sesame seeds"
+      ]
+    }
+  },
+  {
+    "id": "food-005",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "ממה מכינים צ'יפס?",
+      "a": [
+        "גזר",
+        "תפוח אדמה",
+        "קישוא",
+        "תירס"
+      ]
+    },
+    "en": {
+      "q": "What are French fries made from?",
+      "a": [
+        "Carrots",
+        "Potatoes",
+        "Zucchini",
+        "Corn"
+      ]
+    }
+  },
+  {
+    "id": "food-006",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "מאיזה פרי מכינים צימוקים?",
+      "a": [
+        "שזיפים",
+        "תמרים",
+        "ענבים",
+        "תאנים"
+      ]
+    },
+    "en": {
+      "q": "Which fruit is dried to make raisins?",
+      "a": [
+        "Plums",
+        "Dates",
+        "Grapes",
+        "Figs"
+      ]
+    }
+  },
+  {
+    "id": "food-007",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "פיצה מרגריטה היא מאכל מסורתי של איזו מדינה?",
+      "a": [
+        "איטליה",
+        "צרפת",
+        "יוון",
+        "ספרד"
+      ]
+    },
+    "en": {
+      "q": "Pizza Margherita is a traditional dish of which country?",
+      "a": [
+        "Italy",
+        "France",
+        "Greece",
+        "Spain"
+      ]
+    }
+  },
+  {
+    "id": "food-008",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "מאיזה דגן מכינים פופקורן?",
+      "a": [
+        "אורז",
+        "חיטה",
+        "שעורה",
+        "תירס"
+      ]
+    },
+    "en": {
+      "q": "Which grain is used to make popcorn?",
+      "a": [
+        "Rice",
+        "Wheat",
+        "Barley",
+        "Corn"
+      ]
+    }
+  },
+  {
+    "id": "food-009",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מהו המרכיב העיקרי של חביתה?",
+      "a": [
+        "ביצים",
+        "קמח",
+        "חלב",
+        "גבינה"
+      ]
+    },
+    "en": {
+      "q": "What is the main ingredient of an omelette?",
+      "a": [
+        "Eggs",
+        "Flour",
+        "Milk",
+        "Cheese"
+      ]
+    }
+  },
+  {
+    "id": "food-010",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "איזה ירק גורם לדמעות בעיניים כשחותכים אותו?",
+      "a": [
+        "גזר",
+        "בצל",
+        "מלפפון",
+        "עגבנייה"
+      ]
+    },
+    "en": {
+      "q": "Which vegetable is known for making people cry when they cut it?",
+      "a": [
+        "Carrot",
+        "Onion",
+        "Cucumber",
+        "Tomato"
+      ]
+    }
+  },
+  {
+    "id": "food-011",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מאיזה פרח מפיקים את תבלין הזעפרן?",
+      "a": [
+        "ורד",
+        "כרכום",
+        "צבעוני",
+        "חבצלת"
+      ]
+    },
+    "en": {
+      "q": "The spice saffron comes from which flower?",
+      "a": [
+        "Rose",
+        "Crocus",
+        "Tulip",
+        "Lily"
+      ]
+    }
+  },
+  {
+    "id": "food-012",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "פאייה היא מאכל מסורתי של איזו מדינה?",
+      "a": [
+        "איטליה",
+        "פורטוגל",
+        "ספרד",
+        "מקסיקו"
+      ]
+    },
+    "en": {
+      "q": "Paella is a traditional dish of which country?",
+      "a": [
+        "Italy",
+        "Portugal",
+        "Spain",
+        "Mexico"
+      ]
+    }
+  },
+  {
+    "id": "food-013",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מאיזו קטנייה מכינים טופו?",
+      "a": [
+        "עדשים",
+        "גרגרי חומוס",
+        "אפונה",
+        "סויה"
+      ]
+    },
+    "en": {
+      "q": "Which legume is tofu made from?",
+      "a": [
+        "Lentils",
+        "Chickpeas",
+        "Peas",
+        "Soybeans"
+      ]
+    }
+  },
+  {
+    "id": "food-014",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "אילו אגוזים משמשים בפסטו ג׳נובזה הקלאסי?",
+      "a": [
+        "צנוברים",
+        "אגוזי מלך",
+        "שקדים",
+        "קשיו"
+      ]
+    },
+    "en": {
+      "q": "Which nuts are used in classic Genovese pesto?",
+      "a": [
+        "Pine nuts",
+        "Walnuts",
+        "Almonds",
+        "Cashews"
+      ]
+    }
+  },
+  {
+    "id": "food-015",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "איזה תבלין מעניק לקארי את צבעו הצהוב?",
+      "a": [
+        "פפריקה",
+        "כורכום",
+        "קינמון",
+        "כמון"
+      ]
+    },
+    "en": {
+      "q": "Which spice gives curry its yellow color?",
+      "a": [
+        "Paprika",
+        "Turmeric",
+        "Cinnamon",
+        "Cumin"
+      ]
+    }
+  },
+  {
+    "id": "food-016",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "איזה ירק הוא מרכיב עיקרי בצזיקי היווני?",
+      "a": [
+        "חציל",
+        "גזר",
+        "מלפפון",
+        "סלק"
+      ]
+    },
+    "en": {
+      "q": "Which vegetable is a main ingredient of Greek tzatziki?",
+      "a": [
+        "Eggplant",
+        "Carrot",
+        "Cucumber",
+        "Beetroot"
+      ]
+    }
+  },
+  {
+    "id": "food-017",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מאיזה דגן מכינים ריזוטו?",
+      "a": [
+        "חיטה",
+        "שעורה",
+        "קינואה",
+        "אורז"
+      ]
+    },
+    "en": {
+      "q": "Which grain is risotto made from?",
+      "a": [
+        "Wheat",
+        "Barley",
+        "Quinoa",
+        "Rice"
+      ]
+    }
+  },
+  {
+    "id": "food-018",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "איזה מהבאים נחשב מבחינה בוטנית לפרי?",
+      "a": [
+        "עגבנייה",
+        "תפוח אדמה",
+        "גזר",
+        "סלרי"
+      ]
+    },
+    "en": {
+      "q": "Which of these is botanically a fruit?",
+      "a": [
+        "Tomato",
+        "Potato",
+        "Carrot",
+        "Celery"
+      ]
+    }
+  },
+  {
+    "id": "food-019",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "גבינת פטה מזוהה באופן מסורתי עם איזו מדינה?",
+      "a": [
+        "איטליה",
+        "יוון",
+        "צרפת",
+        "הולנד"
+      ]
+    },
+    "en": {
+      "q": "Feta cheese is traditionally associated with which country?",
+      "a": [
+        "Italy",
+        "Greece",
+        "France",
+        "Netherlands"
+      ]
+    }
+  },
+  {
+    "id": "food-020",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "מאילו אגוזים מכינים מרציפן?",
+      "a": [
+        "אגוזי לוז",
+        "פיסטוקים",
+        "שקדים",
+        "בוטנים"
+      ]
+    },
+    "en": {
+      "q": "Which nuts are used to make marzipan?",
+      "a": [
+        "Hazelnuts",
+        "Pistachios",
+        "Almonds",
+        "Peanuts"
+      ]
+    }
+  },
+  {
+    "id": "food-021",
+    "d": 3,
+    "c": 1,
+    "he": {
+      "q": "איזה תבלין הוא ניצני פרחים מיובשים של עץ?",
+      "a": [
+        "קינמון",
+        "ציפורן",
+        "אגוז מוסקט",
+        "פלפל שחור"
+      ]
+    },
+    "en": {
+      "q": "Which spice is made from the dried flower buds of a tree?",
+      "a": [
+        "Cinnamon",
+        "Cloves",
+        "Nutmeg",
+        "Black pepper"
+      ]
+    }
+  },
+  {
+    "id": "food-022",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "איזה חומר מזוהה במיוחד עם הטעם הבסיסי אוּמאמי?",
+      "a": [
+        "סוכרוז",
+        "חומצת לימון",
+        "גלוטמט",
+        "קפאין"
+      ]
+    },
+    "en": {
+      "q": "Which compound is most associated with the basic taste umami?",
+      "a": [
+        "Sucrose",
+        "Citric acid",
+        "Glutamate",
+        "Caffeine"
+      ]
+    }
+  },
+  {
+    "id": "food-023",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "מחלב של איזו חיה מכינים מוצרלה די בופאלה?",
+      "a": [
+        "עז",
+        "כבשה",
+        "פרה",
+        "תאו מים"
+      ]
+    },
+    "en": {
+      "q": "Mozzarella di bufala is made from the milk of which animal?",
+      "a": [
+        "Goat",
+        "Sheep",
+        "Cow",
+        "Water buffalo"
+      ]
+    }
+  },
+  {
+    "id": "food-024",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "מאיזו יבשת הגיע תפוח האדמה במקור?",
+      "a": [
+        "דרום אמריקה",
+        "אפריקה",
+        "אסיה",
+        "אירופה"
+      ]
+    },
+    "en": {
+      "q": "From which continent does the potato originally come?",
+      "a": [
+        "South America",
+        "Africa",
+        "Asia",
+        "Europe"
+      ]
+    }
+  },
+  {
+    "id": "food-025",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "מה מודד סולם סקוביל?",
+      "a": [
+        "מתיקות של פירות",
+        "חומציות של יין",
+        "מליחות של גבינות",
+        "חריפות של פלפלים"
+      ]
+    },
+    "en": {
+      "q": "What does the Scoville scale measure?",
+      "a": [
+        "Sweetness of fruit",
+        "Acidity of wine",
+        "Saltiness of cheese",
+        "Spiciness of peppers"
+      ]
+    }
+  }
+]

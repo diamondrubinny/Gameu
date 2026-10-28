@@ -1,0 +1,577 @@
+[
+  {
+    "id": "nature-001",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "מהי חיית היבשה המהירה ביותר?",
+      "a": [
+        "אריה",
+        "ברדלס",
+        "סוס",
+        "זאב"
+      ]
+    },
+    "en": {
+      "q": "What is the fastest land animal?",
+      "a": [
+        "Lion",
+        "Cheetah",
+        "Horse",
+        "Wolf"
+      ]
+    }
+  },
+  {
+    "id": "nature-002",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מהו בעל החיים הגדול ביותר החי כיום?",
+      "a": [
+        "לווייתן כחול",
+        "פיל אפריקני",
+        "כריש לווייתני",
+        "ג'ירפה"
+      ]
+    },
+    "en": {
+      "q": "What is the largest animal alive today?",
+      "a": [
+        "Blue whale",
+        "African elephant",
+        "Whale shark",
+        "Giraffe"
+      ]
+    }
+  },
+  {
+    "id": "nature-003",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "מהו בעל החיים הגבוה ביותר?",
+      "a": [
+        "פיל",
+        "גמל",
+        "יען",
+        "ג'ירפה"
+      ]
+    },
+    "en": {
+      "q": "What is the tallest animal?",
+      "a": [
+        "Elephant",
+        "Camel",
+        "Ostrich",
+        "Giraffe"
+      ]
+    }
+  },
+  {
+    "id": "nature-004",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "מה מייצרות הדבורות?",
+      "a": [
+        "משי",
+        "חלב",
+        "דבש",
+        "פנינים"
+      ]
+    },
+    "en": {
+      "q": "What do bees make?",
+      "a": [
+        "Silk",
+        "Milk",
+        "Honey",
+        "Pearls"
+      ]
+    }
+  },
+  {
+    "id": "nature-005",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "איזו חיה מפורסמת בפסים השחורים-לבנים שלה?",
+      "a": [
+        "ג'ירפה",
+        "זברה",
+        "נמר",
+        "גמל"
+      ]
+    },
+    "en": {
+      "q": "Which animal is famous for its black-and-white stripes?",
+      "a": [
+        "Giraffe",
+        "Zebra",
+        "Leopard",
+        "Camel"
+      ]
+    }
+  },
+  {
+    "id": "nature-006",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "איך נקרא התהליך שבו צמחים מייצרים מזון בעזרת אור השמש?",
+      "a": [
+        "פוטוסינתזה",
+        "האבקה",
+        "נביטה",
+        "התאדות"
+      ]
+    },
+    "en": {
+      "q": "What is the process by which plants make food using sunlight?",
+      "a": [
+        "Photosynthesis",
+        "Pollination",
+        "Germination",
+        "Evaporation"
+      ]
+    }
+  },
+  {
+    "id": "nature-007",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "למה הופך הזחל בסוף ההתפתחות שלו?",
+      "a": [
+        "צפרדע",
+        "דבורה",
+        "עכביש",
+        "פרפר"
+      ]
+    },
+    "en": {
+      "q": "What does a caterpillar turn into?",
+      "a": [
+        "Frog",
+        "Bee",
+        "Spider",
+        "Butterfly"
+      ]
+    }
+  },
+  {
+    "id": "nature-008",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "איזו חיה מכונה \"מלך החיות\"?",
+      "a": [
+        "נמר",
+        "פיל",
+        "אריה",
+        "דוב"
+      ]
+    },
+    "en": {
+      "q": "Which animal is known as the \"King of the Beasts\"?",
+      "a": [
+        "Tiger",
+        "Elephant",
+        "Lion",
+        "Bear"
+      ]
+    }
+  },
+  {
+    "id": "nature-009",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "מהי הציפור הגדולה ביותר בעולם?",
+      "a": [
+        "עיט",
+        "יען",
+        "פינגווין",
+        "פלמינגו"
+      ]
+    },
+    "en": {
+      "q": "What is the largest bird in the world?",
+      "a": [
+        "Eagle",
+        "Ostrich",
+        "Penguin",
+        "Flamingo"
+      ]
+    }
+  },
+  {
+    "id": "nature-010",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "איך נקרא הצאצא הצעיר של הצפרדע, שחי במים?",
+      "a": [
+        "ראשן",
+        "גור",
+        "עגל",
+        "אפרוח"
+      ]
+    },
+    "en": {
+      "q": "What is a young frog that lives in water called?",
+      "a": [
+        "Tadpole",
+        "Cub",
+        "Calf",
+        "Chick"
+      ]
+    }
+  },
+  {
+    "id": "nature-011",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "מהו היונק היחיד המסוגל לעוף באמת?",
+      "a": [
+        "סנאי מעופף",
+        "דג מעופף",
+        "עטלף",
+        "יונק דבש"
+      ]
+    },
+    "en": {
+      "q": "What is the only mammal capable of true flight?",
+      "a": [
+        "Flying squirrel",
+        "Flying fish",
+        "Bat",
+        "Hummingbird"
+      ]
+    }
+  },
+  {
+    "id": "nature-012",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "כמה לבבות יש לתמנון?",
+      "a": [
+        "1",
+        "2",
+        "4",
+        "3"
+      ]
+    },
+    "en": {
+      "q": "How many hearts does an octopus have?",
+      "a": [
+        "1",
+        "2",
+        "4",
+        "3"
+      ]
+    }
+  },
+  {
+    "id": "nature-013",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "ממה ניזונה הקואלה בעיקר?",
+      "a": [
+        "במבוק",
+        "עלי אקליפטוס",
+        "חרקים",
+        "פירות"
+      ]
+    },
+    "en": {
+      "q": "What does a koala mainly eat?",
+      "a": [
+        "Bamboo",
+        "Eucalyptus leaves",
+        "Insects",
+        "Fruit"
+      ]
+    }
+  },
+  {
+    "id": "nature-014",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "מהו הגדול ביותר מבין החתולים הגדולים?",
+      "a": [
+        "טיגריס",
+        "אריה",
+        "יגואר",
+        "נמר"
+      ]
+    },
+    "en": {
+      "q": "Which is the largest of the big cats?",
+      "a": [
+        "Tiger",
+        "Lion",
+        "Jaguar",
+        "Leopard"
+      ]
+    }
+  },
+  {
+    "id": "nature-015",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מה מאוחסן בעיקר בדבשת של הגמל?",
+      "a": [
+        "מים",
+        "שומן",
+        "אוויר",
+        "דם"
+      ]
+    },
+    "en": {
+      "q": "What is mainly stored in a camel's hump?",
+      "a": [
+        "Water",
+        "Fat",
+        "Air",
+        "Blood"
+      ]
+    }
+  },
+  {
+    "id": "nature-016",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "לאיזה יונק יבשתי יש את ההיריון הארוך ביותר, כמעט שנתיים?",
+      "a": [
+        "ג'ירפה",
+        "פיל",
+        "קרנף",
+        "סוס"
+      ]
+    },
+    "en": {
+      "q": "Which land mammal has the longest pregnancy, nearly two years?",
+      "a": [
+        "Giraffe",
+        "Elephant",
+        "Rhinoceros",
+        "Horse"
+      ]
+    }
+  },
+  {
+    "id": "nature-017",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "לאיזו קבוצה של בעלי חיים שייך הלווייתן?",
+      "a": [
+        "דגים",
+        "זוחלים",
+        "דו-חיים",
+        "יונקים"
+      ]
+    },
+    "en": {
+      "q": "To which group of animals does the whale belong?",
+      "a": [
+        "Fish",
+        "Reptiles",
+        "Amphibians",
+        "Mammals"
+      ]
+    }
+  },
+  {
+    "id": "nature-018",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "איזה עץ מצמיח בלוטים?",
+      "a": [
+        "אלון",
+        "אורן",
+        "אדר",
+        "זית"
+      ]
+    },
+    "en": {
+      "q": "Which tree produces acorns?",
+      "a": [
+        "Oak",
+        "Pine",
+        "Maple",
+        "Olive"
+      ]
+    }
+  },
+  {
+    "id": "nature-019",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "אצל סוסוני הים, מי נושא את הביצים עד הבקיעה?",
+      "a": [
+        "הנקבה",
+        "הזכר",
+        "שני ההורים",
+        "אף אחד מהם"
+      ]
+    },
+    "en": {
+      "q": "In seahorses, which parent carries the eggs until they hatch?",
+      "a": [
+        "The female",
+        "The male",
+        "Both parents",
+        "Neither parent"
+      ]
+    }
+  },
+  {
+    "id": "nature-020",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "כמה רגליים יש לחרק?",
+      "a": [
+        "4",
+        "8",
+        "6",
+        "10"
+      ]
+    },
+    "en": {
+      "q": "How many legs does an insect have?",
+      "a": [
+        "4",
+        "8",
+        "6",
+        "10"
+      ]
+    }
+  },
+  {
+    "id": "nature-021",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "מהו הזוחל הגדול ביותר החי כיום?",
+      "a": [
+        "דרקון קומודו",
+        "צב גלדי",
+        "תנין הים",
+        "אנקונדה"
+      ]
+    },
+    "en": {
+      "q": "What is the largest living reptile?",
+      "a": [
+        "Komodo dragon",
+        "Leatherback turtle",
+        "Saltwater crocodile",
+        "Anaconda"
+      ]
+    }
+  },
+  {
+    "id": "nature-022",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "איזה מין עץ הוא הגבוה ביותר בעולם?",
+      "a": [
+        "באובב",
+        "אלון",
+        "ארז הלבנון",
+        "סקוויה חופית (רדווד)"
+      ]
+    },
+    "en": {
+      "q": "Which tree species is the tallest in the world?",
+      "a": [
+        "Baobab",
+        "Oak",
+        "Cedar of Lebanon",
+        "Coast redwood"
+      ]
+    }
+  },
+  {
+    "id": "nature-023",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "איזו ציפור מגיעה למהירות הגבוהה ביותר בזמן צלילה?",
+      "a": [
+        "בז נודד",
+        "אלבטרוס",
+        "יען",
+        "יונק דבש"
+      ]
+    },
+    "en": {
+      "q": "Which bird reaches the highest speed when diving?",
+      "a": [
+        "Peregrine falcon",
+        "Albatross",
+        "Ostrich",
+        "Hummingbird"
+      ]
+    }
+  },
+  {
+    "id": "nature-024",
+    "d": 3,
+    "c": 1,
+    "he": {
+      "q": "איזה מהיונקים הבאים מטיל ביצים?",
+      "a": [
+        "קנגורו",
+        "ברווזן",
+        "קואלה",
+        "עצלן"
+      ]
+    },
+    "en": {
+      "q": "Which of these mammals lays eggs?",
+      "a": [
+        "Kangaroo",
+        "Platypus",
+        "Koala",
+        "Sloth"
+      ]
+    }
+  },
+  {
+    "id": "nature-025",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "מהו הדג הגדול ביותר בעולם?",
+      "a": [
+        "כריש לבן גדול",
+        "דג חרב",
+        "כריש לווייתני",
+        "מנטה"
+      ]
+    },
+    "en": {
+      "q": "What is the largest fish in the world?",
+      "a": [
+        "Great white shark",
+        "Swordfish",
+        "Whale shark",
+        "Manta ray"
+      ]
+    }
+  }
+]

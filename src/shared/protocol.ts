@@ -220,6 +220,8 @@ export interface GamePlayer {
   avatar: number;
   color: string;
   connected: boolean;
+  /** The room admin (controls menus); games may give them setup controls. */
+  isAdmin: boolean;
 }
 
 export type HostToGame =

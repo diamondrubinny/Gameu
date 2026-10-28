@@ -1,0 +1,577 @@
+[
+  {
+    "id": "tech-001",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "כמה ביטים יש בבייט אחד?",
+      "a": [
+        "4",
+        "6",
+        "8",
+        "16"
+      ]
+    },
+    "en": {
+      "q": "How many bits are in one byte?",
+      "a": [
+        "4",
+        "6",
+        "8",
+        "16"
+      ]
+    }
+  },
+  {
+    "id": "tech-002",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מי המציא את ה-World Wide Web (הרשת העולמית)?",
+      "a": [
+        "טים ברנרס-לי",
+        "ביל גייטס",
+        "סטיב ג׳ובס",
+        "מארק צוקרברג"
+      ]
+    },
+    "en": {
+      "q": "Who invented the World Wide Web?",
+      "a": [
+        "Tim Berners-Lee",
+        "Bill Gates",
+        "Steve Jobs",
+        "Mark Zuckerberg"
+      ]
+    }
+  },
+  {
+    "id": "tech-003",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "מי קיבל ב-1876 את הפטנט האמריקאי הראשון על הטלפון?",
+      "a": [
+        "תומאס אדיסון",
+        "אלכסנדר גרהם בל",
+        "ניקולה טסלה",
+        "גוליילמו מרקוני"
+      ]
+    },
+    "en": {
+      "q": "Who received the first US patent for the telephone in 1876?",
+      "a": [
+        "Thomas Edison",
+        "Alexander Graham Bell",
+        "Nikola Tesla",
+        "Guglielmo Marconi"
+      ]
+    }
+  },
+  {
+    "id": "tech-004",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "מה פירוש ראשי התיבות CPU במחשב?",
+      "a": [
+        "יחידת כוח ממוחשבת",
+        "תוכנת שירות מרכזית",
+        "יחידת ציוד היקפי",
+        "יחידת עיבוד מרכזית"
+      ]
+    },
+    "en": {
+      "q": "What does CPU stand for in a computer?",
+      "a": [
+        "Computer Power Unit",
+        "Central Program Utility",
+        "Core Peripheral Unit",
+        "Central Processing Unit"
+      ]
+    }
+  },
+  {
+    "id": "tech-005",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "באיזו שנה הוצג האייפון הראשון?",
+      "a": [
+        "2005",
+        "2007",
+        "2009",
+        "2011"
+      ]
+    },
+    "en": {
+      "q": "In which year was the first iPhone introduced?",
+      "a": [
+        "2005",
+        "2007",
+        "2009",
+        "2011"
+      ]
+    }
+  },
+  {
+    "id": "tech-006",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "איזה ממציא מפורסם בפיתוח נורת להט מעשית ב-1879?",
+      "a": [
+        "אלכסנדר גרהם בל",
+        "גוליילמו מרקוני",
+        "תומאס אדיסון",
+        "סמואל מורס"
+      ]
+    },
+    "en": {
+      "q": "Which inventor is famous for developing a practical light bulb in 1879?",
+      "a": [
+        "Alexander Graham Bell",
+        "Guglielmo Marconi",
+        "Thomas Edison",
+        "Samuel Morse"
+      ]
+    }
+  },
+  {
+    "id": "tech-007",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "איזו חברה מפתחת את מערכת ההפעלה Windows?",
+      "a": [
+        "מיקרוסופט",
+        "אפל",
+        "גוגל",
+        "IBM"
+      ]
+    },
+    "en": {
+      "q": "Which company makes the Windows operating system?",
+      "a": [
+        "Microsoft",
+        "Apple",
+        "Google",
+        "IBM"
+      ]
+    }
+  },
+  {
+    "id": "tech-008",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "איזו מיחידות המידע הבאות היא הגדולה ביותר?",
+      "a": [
+        "קילובייט",
+        "מגהבייט",
+        "בייט",
+        "גיגהבייט"
+      ]
+    },
+    "en": {
+      "q": "Which of these units of data is the largest?",
+      "a": [
+        "Kilobyte",
+        "Megabyte",
+        "Byte",
+        "Gigabyte"
+      ]
+    }
+  },
+  {
+    "id": "tech-009",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "באיזה סוג כתובת מופיע תמיד הסימן @ (שטרודל)?",
+      "a": [
+        "מספר טלפון",
+        "כתובת דואר אלקטרוני",
+        "מיקוד",
+        "כתובת מגורים"
+      ]
+    },
+    "en": {
+      "q": "Which kind of address always contains the @ symbol?",
+      "a": [
+        "Phone number",
+        "Email address",
+        "Postal code",
+        "Home address"
+      ]
+    }
+  },
+  {
+    "id": "tech-010",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "איזה מקש במקלדת מוחק את התו שנמצא לפני הסמן?",
+      "a": [
+        "Enter",
+        "Backspace",
+        "Shift",
+        "Tab"
+      ]
+    },
+    "en": {
+      "q": "Which keyboard key deletes the character just before the cursor?",
+      "a": [
+        "Enter",
+        "Backspace",
+        "Shift",
+        "Tab"
+      ]
+    }
+  },
+  {
+    "id": "tech-011",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "באילו ספרות משתמשת שיטת הספירה הבינארית?",
+      "a": [
+        "0 ו-1",
+        "1 ו-2",
+        "0 עד 7",
+        "0 עד 9"
+      ]
+    },
+    "en": {
+      "q": "Which digits does the binary number system use?",
+      "a": [
+        "0 and 1",
+        "1 and 2",
+        "0 to 7",
+        "0 to 9"
+      ]
+    }
+  },
+  {
+    "id": "tech-012",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מה פירוש ראשי התיבות HTML?",
+      "a": [
+        "HighTech Modern Language",
+        "Hyperlink Text Management Language",
+        "Home Tool Markup Language",
+        "HyperText Markup Language"
+      ]
+    },
+    "en": {
+      "q": "What does HTML stand for?",
+      "a": [
+        "HighTech Modern Language",
+        "Hyperlink Text Management Language",
+        "Home Tool Markup Language",
+        "HyperText Markup Language"
+      ]
+    }
+  },
+  {
+    "id": "tech-013",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "איזה סטיב ייסד את אפל יחד עם סטיב ג׳ובס?",
+      "a": [
+        "סטיב באלמר",
+        "סטיב ווזניאק",
+        "סטיב קייס",
+        "סטיב צ׳ן"
+      ]
+    },
+    "en": {
+      "q": "Which Steve co-founded Apple with Steve Jobs?",
+      "a": [
+        "Steve Ballmer",
+        "Steve Wozniak",
+        "Steve Case",
+        "Steve Chen"
+      ]
+    }
+  },
+  {
+    "id": "tech-014",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "באיזו שנה נוסדה חברת גוגל?",
+      "a": [
+        "1992",
+        "1995",
+        "1998",
+        "2002"
+      ]
+    },
+    "en": {
+      "q": "In which year was Google founded?",
+      "a": [
+        "1992",
+        "1995",
+        "1998",
+        "2002"
+      ]
+    }
+  },
+  {
+    "id": "tech-015",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מי נחשבת למתכנתת הראשונה בהיסטוריה?",
+      "a": [
+        "מארי קירי",
+        "גרייס הופר",
+        "פלורנס נייטינגייל",
+        "עדה לאבלייס"
+      ]
+    },
+    "en": {
+      "q": "Who is considered the first computer programmer in history?",
+      "a": [
+        "Marie Curie",
+        "Grace Hopper",
+        "Florence Nightingale",
+        "Ada Lovelace"
+      ]
+    }
+  },
+  {
+    "id": "tech-016",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "איזו שפת תכנות נקראה על שם קבוצת קומיקאים בריטית?",
+      "a": [
+        "Java",
+        "Python",
+        "Ruby",
+        "Perl"
+      ]
+    },
+    "en": {
+      "q": "Which programming language is named after a British comedy group?",
+      "a": [
+        "Java",
+        "Python",
+        "Ruby",
+        "Perl"
+      ]
+    }
+  },
+  {
+    "id": "tech-017",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "איזו חברה הוציאה ב-1979 את נגן הקלטות הנייד ווקמן?",
+      "a": [
+        "סוני",
+        "פנסוניק",
+        "פיליפס",
+        "טושיבה"
+      ]
+    },
+    "en": {
+      "q": "Which company launched the Walkman portable cassette player in 1979?",
+      "a": [
+        "Sony",
+        "Panasonic",
+        "Philips",
+        "Toshiba"
+      ]
+    }
+  },
+  {
+    "id": "tech-018",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "מה פירוש ראשי התיבות USB?",
+      "a": [
+        "Universal Serial Bus",
+        "Unified System Board",
+        "Universal Storage Box",
+        "User Signal Bridge"
+      ]
+    },
+    "en": {
+      "q": "What does USB stand for?",
+      "a": [
+        "Universal Serial Bus",
+        "Unified System Board",
+        "Universal Storage Box",
+        "User Signal Bridge"
+      ]
+    }
+  },
+  {
+    "id": "tech-019",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "למה מתייחס המונח QWERTY?",
+      "a": [
+        "שפת תכנות",
+        "סוג של מעבד",
+        "פרוטוקול אינטרנט",
+        "פריסת מקלדת"
+      ]
+    },
+    "en": {
+      "q": "What does the term QWERTY refer to?",
+      "a": [
+        "A programming language",
+        "A type of processor",
+        "An internet protocol",
+        "A keyboard layout"
+      ]
+    }
+  },
+  {
+    "id": "tech-020",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "איזו חברה הוציאה ב-1972 את משחק הווידאו \"פונג\"?",
+      "a": [
+        "נינטנדו",
+        "עטארי",
+        "סגה",
+        "סוני"
+      ]
+    },
+    "en": {
+      "q": "Which company released the video game Pong in 1972?",
+      "a": [
+        "Nintendo",
+        "Atari",
+        "Sega",
+        "Sony"
+      ]
+    }
+  },
+  {
+    "id": "tech-021",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "איזה דפדפן משנת 1993 נחשב לזה שהפך את הרשת העולמית לפופולרית?",
+      "a": [
+        "נטסקייפ נביגייטור",
+        "אינטרנט אקספלורר",
+        "מוזאיק",
+        "אופרה"
+      ]
+    },
+    "en": {
+      "q": "Which 1993 web browser is credited with popularizing the World Wide Web?",
+      "a": [
+        "Netscape Navigator",
+        "Internet Explorer",
+        "Mosaic",
+        "Opera"
+      ]
+    }
+  },
+  {
+    "id": "tech-022",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "באיזה עשור הוצג לציבור המחשב ENIAC, מהמחשבים האלקטרוניים הראשונים?",
+      "a": [
+        "שנות ה-40",
+        "שנות ה-20",
+        "שנות ה-60",
+        "שנות ה-70"
+      ]
+    },
+    "en": {
+      "q": "In which decade was ENIAC, one of the first electronic computers, unveiled?",
+      "a": [
+        "1940s",
+        "1920s",
+        "1960s",
+        "1970s"
+      ]
+    }
+  },
+  {
+    "id": "tech-023",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "איך נקראה הרשת שהושקה ב-1969 ונחשבת לאם של האינטרנט?",
+      "a": [
+        "אתרנט",
+        "ביטנט",
+        "יוזנט",
+        "ARPANET"
+      ]
+    },
+    "en": {
+      "q": "What was the 1969 network considered the forerunner of the Internet called?",
+      "a": [
+        "Ethernet",
+        "BITNET",
+        "Usenet",
+        "ARPANET"
+      ]
+    }
+  },
+  {
+    "id": "tech-024",
+    "d": 3,
+    "c": 1,
+    "he": {
+      "q": "מי הגה את \"משחק החיקוי\", מבחן לבינה של מכונות?",
+      "a": [
+        "ג׳ון פון נוימן",
+        "אלן טיורינג",
+        "קלוד שאנון",
+        "צ׳ארלס בבג׳"
+      ]
+    },
+    "en": {
+      "q": "Who devised the \"imitation game\", a test of machine intelligence?",
+      "a": [
+        "John von Neumann",
+        "Alan Turing",
+        "Claude Shannon",
+        "Charles Babbage"
+      ]
+    }
+  },
+  {
+    "id": "tech-025",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "מכמה ביטים מורכבת כתובת IPv4?",
+      "a": [
+        "8",
+        "16",
+        "32",
+        "64"
+      ]
+    },
+    "en": {
+      "q": "How many bits make up an IPv4 address?",
+      "a": [
+        "8",
+        "16",
+        "32",
+        "64"
+      ]
+    }
+  }
+]

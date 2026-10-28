@@ -1,12 +1,22 @@
 {
   "id": "trivia",
-  "version": "1.0.0",
-  "name": { "he": "טריוויה", "en": "Trivia" },
-  "description": { "he": "10 שאלות ידע כללי. עונים מהטלפון — מהר יותר, יותר נקודות!", "en": "10 general-knowledge questions. Answer on your phone — faster means more points!" },
+  "version": "2.0.0",
+  "name": {
+    "he": "טריוויה — תחרות",
+    "en": "Trivia Contest"
+  },
+  "description": {
+    "he": "תחרות טריוויה ב־16 נושאים ו־400 שאלות: בוחרים נושאים ורמה, עונים מהטלפון, בונוס על רצף ושאלת אלופים כפולה.",
+    "en": "A trivia contest with 400 questions in 16 topics: pick topics and level, answer on your phone, streak bonuses and a double-points final."
+  },
   "minPlayers": 1,
   "maxPlayers": 8,
   "entry": "index.html",
   "icon": "icon.svg",
   "controller": "choices",
-  "accessibility": { "colorIndependent": true, "extendedTime": true, "noFlashing": true }
+  "accessibility": {
+    "colorIndependent": true,
+    "extendedTime": true,
+    "noFlashing": true
+  }
 }

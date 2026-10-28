@@ -1,3 +1,4 @@
+import { CATEGORIES } from '../../games/trivia/categories';
 import { expect, test, devices, type Browser, type BrowserContext, type Page } from '@playwright/test';
 
 // The console server is shared by all tests: close phone contexts after each test so they disconnect.
@@ -52,7 +53,26 @@ test('TV host + two phones: join, navigate, play trivia, exit, play snake', asyn
 
   const game = host.frameLocator('.game-frame');
   await expect(host.locator('.game-loading')).toHaveCount(0, { timeout: 10_000 });
-  await expect(game.locator('.question')).toBeVisible({ timeout: 10_000 });
+  // Contest setup: the admin picks a topic with the phone d-pad, then starts.
+  await expect(game.locator('.setup')).toBeVisible({ timeout: 10_000 });
+  await expect(guest.locator('.message-text')).toContainText('בוחר/ת נושאים');
+  await expect(game.locator('#opt-start')).toHaveClass(/focused/);
+  for (let i = 0; i < 12 && !(await game.locator('.cat.focused').count()); i++) await press(admin, 'למעלה');
+  const topic = game.locator('.cat.focused');
+  await expect(topic).toHaveCount(1);
+  if ((await topic.getAttribute('data-cat')) === 'all') await press(admin, 'ימינה');
+  const chosen = (await game.locator('.cat.focused').getAttribute('data-cat'))!;
+  await press(admin, 'בחירה');
+  await expect(game.locator(`.cat[data-cat="${chosen}"]`)).toHaveAttribute('aria-pressed', 'true');
+  await expect(game.locator('.cat[data-cat="all"]')).toHaveAttribute('aria-pressed', 'false');
+  for (let i = 0; i < 12 && !(await game.locator('#opt-start.focused').count()); i++) await press(admin, 'למטה');
+  for (let i = 0; i < 6 && !(await game.locator('#opt-start.focused').count()); i++) await press(admin, 'שמאלה');
+  await expect(game.locator('#opt-start')).toHaveClass(/focused/);
+  await press(admin, 'בחירה');
+  await expect(game.locator('.question')).toBeVisible({ timeout: 12_000 });
+  // The question belongs to the chosen topic.
+  const topicInfo = CATEGORIES.find((c) => c.id === chosen)!;
+  await expect(game.locator('.meta .badge').first()).toHaveText(`${topicInfo.icon} ${topicInfo.he}`);
 
   // Both phones receive the 4 answers and answer.
   await expect(admin.locator('.choice')).toHaveCount(4);

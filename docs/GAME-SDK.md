@@ -34,7 +34,7 @@ TypeScript (bundled games): `import { createSdk } from '../../src/sdk/gameu'`. P
 |---|---|
 | `onInit(({ players, settings }) => …)` | Start here. `settings` holds language, textScale, highContrast, reduceMotion, extendedTime and volume. |
 | `onInput((playerId, input) => …)` | `input.kind`: `button` {id, pressed}, `stick` {x, y ∈ [-1, 1], y up}, `choice` {index}, `text` {value}, `draw` {stroke, color, size, points[[x, y] ∈ 0..1]} |
-| `onPlayers(players => …)` | Fires when a player joins, leaves or reconnects (`connected` flag) |
+| `onPlayers(players => …)` | Fires when a player joins, leaves or reconnects (`connected` flag). `isAdmin` marks the room admin, who can drive setup screens. |
 | `setLayout(layout, target = 'all')` | Sets the controls on phones: `dpad`, `joystick`, `choices`, `text`, `draw`, `message`, `menu` |
 | `haptic([ms, pause, ms…], target)` | Vibrates phones (unsupported on iOS) |
 | `end([{ playerId, score }])` | Shows the results screen and returns to the menu |

@@ -601,7 +601,7 @@ export class HostApp {
   // ---------------- games ----------------
 
   private gamePlayers(): GamePlayer[] {
-    return this.players.map((p) => ({ id: p.id, nickname: p.nickname, avatar: p.avatar, color: colorFor(p.avatar), connected: p.connected }));
+    return this.players.map((p) => ({ id: p.id, nickname: p.nickname, avatar: p.avatar, color: colorFor(p.avatar), connected: p.connected, isAdmin: p.isAdmin }));
   }
 
   private startGame(manifest: GameManifest): void {

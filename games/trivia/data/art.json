@@ -1,0 +1,577 @@
+[
+  {
+    "id": "art-001",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מי צייר את \"המונה ליזה\"?",
+      "a": [
+        "לאונרדו דה וינצ'י",
+        "מיכלאנג'לו",
+        "רפאל",
+        "רמברנדט"
+      ]
+    },
+    "en": {
+      "q": "Who painted the \"Mona Lisa\"?",
+      "a": [
+        "Leonardo da Vinci",
+        "Michelangelo",
+        "Raphael",
+        "Rembrandt"
+      ]
+    }
+  },
+  {
+    "id": "art-002",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "מי צייר את \"ליל כוכבים\"?",
+      "a": [
+        "קלוד מונה",
+        "פבלו פיקאסו",
+        "סלבדור דאלי",
+        "וינסנט ואן גוך"
+      ]
+    },
+    "en": {
+      "q": "Who painted \"The Starry Night\"?",
+      "a": [
+        "Claude Monet",
+        "Pablo Picasso",
+        "Salvador Dalí",
+        "Vincent van Gogh"
+      ]
+    }
+  },
+  {
+    "id": "art-003",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "באיזו עיר נמצא מוזיאון הלובר?",
+      "a": [
+        "לונדון",
+        "רומא",
+        "פריז",
+        "מדריד"
+      ]
+    },
+    "en": {
+      "q": "In which city is the Louvre Museum?",
+      "a": [
+        "London",
+        "Rome",
+        "Paris",
+        "Madrid"
+      ]
+    }
+  },
+  {
+    "id": "art-004",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "מהם שלושת צבעי היסוד בציור המסורתי?",
+      "a": [
+        "אדום, ירוק, כחול",
+        "אדום, צהוב, כחול",
+        "שחור, לבן, אפור",
+        "כתום, ירוק, סגול"
+      ]
+    },
+    "en": {
+      "q": "What are the three primary colors in traditional painting?",
+      "a": [
+        "Red, green, blue",
+        "Red, yellow, blue",
+        "Black, white, gray",
+        "Orange, green, purple"
+      ]
+    }
+  },
+  {
+    "id": "art-005",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "את תקרת איזה מבנה צייר מיכלאנג'לו?",
+      "a": [
+        "קתדרלת נוטרדאם",
+        "הקפלה הסיסטינית",
+        "קתדרלת סנט פול",
+        "איה סופיה"
+      ]
+    },
+    "en": {
+      "q": "Which building's ceiling did Michelangelo paint?",
+      "a": [
+        "Notre-Dame Cathedral",
+        "The Sistine Chapel",
+        "St Paul's Cathedral",
+        "Hagia Sophia"
+      ]
+    }
+  },
+  {
+    "id": "art-006",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מאיזו מדינה היה הצייר פבלו פיקאסו?",
+      "a": [
+        "ספרד",
+        "צרפת",
+        "איטליה",
+        "פורטוגל"
+      ]
+    },
+    "en": {
+      "q": "Which country was the painter Pablo Picasso from?",
+      "a": [
+        "Spain",
+        "France",
+        "Italy",
+        "Portugal"
+      ]
+    }
+  },
+  {
+    "id": "art-007",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "את מי מתאר הפסל המפורסם של מיכלאנג'לו בפירנצה, את הגיבור הצעיר שנלחם בגוליית?",
+      "a": [
+        "שאול",
+        "שמשון",
+        "יהונתן",
+        "דוד"
+      ]
+    },
+    "en": {
+      "q": "Michelangelo's famous statue in Florence shows the young hero who fought Goliath. Who is he?",
+      "a": [
+        "Saul",
+        "Samson",
+        "Jonathan",
+        "David"
+      ]
+    }
+  },
+  {
+    "id": "art-008",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "באיזו עיר נמצא המגדל הנטוי המפורסם?",
+      "a": [
+        "ונציה",
+        "פירנצה",
+        "פיזה",
+        "רומא"
+      ]
+    },
+    "en": {
+      "q": "In which city is the famous Leaning Tower?",
+      "a": [
+        "Venice",
+        "Florence",
+        "Pisa",
+        "Rome"
+      ]
+    }
+  },
+  {
+    "id": "art-009",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "איך נקרא ציור של פירות, פרחים או חפצים?",
+      "a": [
+        "דיוקן",
+        "נוף",
+        "טבע דומם",
+        "ציור מופשט"
+      ]
+    },
+    "en": {
+      "q": "What is a painting of fruit, flowers or objects called?",
+      "a": [
+        "Portrait",
+        "Landscape",
+        "Still life",
+        "Abstract"
+      ]
+    }
+  },
+  {
+    "id": "art-010",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "איזו מדינה העניקה לארצות הברית את פסל החירות?",
+      "a": [
+        "בריטניה",
+        "צרפת",
+        "ספרד",
+        "איטליה"
+      ]
+    },
+    "en": {
+      "q": "Which country gave the Statue of Liberty to the United States?",
+      "a": [
+        "Britain",
+        "France",
+        "Spain",
+        "Italy"
+      ]
+    }
+  },
+  {
+    "id": "art-011",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "מי פיסל את \"האדם החושב\"?",
+      "a": [
+        "אוגוסט רודן",
+        "מיכלאנג'לו",
+        "דונטלו",
+        "ברניני"
+      ]
+    },
+    "en": {
+      "q": "Who sculpted \"The Thinker\"?",
+      "a": [
+        "Auguste Rodin",
+        "Michelangelo",
+        "Donatello",
+        "Bernini"
+      ]
+    }
+  },
+  {
+    "id": "art-012",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מי צייר את השעונים הנמסים ביצירה \"התמדת הזיכרון\"?",
+      "a": [
+        "רנה מגריט",
+        "חואן מירו",
+        "פבלו פיקאסו",
+        "סלבדור דאלי"
+      ]
+    },
+    "en": {
+      "q": "Who painted the melting clocks in \"The Persistence of Memory\"?",
+      "a": [
+        "René Magritte",
+        "Joan Miró",
+        "Pablo Picasso",
+        "Salvador Dalí"
+      ]
+    }
+  },
+  {
+    "id": "art-013",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "תנועת האימפרסיוניזם נקראה על שם ציור של איזה צייר?",
+      "a": [
+        "פייר-אוגוסט רנואר",
+        "אדגר דגה",
+        "אדואר מאנה",
+        "קלוד מונה"
+      ]
+    },
+    "en": {
+      "q": "The Impressionist movement was named after a painting by which artist?",
+      "a": [
+        "Pierre-Auguste Renoir",
+        "Edgar Degas",
+        "Édouard Manet",
+        "Claude Monet"
+      ]
+    }
+  },
+  {
+    "id": "art-014",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "איזה זרם אמנותי ייסדו פיקאסו וז'ורז' בראק?",
+      "a": [
+        "פוינטיליזם",
+        "סוריאליזם",
+        "קוביזם",
+        "פוביזם"
+      ]
+    },
+    "en": {
+      "q": "Which art movement did Picasso and Georges Braque found?",
+      "a": [
+        "Pointillism",
+        "Surrealism",
+        "Cubism",
+        "Fauvism"
+      ]
+    }
+  },
+  {
+    "id": "art-015",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מי צייר את \"הצעקה\"?",
+      "a": [
+        "גוסטב קלימט",
+        "אדוארד מונק",
+        "וסילי קנדינסקי",
+        "אגון שילה"
+      ]
+    },
+    "en": {
+      "q": "Who painted \"The Scream\"?",
+      "a": [
+        "Gustav Klimt",
+        "Edvard Munch",
+        "Wassily Kandinsky",
+        "Egon Schiele"
+      ]
+    }
+  },
+  {
+    "id": "art-016",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "מי תכנן את כנסיית \"סגרדה פמיליה\" בברצלונה?",
+      "a": [
+        "אנטוני גאודי",
+        "לה קורבוזיה",
+        "סנטיאגו קלטרווה",
+        "פרנק גרי"
+      ]
+    },
+    "en": {
+      "q": "Who designed the Sagrada Família church in Barcelona?",
+      "a": [
+        "Antoni Gaudí",
+        "Le Corbusier",
+        "Santiago Calatrava",
+        "Frank Gehry"
+      ]
+    }
+  },
+  {
+    "id": "art-017",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "מי צייר את \"נערה עם עגיל פנינה\"?",
+      "a": [
+        "יוהנס ורמיר",
+        "רמברנדט",
+        "פטר פאול רובנס",
+        "יאן ואן אייק"
+      ]
+    },
+    "en": {
+      "q": "Who painted \"Girl with a Pearl Earring\"?",
+      "a": [
+        "Johannes Vermeer",
+        "Rembrandt",
+        "Peter Paul Rubens",
+        "Jan van Eyck"
+      ]
+    }
+  },
+  {
+    "id": "art-018",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מי צייר את \"הולדת ונוס\"?",
+      "a": [
+        "רפאל",
+        "טיציאן",
+        "קאראווג'ו",
+        "סנדרו בוטיצ'לי"
+      ]
+    },
+    "en": {
+      "q": "Who painted \"The Birth of Venus\"?",
+      "a": [
+        "Raphael",
+        "Titian",
+        "Caravaggio",
+        "Sandro Botticelli"
+      ]
+    }
+  },
+  {
+    "id": "art-019",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "לאיזה זרם אמנותי משתייך אנדי וורהול?",
+      "a": [
+        "קוביזם",
+        "סוריאליזם",
+        "פופ ארט",
+        "אקספרסיוניזם"
+      ]
+    },
+    "en": {
+      "q": "Which art movement is Andy Warhol associated with?",
+      "a": [
+        "Cubism",
+        "Surrealism",
+        "Pop Art",
+        "Expressionism"
+      ]
+    }
+  },
+  {
+    "id": "art-020",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מי צייר את \"הנשיקה\", המפורסם בשימוש בעלי זהב?",
+      "a": [
+        "אדוארד מונק",
+        "גוסטב קלימט",
+        "אגון שילה",
+        "אוסקר קוקושקה"
+      ]
+    },
+    "en": {
+      "q": "Who painted \"The Kiss\", famous for its use of gold leaf?",
+      "a": [
+        "Edvard Munch",
+        "Gustav Klimt",
+        "Egon Schiele",
+        "Oskar Kokoschka"
+      ]
+    }
+  },
+  {
+    "id": "art-021",
+    "d": 3,
+    "c": 1,
+    "he": {
+      "q": "מי תכנן את מוזיאון גוגנהיים בבילבאו?",
+      "a": [
+        "זהה חדיד",
+        "פרנק גרי",
+        "רנזו פיאנו",
+        "נורמן פוסטר"
+      ]
+    },
+    "en": {
+      "q": "Who designed the Guggenheim Museum in Bilbao?",
+      "a": [
+        "Zaha Hadid",
+        "Frank Gehry",
+        "Renzo Piano",
+        "Norman Foster"
+      ]
+    }
+  },
+  {
+    "id": "art-022",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "מי תכנן את פירמידת הזכוכית בכניסה למוזיאון הלובר?",
+      "a": [
+        "איי אם פיי",
+        "פרנק גרי",
+        "ז'אן נובל",
+        "לה קורבוזיה"
+      ]
+    },
+    "en": {
+      "q": "Who designed the glass pyramid at the entrance to the Louvre?",
+      "a": [
+        "I. M. Pei",
+        "Frank Gehry",
+        "Jean Nouvel",
+        "Le Corbusier"
+      ]
+    }
+  },
+  {
+    "id": "art-023",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "מי ייסד את בית הספר לאמנות \"בצלאל\" בירושלים בשנת 1906?",
+      "a": [
+        "ראובן רובין",
+        "נחום גוטמן",
+        "מרדכי ארדון",
+        "בוריס שץ"
+      ]
+    },
+    "en": {
+      "q": "Who founded the Bezalel art school in Jerusalem in 1906?",
+      "a": [
+        "Reuven Rubin",
+        "Nahum Gutman",
+        "Mordecai Ardon",
+        "Boris Schatz"
+      ]
+    }
+  },
+  {
+    "id": "art-024",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "מי צייר את \"גן התענוגות הארציים\"?",
+      "a": [
+        "פיטר ברויגל האב",
+        "יאן ואן אייק",
+        "הירונימוס בוש",
+        "אלברכט דירר"
+      ]
+    },
+    "en": {
+      "q": "Who painted \"The Garden of Earthly Delights\"?",
+      "a": [
+        "Pieter Bruegel the Elder",
+        "Jan van Eyck",
+        "Hieronymus Bosch",
+        "Albrecht Dürer"
+      ]
+    }
+  },
+  {
+    "id": "art-025",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "מי צייר את \"יום ראשון אחר הצהריים באי לה גראנד ז'אט\" בטכניקת נקודות קטנות?",
+      "a": [
+        "פול סזאן",
+        "פול גוגן",
+        "ז'ורז' סרה",
+        "אנרי דה טולוז-לוטרק"
+      ]
+    },
+    "en": {
+      "q": "Who painted \"A Sunday Afternoon on the Island of La Grande Jatte\" using tiny dots?",
+      "a": [
+        "Paul Cézanne",
+        "Paul Gauguin",
+        "Georges Seurat",
+        "Henri de Toulouse-Lautrec"
+      ]
+    }
+  }
+]

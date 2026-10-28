@@ -1,0 +1,577 @@
+[
+  {
+    "id": "sports-001",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "כמה שחקנים יש לכל קבוצה על המגרש במשחק כדורגל?",
+      "a": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ]
+    },
+    "en": {
+      "q": "How many players does each team have on the field in a soccer match?",
+      "a": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ]
+    }
+  },
+  {
+    "id": "sports-002",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "כמה שחקנים יש לכל קבוצה על המגרש בכדורסל?",
+      "a": [
+        "5",
+        "6",
+        "7",
+        "9"
+      ]
+    },
+    "en": {
+      "q": "How many players does each team have on the court in basketball?",
+      "a": [
+        "5",
+        "6",
+        "7",
+        "9"
+      ]
+    }
+  },
+  {
+    "id": "sports-003",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "כמה טבעות יש בסמל המשחקים האולימפיים?",
+      "a": [
+        "3",
+        "4",
+        "6",
+        "5"
+      ]
+    },
+    "en": {
+      "q": "How many rings are in the Olympic symbol?",
+      "a": [
+        "3",
+        "4",
+        "6",
+        "5"
+      ]
+    }
+  },
+  {
+    "id": "sports-004",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "באיזה ענף ספורט מבצעים \"הטבעה\" (סלאם דאנק)?",
+      "a": [
+        "כדורעף",
+        "כדורסל",
+        "טניס",
+        "כדוריד"
+      ]
+    },
+    "en": {
+      "q": "In which sport do players perform a \"slam dunk\"?",
+      "a": [
+        "Volleyball",
+        "Basketball",
+        "Tennis",
+        "Handball"
+      ]
+    }
+  },
+  {
+    "id": "sports-005",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "באיזה ענף ספורט משחקים עם כדור נוצה?",
+      "a": [
+        "טניס",
+        "סקווש",
+        "בדמינטון",
+        "טניס שולחן"
+      ]
+    },
+    "en": {
+      "q": "In which sport is a shuttlecock used?",
+      "a": [
+        "Tennis",
+        "Squash",
+        "Badminton",
+        "Table tennis"
+      ]
+    }
+  },
+  {
+    "id": "sports-006",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "באיזה ענף ספורט מבקיעים 'טאצ'דאון'?",
+      "a": [
+        "בייסבול",
+        "פוטבול אמריקאי",
+        "הוקי קרח",
+        "גולף"
+      ]
+    },
+    "en": {
+      "q": "In which sport can you score a \"touchdown\"?",
+      "a": [
+        "Baseball",
+        "American football",
+        "Ice hockey",
+        "Golf"
+      ]
+    }
+  },
+  {
+    "id": "sports-007",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "איזה ענף ספורט משוחק בטורניר ווימבלדון?",
+      "a": [
+        "גולף",
+        "קריקט",
+        "כדורגל",
+        "טניס"
+      ]
+    },
+    "en": {
+      "q": "Which sport is played at the Wimbledon tournament?",
+      "a": [
+        "Golf",
+        "Cricket",
+        "Soccer",
+        "Tennis"
+      ]
+    }
+  },
+  {
+    "id": "sports-008",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "כל כמה שנים נערכים המשחקים האולימפיים של הקיץ?",
+      "a": [
+        "כל שנה",
+        "כל שנתיים",
+        "כל 4 שנים",
+        "כל 5 שנים"
+      ]
+    },
+    "en": {
+      "q": "How often are the Summer Olympic Games held?",
+      "a": [
+        "Every year",
+        "Every 2 years",
+        "Every 4 years",
+        "Every 5 years"
+      ]
+    }
+  },
+  {
+    "id": "sports-009",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "כמה גומות יש במסלול גולף סטנדרטי מלא?",
+      "a": [
+        "9",
+        "18",
+        "12",
+        "24"
+      ]
+    },
+    "en": {
+      "q": "How many holes are there in a standard full round of golf?",
+      "a": [
+        "9",
+        "18",
+        "12",
+        "24"
+      ]
+    }
+  },
+  {
+    "id": "sports-010",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "איזה כרטיס מקבל שחקן כדורגל שמורחק מהמשחק?",
+      "a": [
+        "אדום",
+        "צהוב",
+        "ירוק",
+        "כחול"
+      ]
+    },
+    "en": {
+      "q": "What color card is shown to a soccer player who is sent off?",
+      "a": [
+        "Red",
+        "Yellow",
+        "Green",
+        "Blue"
+      ]
+    }
+  },
+  {
+    "id": "sports-011",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מהו אורכה של ריצת מרתון?",
+      "a": [
+        "21.1 ק\"מ",
+        "30 ק\"מ",
+        "50 ק\"מ",
+        "42.195 ק\"מ"
+      ]
+    },
+    "en": {
+      "q": "How long is a marathon race?",
+      "a": [
+        "21.1 km",
+        "30 km",
+        "50 km",
+        "42.195 km"
+      ]
+    }
+  },
+  {
+    "id": "sports-012",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "באיזו עיר נערכו המשחקים האולימפיים המודרניים הראשונים ב-1896?",
+      "a": [
+        "אתונה",
+        "פריז",
+        "לונדון",
+        "רומא"
+      ]
+    },
+    "en": {
+      "q": "In which city were the first modern Olympic Games held in 1896?",
+      "a": [
+        "Athens",
+        "Paris",
+        "London",
+        "Rome"
+      ]
+    }
+  },
+  {
+    "id": "sports-013",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "כמה שחקנים יש לכל קבוצה על המגרש בכדורעף אולם?",
+      "a": [
+        "4",
+        "5",
+        "7",
+        "6"
+      ]
+    },
+    "en": {
+      "q": "How many players does each team have on the court in indoor volleyball?",
+      "a": [
+        "4",
+        "5",
+        "7",
+        "6"
+      ]
+    }
+  },
+  {
+    "id": "sports-014",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מהו אורכה של בריכת שחייה אולימפית?",
+      "a": [
+        "25 מטר",
+        "50 מטר",
+        "75 מטר",
+        "100 מטר"
+      ]
+    },
+    "en": {
+      "q": "How long is an Olympic-size swimming pool?",
+      "a": [
+        "25 meters",
+        "50 meters",
+        "75 meters",
+        "100 meters"
+      ]
+    }
+  },
+  {
+    "id": "sports-015",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "באיזו מדינה נולד ענף הג'ודו?",
+      "a": [
+        "יפן",
+        "סין",
+        "קוריאה",
+        "תאילנד"
+      ]
+    },
+    "en": {
+      "q": "In which country did judo originate?",
+      "a": [
+        "Japan",
+        "China",
+        "Korea",
+        "Thailand"
+      ]
+    }
+  },
+  {
+    "id": "sports-016",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "באיזה ענף ספורט מתחרים על גביע דייוויס?",
+      "a": [
+        "גולף",
+        "שיט",
+        "רכיבת אופניים",
+        "טניס"
+      ]
+    },
+    "en": {
+      "q": "In which sport do nations compete for the Davis Cup?",
+      "a": [
+        "Golf",
+        "Sailing",
+        "Cycling",
+        "Tennis"
+      ]
+    }
+  },
+  {
+    "id": "sports-017",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "כמה שחקנים (כולל השוער) יש לכל קבוצה על המגרש בכדוריד?",
+      "a": [
+        "6",
+        "7",
+        "9",
+        "11"
+      ]
+    },
+    "en": {
+      "q": "How many players (including the goalkeeper) does each handball team have on court?",
+      "a": [
+        "6",
+        "7",
+        "9",
+        "11"
+      ]
+    }
+  },
+  {
+    "id": "sports-018",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "איזו מדינה אירחה את גביע העולם הראשון בכדורגל ב-1930?",
+      "a": [
+        "ברזיל",
+        "איטליה",
+        "אורוגוואי",
+        "ארגנטינה"
+      ]
+    },
+    "en": {
+      "q": "Which country hosted the first FIFA World Cup in 1930?",
+      "a": [
+        "Brazil",
+        "Italy",
+        "Uruguay",
+        "Argentina"
+      ]
+    }
+  },
+  {
+    "id": "sports-019",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "כמה דקות נמשך משחק כדורגל רגיל, ללא תוספות והארכות?",
+      "a": [
+        "60",
+        "80",
+        "90",
+        "100"
+      ]
+    },
+    "en": {
+      "q": "How many minutes does a regular soccer match last, not counting added or extra time?",
+      "a": [
+        "60",
+        "80",
+        "90",
+        "100"
+      ]
+    }
+  },
+  {
+    "id": "sports-020",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "איזה טורניר גראנד סלאם בטניס משוחק על מגרשי חימר?",
+      "a": [
+        "ווימבלדון",
+        "אליפות צרפת הפתוחה (רולאן גארוס)",
+        "אליפות ארה\"ב הפתוחה",
+        "אליפות אוסטרליה הפתוחה"
+      ]
+    },
+    "en": {
+      "q": "Which tennis Grand Slam tournament is played on clay courts?",
+      "a": [
+        "Wimbledon",
+        "French Open (Roland Garros)",
+        "US Open",
+        "Australian Open"
+      ]
+    }
+  },
+  {
+    "id": "sports-021",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "מי המציא את משחק הכדורסל?",
+      "a": [
+        "וולטר קאמפ",
+        "אבנר דאבלדיי",
+        "ויליאם מורגן",
+        "ג'יימס נייסמית'"
+      ]
+    },
+    "en": {
+      "q": "Who invented the game of basketball?",
+      "a": [
+        "Walter Camp",
+        "Abner Doubleday",
+        "William Morgan",
+        "James Naismith"
+      ]
+    }
+  },
+  {
+    "id": "sports-022",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "מי נחשב למייסד המשחקים האולימפיים המודרניים?",
+      "a": [
+        "פייר דה קוברטן",
+        "אייברי ברנדג'",
+        "ז'ול רימה",
+        "חואן אנטוניו סמרנץ'"
+      ]
+    },
+    "en": {
+      "q": "Who is considered the founder of the modern Olympic Games?",
+      "a": [
+        "Pierre de Coubertin",
+        "Avery Brundage",
+        "Jules Rimet",
+        "Juan Antonio Samaranch"
+      ]
+    }
+  },
+  {
+    "id": "sports-023",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "באיזה ענף זכתה ישראל במדליה האולימפית הראשונה שלה, ב-1992?",
+      "a": [
+        "שיט",
+        "אתלטיקה",
+        "ג'ודו",
+        "התעמלות"
+      ]
+    },
+    "en": {
+      "q": "In which sport did Israel win its first Olympic medal, in 1992?",
+      "a": [
+        "Sailing",
+        "Athletics",
+        "Judo",
+        "Gymnastics"
+      ]
+    }
+  },
+  {
+    "id": "sports-024",
+    "d": 3,
+    "c": 1,
+    "he": {
+      "q": "מה המרחק בין נקודת הפנדל לקו השער בכדורגל?",
+      "a": [
+        "9 מטר",
+        "11 מטר",
+        "16.5 מטר",
+        "20 מטר"
+      ]
+    },
+    "en": {
+      "q": "In soccer, how far is the penalty spot from the goal line?",
+      "a": [
+        "9 meters",
+        "11 meters",
+        "16.5 meters",
+        "20 meters"
+      ]
+    }
+  },
+  {
+    "id": "sports-025",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "באיזה גובה מהרצפה תלויה טבעת הסל בכדורסל?",
+      "a": [
+        "2.45 מטר",
+        "2.75 מטר",
+        "3.05 מטר",
+        "3.65 מטר"
+      ]
+    },
+    "en": {
+      "q": "How high above the floor is a basketball hoop?",
+      "a": [
+        "2.45 meters",
+        "2.75 meters",
+        "3.05 meters",
+        "3.65 meters"
+      ]
+    }
+  }
+]
