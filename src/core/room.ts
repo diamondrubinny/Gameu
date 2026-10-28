@@ -10,6 +10,7 @@ import {
   type ServerToController,
   type ServerToHost,
 } from '../shared/protocol';
+import type { Lang } from '../shared/i18n';
 import type { Logger } from './logger';
 import { TokenBucket } from './rate-limit';
 import { randomRoomCode, randomToken, safeEqual, uuid } from './random';
@@ -36,6 +37,7 @@ interface Player {
   id: string;
   nickname: string;
   avatar: number;
+  lang: Lang;
   reconnectToken: string;
   peer: Peer<ServerToController> | null;
   joinedAt: number;
@@ -144,6 +146,7 @@ export class Room {
           if (p.removalTimer !== null) this.clock.clearTimeout(p.removalTimer);
           p.removalTimer = null;
           p.peer = peer;
+          if (msg.lang) p.lang = msg.lang; // the player may have switched language on the phone
           if (this.adminId === null) this.adminId = p.id;
           this.welcome(p);
           this.log.info('player_reconnected', { playerId: p.id });
@@ -161,6 +164,7 @@ export class Room {
       id: uuid(),
       nickname: this.uniqueNickname(msg.nickname),
       avatar: msg.avatar,
+      lang: msg.lang ?? 'he',
       reconnectToken: randomToken(),
       peer,
       joinedAt: this.clock.now(),
@@ -181,6 +185,13 @@ export class Room {
     this.host?.send({ type: 'input', playerId, input });
   }
 
+  setLang(playerId: string, lang: Lang): void {
+    const p = this.players.get(playerId);
+    if (!p || p.lang === lang) return;
+    p.lang = lang;
+    this.emitPlayers();
+  }
+
   disconnect(playerId: string, peer: Peer<ServerToController>): void {
     const p = this.players.get(playerId);
     if (!p || p.peer !== peer) return; // stale socket after a reconnect
@@ -194,7 +205,7 @@ export class Room {
   playerInfos(): PlayerInfo[] {
     return [...this.players.values()]
       .sort((a, b) => a.joinedAt - b.joinedAt)
-      .map((p) => ({ id: p.id, nickname: p.nickname, avatar: p.avatar, isAdmin: p.id === this.adminId, connected: p.peer !== null }));
+      .map((p) => ({ id: p.id, nickname: p.nickname, avatar: p.avatar, isAdmin: p.id === this.adminId, connected: p.peer !== null, lang: p.lang }));
   }
 
   // ---------------- internals ----------------

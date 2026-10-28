@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { CATEGORIES } from '../../games/trivia/categories';
-import { BASE_POINTS, prepare, rank, scoreAnswer, selectQuestions, type Question } from '../../games/trivia/contest';
+import { BASE_POINTS, localize, prepare, rank, scoreAnswer, selectQuestions, type Question } from '../../games/trivia/contest';
 import { QUESTIONS } from '../../games/trivia/db';
 // @ts-expect-error plain ESM build script without type declarations
-import { CATEGORY_IDS, validateAll } from '../../scripts/validate-trivia.mjs';
+import { CATEGORY_IDS, TRANSLATION_LANGS, validateAll, validateTranslations } from '../../scripts/validate-trivia.mjs';
 
 /** Deterministic RNG for reproducible selections. */
 function seeded(seed: number): () => number {
@@ -80,18 +80,41 @@ describe('selectQuestions', () => {
   });
 });
 
-describe('prepare', () => {
-  it('shuffles answers but keeps the correct one marked', () => {
-    const base = { ...q('x', 'a', 1), c: 2 };
+describe('prepare / localize', () => {
+  it('shuffles answers once and keeps the correct one marked in every language', () => {
+    const base: Question = { ...q('x', 'a', 1), c: 2, ru: { q: 'Вопрос x', a: ['А', 'Б', 'В', 'Г'] } };
     const seen = new Set<number>();
     for (let s = 1; s < 40; s++) {
-      const p = prepare(base, 'en', seeded(s));
-      expect(p.answers[p.correct]).toBe('C');
-      expect([...p.answers].sort()).toEqual(['A', 'B', 'C', 'D']);
+      const p = prepare(base, seeded(s));
+      const en = localize(p, 'en');
+      expect(en.answers[p.correct]).toBe('C');
+      expect([...en.answers].sort()).toEqual(['A', 'B', 'C', 'D']);
+      expect(localize(p, 'he').answers[p.correct]).toBe('ג');
+      expect(localize(p, 'ru').answers[p.correct]).toBe('В');
       seen.add(p.correct);
     }
     expect(seen.size).toBeGreaterThan(1);
-    expect(prepare(base, 'he').text).toBe('שאלה x');
+  });
+
+  it('falls back to English for missing translations', () => {
+    const p = prepare({ ...q('y', 'a', 1), c: 0 }, seeded(1));
+    expect(localize(p, 'fr').text).toBe('Question y');
+  });
+});
+
+describe('trivia translations', () => {
+  it('every translation language is complete and valid', () => {
+    for (const lang of TRANSLATION_LANGS as string[]) {
+      const { errors, translated } = validateTranslations(lang);
+      expect(errors.slice(0, 20), `${lang}:\n${errors.slice(0, 20).join('\n')}`).toEqual([]);
+      expect(translated, lang).toBe(QUESTIONS.length);
+    }
+  });
+
+  it('db attaches translations to questions', () => {
+    for (const lang of TRANSLATION_LANGS as ('ar' | 'ru' | 'es' | 'fr')[]) {
+      expect(QUESTIONS.filter((x) => x[lang]).length, lang).toBe(QUESTIONS.length);
+    }
   });
 });
 

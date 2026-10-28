@@ -13,7 +13,8 @@ Turn any TV into a party game console that runs from a USB drive, with players' 
 
 ## Features (MVP)
 
-- **TV host**: a 10‑foot UI in Hebrew (RTL) or English, a QR code and room code, a player list, and a game menu you navigate from the admin's phone (👑).
+- **6 languages**: Hebrew, English, Arabic, Russian, Spanish and French. The TV and each phone have their own language, so in trivia every player reads the question in their own language. See [docs/TRANSLATING.md](docs/TRANSLATING.md).
+- **TV host**: a 10‑foot UI in any of the 6 languages (Hebrew and Arabic right‑to‑left), a QR code and room code, a player list, and a game menu you navigate from the admin's phone (👑).
 - **Phone controller**: a d‑pad, joystick, answer buttons, text input or drawing canvas. The game decides what each phone shows. It also has vibration, left‑hand mode and automatic reconnect.
 - **3 games**: Snakes (arcade, 1–8 players), Trivia Contest (1–8; 400 questions in 16 topics, Hebrew + English; see [docs/TRIVIA.md](docs/TRIVIA.md)) and Draw & Guess (2–8).
 - **Game SDK**: games are sandboxed iframes (`sandbox="allow-scripts"`, opaque origin, `connect-src 'none'`). See [docs/GAME-SDK.md](docs/GAME-SDK.md).
@@ -76,6 +77,7 @@ All environment variables are optional. See `.env.example`.
 | `GAMEU_HOST_KEY` | *(empty)* | Enables opening the TV screen from another device (for example a smart‑TV browser) at `/?key=…`. Minimum 16 characters. |
 | `GAMEU_DATA_DIR` | `<app>/../data` | Settings and kiosk browser profile |
 | `GAMEU_BROWSER` | auto | Path to a Chromium‑family browser for kiosk mode |
+| `GAMEU_RECONNECT_GRACE_MS` | `120000` | How long a disconnected phone keeps its place (1000–600000) |
 | `LOG_LEVEL` | `info` | `debug`, `info`, `warn` or `error` |
 
 ## Project structure

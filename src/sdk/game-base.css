@@ -3,7 +3,7 @@
 :root.high-contrast { --bg: #000; --panel: #000; --text: #fff; --muted: #fff; --accent: #ff0; }
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); }
-body { font: 400 calc(clamp(16px, 1.2vw, 30px) * var(--text-scale))/1.4 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Hebrew', Arial, sans-serif; }
+body { font: 400 calc(clamp(16px, 1.2vw, 30px) * var(--text-scale))/1.4 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Hebrew', 'Noto Sans Arabic', Tahoma, Arial, sans-serif; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .center { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
 .big { font-size: 3em; font-weight: 900; }

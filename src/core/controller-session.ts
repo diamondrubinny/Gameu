@@ -118,6 +118,9 @@ export class ControllerSession {
         }
         return;
       }
+      case 'lang':
+        if (this.playerId) this.room.setLang(this.playerId, msg.lang);
+        return;
       case 'input':
         if (!this.playerId) {
           this.peer.send({ type: 'error', code: 'not_joined' });

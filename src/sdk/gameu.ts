@@ -2,9 +2,10 @@
  * Gameu Game SDK — runs inside the sandboxed game iframe and talks to the TV host via postMessage.
  * The host validates every message; games never get network access.
  */
+import type { Lang } from '../shared/i18n';
 import type { ControllerLayout, GamePlayer, HostToGame, Input, Settings } from '../shared/protocol';
 
-export type { ControllerLayout, GamePlayer, Input, Settings };
+export type { ControllerLayout, GamePlayer, Input, Lang, Settings };
 
 export interface GameContext {
   players: GamePlayer[];
@@ -25,7 +26,15 @@ export interface GameuSdk {
   end(results: { playerId: string; score: number }[]): void;
   readonly players: GamePlayer[];
   readonly settings: Settings | null;
-  /** Picks the string for the console language. */
+  /** Console (TV) language. */
+  readonly lang: Lang;
+  /** A player's phone language (falls back to the console language). */
+  langOf(playerId: string): Lang;
+  /** Picks a translation for the console language, falling back to English. */
+  tr<T>(dicts: Partial<Record<Lang, T>> & { en: T }): T;
+  /** Picks a translation for one player's phone language, falling back to English. */
+  trFor<T>(playerId: string, dicts: Partial<Record<Lang, T>> & { en: T }): T;
+  /** @deprecated Two-language helper; other languages get the English string. Use `tr`. */
   t(he: string, en: string): string;
 }
 
@@ -93,8 +102,20 @@ export function createSdk(win: Window = window): GameuSdk {
     get settings() {
       return settings;
     },
+    get lang() {
+      return settings?.language ?? 'he';
+    },
+    langOf(playerId) {
+      return players.find((p) => p.id === playerId)?.lang ?? settings?.language ?? 'he';
+    },
+    tr(dicts) {
+      return dicts[settings?.language ?? 'he'] ?? dicts.en;
+    },
+    trFor(playerId, dicts) {
+      return dicts[sdk.langOf(playerId)] ?? dicts.en;
+    },
     t(he, en) {
-      return settings?.language === 'en' ? en : he;
+      return (settings?.language ?? 'he') === 'he' ? he : en;
     },
   };
 

@@ -21,7 +21,7 @@ export default defineConfig({
     command: 'node dist/server/server.cjs',
     url: `http://localhost:${PORT}/api/health`,
     reuseExistingServer: false,
-    env: { PORT: String(PORT), GAMEU_DATA_DIR: '.cache/e2e-data', LOG_LEVEL: 'warn' },
+    env: { PORT: String(PORT), GAMEU_DATA_DIR: '.cache/e2e-data', LOG_LEVEL: 'warn', GAMEU_RECONNECT_GRACE_MS: '1000' },
     timeout: 20_000,
   },
 });

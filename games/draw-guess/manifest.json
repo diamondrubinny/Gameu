@@ -1,12 +1,30 @@
 {
   "id": "draw-guess",
   "version": "1.0.0",
-  "name": { "he": "צייר ונחש", "en": "Draw & Guess" },
-  "description": { "he": "שחקן אחד מצייר בטלפון, כל השאר מנחשים. כל אחד מצייר פעם אחת.", "en": "One player draws on their phone, everyone else guesses. Everyone draws once." },
+  "name": {
+    "he": "צייר ונחש",
+    "en": "Draw & Guess",
+    "ar": "ارسم وخمّن",
+    "ru": "Рисуй и угадывай",
+    "es": "Dibuja y adivina",
+    "fr": "Dessine et devine"
+  },
+  "description": {
+    "he": "שחקן אחד מצייר בטלפון, כל השאר מנחשים. כל אחד מצייר פעם אחת.",
+    "en": "One player draws on their phone, everyone else guesses. Everyone draws once.",
+    "ar": "لاعب واحد يرسم على هاتفه والبقية يخمّنون. كل لاعب يرسم مرة واحدة.",
+    "ru": "Один игрок рисует на телефоне, остальные угадывают. Каждый рисует по разу.",
+    "es": "Una persona dibuja en su teléfono y las demás adivinan. Todos dibujan una vez.",
+    "fr": "Une personne dessine sur son téléphone, les autres devinent. Chacun dessine une fois."
+  },
   "minPlayers": 2,
   "maxPlayers": 8,
   "entry": "index.html",
   "icon": "icon.svg",
   "controller": "mixed",
-  "accessibility": { "colorIndependent": true, "extendedTime": true, "noFlashing": true }
+  "accessibility": {
+    "colorIndependent": true,
+    "extendedTime": true,
+    "noFlashing": true
+  }
 }

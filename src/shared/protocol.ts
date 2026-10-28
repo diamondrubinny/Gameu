@@ -5,6 +5,7 @@
 import * as z from 'zod';
 
 import { LIMITS } from './constants';
+import { LANG_CODES, type Lang } from './i18n';
 
 export * from './constants';
 
@@ -106,9 +107,12 @@ export const ControllerToServerSchema = z.discriminatedUnion('type', [
     nickname: NicknameSchema,
     avatar: AvatarSchema,
     reconnectToken: Token.optional(),
+    /** The phone's UI language; games use it for per-player texts. */
+    lang: z.enum(LANG_CODES).optional(),
   }),
   z.object({ type: z.literal('input'), input: InputSchema }),
   z.object({ type: z.literal('ping'), t: z.number() }),
+  z.object({ type: z.literal('lang'), lang: z.enum(LANG_CODES) }),
 ]);
 export type ControllerToServer = z.input<typeof ControllerToServerSchema>;
 export type ControllerToServerMsg = z.output<typeof ControllerToServerSchema>;
@@ -153,6 +157,7 @@ export interface PlayerInfo {
   avatar: number;
   isAdmin: boolean;
   connected: boolean;
+  lang: Lang;
 }
 
 export type ServerToHost =
@@ -163,8 +168,13 @@ export type ServerToHost =
 
 // ---------- game manifest ----------
 
-const Localized = z.object({ he: z.string().min(1).max(80), en: z.string().min(1).max(80) });
-const LocalizedLong = z.object({ he: z.string().min(1).max(300), en: z.string().min(1).max(300) });
+/** Hebrew and English are required; other languages fall back to English. */
+const localized = (max: number) => {
+  const text = z.string().min(1).max(max);
+  return z.object({ he: text, en: text, ar: text.optional(), ru: text.optional(), es: text.optional(), fr: text.optional() });
+};
+const Localized = localized(80);
+const LocalizedLong = localized(300);
 
 export const GameManifestSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]{1,32}$/),
@@ -189,7 +199,7 @@ export type GameManifest = z.output<typeof GameManifestSchema>;
 // ---------- console settings ----------
 
 export const SettingsSchema = z.object({
-  language: z.enum(['he', 'en']).default('he'),
+  language: z.enum(LANG_CODES).default('he'),
   textScale: z.number().min(1).max(2).default(1),
   highContrast: z.boolean().default(false),
   reduceMotion: z.boolean().default(false),
@@ -222,6 +232,8 @@ export interface GamePlayer {
   connected: boolean;
   /** The room admin (controls menus); games may give them setup controls. */
   isAdmin: boolean;
+  /** The player's phone language, for per-player texts. */
+  lang: Lang;
 }
 
 export type HostToGame =

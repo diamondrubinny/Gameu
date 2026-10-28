@@ -1,7 +1,11 @@
-/** Trivia topics. Each has a data file at games/trivia/data/<id>.json. */
+/**
+ * Trivia topics. Each has a data file at games/trivia/data/<id>.json and
+ * translations at games/trivia/i18n/<lang>/<id>.json. Display names live in locales/.
+ */
 export interface Category {
   id: string;
   icon: string;
+  /** Hebrew/English names (kept for tooling; the game uses locales/*.categories). */
   he: string;
   en: string;
 }

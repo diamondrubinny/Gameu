@@ -1,6 +1,7 @@
 import { createSdk, type GamePlayer, type Input } from '../../src/sdk/gameu';
 import { AVATARS } from '../../src/shared/constants';
 import { $, announce, applyDocumentSettings, clear, h, sleep } from '../../src/sdk/game-utils';
+import { DICTS } from './locales';
 
 const COLS = 48;
 const ROWS = 27;
@@ -39,9 +40,11 @@ sdk.onInit(async ({ players, settings }) => {
   applyDocumentSettings(settings);
   highContrast = settings.highContrast;
   tickMs = settings.extendedTime ? 170 : 120;
-  $('#title').textContent = `🐍 ${sdk.t('נחשים', 'Snakes')}`;
-  canvas.setAttribute('aria-label', sdk.t('לוח המשחק', 'Game board'));
-  sdk.setLayout({ type: 'dpad', title: sdk.t('🐍 נחשים — כוונו עם החצים', '🐍 Snakes — steer with the arrows'), buttons: [] });
+  const tv = sdk.tr(DICTS);
+  $('#title').textContent = `🐍 ${tv.title}`;
+  canvas.setAttribute('aria-label', tv.board);
+  sdk.setLayout({ type: 'dpad', title: tv.padTitle, buttons: [] });
+  for (const p of players) sendPad(p.id);
   for (const p of players) if (p.connected) addSnake(p);
   placeFood();
   fit();
@@ -56,7 +59,10 @@ sdk.onInit(async ({ players, settings }) => {
 sdk.onPlayers((players) => {
   for (const p of players) {
     const s = snakes.get(p.id);
-    if (p.connected && !s) addSnake(p);
+    if (p.connected && !s) {
+      addSnake(p);
+      sendPad(p.id);
+    }
     if (s) s.player = p;
   }
   renderScores();
@@ -70,6 +76,11 @@ sdk.onInput((playerId: string, input: Input) => {
   const last = s.queue[s.queue.length - 1] ?? s.dir;
   if (d !== last && d !== OPPOSITE[last] && s.queue.length < 2) s.queue.push(d);
 });
+
+/** Each phone gets the d-pad title in its own language. */
+function sendPad(playerId: string): void {
+  sdk.setLayout({ type: 'dpad', title: sdk.trFor(playerId, DICTS).padTitle, buttons: [] }, playerId);
+}
 
 function addSnake(p: GamePlayer): void {
   const s: Snake = { player: p, body: [], dir: 'right', queue: [], alive: false, respawnAt: 0, score: 0, grow: 0 };
@@ -210,14 +221,14 @@ function finish(): void {
   renderScores();
   const overlay = $('#overlay');
   clear(overlay);
-  overlay.append(h('div', { class: 'big pop' }, sdk.t('נגמר הזמן!', "Time's up!")));
-  announce(sdk.t('נגמר הזמן', "Time's up"));
+  overlay.append(h('div', { class: 'big pop' }, sdk.tr(DICTS).timesUp));
+  announce(sdk.tr(DICTS).timesUp);
   setTimeout(() => sdk.end([...snakes.values()].map((s) => ({ playerId: s.player.id, score: s.score }))), 2000);
 }
 
 async function countdown(): Promise<void> {
   const overlay = $('#overlay');
-  for (const n of ['3', '2', '1', sdk.t('צאו!', 'Go!')]) {
+  for (const n of ['3', '2', '1', sdk.tr(DICTS).go]) {
     clear(overlay);
     overlay.append(h('div', { class: 'big pop' }, n));
     announce(n);

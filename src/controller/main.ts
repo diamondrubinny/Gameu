@@ -1,7 +1,8 @@
-import { AVATARS, AVATAR_NAMES_EN, AVATAR_NAMES_HE, LIMITS, colorFor } from '../shared/constants';
+import { AVATARS, LIMITS, colorFor } from '../shared/constants';
+import { LANGUAGES, isLang } from '../shared/i18n';
 import type { ControllerToServer, ErrorCode, Input, ParsedLayout, ServerToController } from '../shared/protocol';
 import { $, clear, h, storage } from '../ui/dom';
-import { lang, t } from './i18n';
+import { applyDocumentLang, lang, setLang, t } from './i18n';
 import { renderLayout } from './layouts';
 
 const KEYS = { nick: 'gameu.nick', avatar: 'gameu.avatar', token: 'gameu.rt', prefs: 'gameu.prefs' } as const;
@@ -28,11 +29,10 @@ class ControllerApp {
   private statusEl: HTMLElement | null = null;
   private stage: HTMLElement | null = null;
   private retryTimer = 0;
+  private draftNick: string | null = null;
 
   start(): void {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
-    document.title = t.title;
+    applyDocumentLang();
     const params = new URLSearchParams(location.search);
     this.room = (params.get('r') ?? '').toUpperCase().slice(0, LIMITS.roomCodeLength);
     // Remove the room code from the address bar so screenshots/shares don't leak it.
@@ -64,9 +64,10 @@ class ControllerApp {
     this.cleanup();
     this.joined = false;
     clear(this.root);
-    const savedNick = storage.get(KEYS.nick) ?? '';
+    const savedNick = this.draftNick ?? storage.get(KEYS.nick) ?? '';
+    this.draftNick = null;
     const savedAvatar = Number(storage.get(KEYS.avatar) ?? Math.floor(Math.random() * AVATARS.length)) || 0;
-    const names = lang === 'he' ? AVATAR_NAMES_HE : AVATAR_NAMES_EN;
+    const names = t.avatarNames;
 
     const errorEl = h('p', { class: 'form-error', role: 'alert', id: 'join-error' }, error ?? '');
     const code = h('input', {
@@ -102,9 +103,16 @@ class ControllerApp {
       avatars.append(input, label);
     });
     const submit = h('button', { type: 'submit', class: 'action primary wide' }, t.join);
+    const langSelect = this.languageSelect(() => {
+      // Keep what was typed while re-rendering in the new language.
+      this.room = code.value.trim().toUpperCase();
+      this.draftNick = nick.value;
+      this.renderJoin(errorEl.textContent || undefined);
+    });
     const form = h(
       'form',
       { class: 'join-form', novalidate: true },
+      langSelect,
       h('h1', {}, '🎮 ', t.joinTitle),
       h('label', { for: 'room' }, t.roomCode),
       code,
@@ -152,11 +160,27 @@ class ControllerApp {
     (this.room ? nick : code).focus();
   }
 
+  /** Language picker (native names). Changing it re-renders via `onChange`. */
+  private languageSelect(onChange: () => void): HTMLElement {
+    const select = h('select', { id: 'lang-select', class: 'lang-select' });
+    for (const l of LANGUAGES) {
+      const opt = h('option', { value: l.code, lang: l.code, selected: l.code === lang() }, l.name);
+      select.append(opt);
+    }
+    select.addEventListener('change', () => {
+      if (!isLang(select.value)) return;
+      setLang(select.value);
+      this.sendRaw({ type: 'lang', lang: select.value });
+      onChange();
+    });
+    return h('div', { class: 'lang-row' }, h('label', { for: 'lang-select' }, '🌐 ', t.language), select);
+  }
+
   // ---------------- play screen ----------------
 
   private renderPlay(): void {
     clear(this.root);
-    const names = lang === 'he' ? AVATAR_NAMES_HE : AVATAR_NAMES_EN;
+    const names = t.avatarNames;
     const menuBtn = h('button', { class: 'icon-btn', type: 'button', 'aria-label': t.settings, 'aria-haspopup': 'dialog' }, '⚙');
     menuBtn.addEventListener('click', () => this.openSettings());
     const fsBtn = h('button', { class: 'icon-btn', type: 'button', 'aria-label': t.fullscreen }, '⛶');
@@ -229,7 +253,13 @@ class ControllerApp {
     });
     const close = h('button', { type: 'button', class: 'action secondary wide' }, t.close);
     close.addEventListener('click', () => dialog.close());
-    dialog.append(h('h2', { id: 'sheet-title' }, t.settings));
+    dialog.append(
+      h('h2', { id: 'sheet-title' }, t.settings),
+      this.languageSelect(() => {
+        dialog.close();
+        this.renderPlay();
+      }),
+    );
     if ('vibrate' in navigator) dialog.append(toggle(t.vibration, 'vibration'));
     dialog.append(
       toggle(t.leftHand, 'leftHand'),
@@ -275,7 +305,7 @@ class ControllerApp {
     this.ws = ws;
     ws.addEventListener('open', () => {
       const token = storage.get(KEYS.token) ?? undefined;
-      const join: ControllerToServer = { type: 'join', room: this.room || 'AAAA', nickname: this.nickname, avatar: this.avatar, reconnectToken: token };
+      const join: ControllerToServer = { type: 'join', room: this.room || 'AAAA', nickname: this.nickname, avatar: this.avatar, reconnectToken: token, lang: lang() };
       ws.send(JSON.stringify(join));
     });
     ws.addEventListener('message', (ev) => {
@@ -360,6 +390,10 @@ class ControllerApp {
     this.layout = null;
     if (code === 'kicked' || code === 'replaced') storage.remove(KEYS.token);
     this.renderJoin(t.errors[code as keyof typeof t.errors] ?? t.errors.invalid);
+  }
+
+  private sendRaw(msg: ControllerToServer): void {
+    if (this.ws?.readyState === WebSocket.OPEN && this.joined) this.ws.send(JSON.stringify(msg));
   }
 
   private sendInput(input: Input): void {

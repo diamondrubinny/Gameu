@@ -1,7 +1,5 @@
 import {
   AVATARS,
-  AVATAR_NAMES_EN,
-  AVATAR_NAMES_HE,
   DEFAULT_SETTINGS,
   GameToHostSchema,
   colorFor,
@@ -16,7 +14,8 @@ import {
 } from '../shared/protocol';
 import { $, clear, h } from '../ui/dom';
 import type { HostConnectionState, HostPlatform } from './platform';
-import { lang, setLang, t } from './i18n';
+import { LANG_CODES, languageName, pick } from '../shared/i18n';
+import { lang, setLang, t, tFor } from './i18n';
 import { sfx, setVolume } from './sfx';
 import { nextInDirection, type Direction } from './spatial';
 
@@ -295,7 +294,13 @@ export class HostApp {
   private syncMenuLayouts(): void {
     const admin = this.admin;
     this.sendLayout({ type: 'message', text: admin ? t.waitingForAdmin(admin.nickname) : t.menuTitle });
-    if (admin) this.sendLayout({ type: 'menu', title: t.menuTitle }, admin.id);
+    // Each phone in its own language.
+    for (const p of this.players) {
+      if (!p.connected) continue;
+      const pt = tFor(p.lang);
+      if (admin && p.id === admin.id) this.sendLayout({ type: 'menu', title: pt.menuTitle }, p.id);
+      else this.sendLayout({ type: 'message', text: admin ? pt.waitingForAdmin(admin.nickname) : pt.menuTitle }, p.id);
+    }
   }
 
   // ---------------- rendering ----------------
@@ -333,13 +338,13 @@ export class HostApp {
   private renderHome(): HTMLElement {
     const grid = h('div', { class: 'grid', role: 'list' });
     for (const g of this.games) {
-      const name = g.name[lang()];
+      const name = pick(g.name, lang());
       const card = h(
         'button',
         { class: 'card', 'data-nav': true, 'data-id': `game:${g.id}`, role: 'listitem', 'aria-describedby': `desc-${g.id}` },
         g.icon ? h('img', { src: `/games/${g.id}/${g.icon}`, alt: '', class: 'card-icon', width: 96, height: 96 }) : h('span', { class: 'card-icon', 'aria-hidden': 'true' }, '🎲'),
-        h('span', { class: 'card-title' }, name),
-        h('span', { class: 'card-desc', id: `desc-${g.id}` }, g.description[lang()]),
+        h('span', { class: 'card-title', dir: 'auto' }, name),
+        h('span', { class: 'card-desc', id: `desc-${g.id}`, dir: 'auto' }, pick(g.description, lang())),
         h('span', { class: 'card-meta', 'data-game': g.id }),
       );
       card.addEventListener('click', () => this.startGame(g));
@@ -373,7 +378,10 @@ export class HostApp {
       list.append(btn);
     };
 
-    row('lang', t.language, t.languageValue, () => void this.saveSettings({ language: s.language === 'he' ? 'en' : 'he' }).then(() => this.render()));
+    row('lang', t.language, languageName(s.language), () => {
+      const next = LANG_CODES[(LANG_CODES.indexOf(s.language) + 1) % LANG_CODES.length] ?? 'he';
+      void this.saveSettings({ language: next }).then(() => this.render());
+    });
     row('text', t.textSize, `${Math.round(s.textScale * 100)}%`, () => {
       const steps = [1, 1.25, 1.5, 1.75];
       const next = steps[(steps.indexOf(s.textScale) + 1) % steps.length] ?? 1;
@@ -451,7 +459,7 @@ export class HostApp {
       list.append(h('li', { class: 'empty' }, t.noPlayers));
       return;
     }
-    const names = lang() === 'he' ? AVATAR_NAMES_HE : AVATAR_NAMES_EN;
+    const names = t.avatarNames;
     for (const p of this.players) {
       const li = h(
         'li',
@@ -562,7 +570,7 @@ export class HostApp {
       };
     });
     const admin = this.admin;
-    if (admin) this.sendLayout({ type: 'menu', title: t.exitTitle }, admin.id);
+    if (admin) this.sendLayout({ type: 'menu', title: tFor(admin.lang).exitTitle }, admin.id);
   }
 
   private showResults(results: { playerId: string; score: number }[]): void {
@@ -595,13 +603,13 @@ export class HostApp {
       return { el: h('div', { class: 'dialog results-dialog', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'res-title' }, h('h2', { id: 'res-title' }, '🏆 ', t.results), list, btn) };
     });
     const admin = this.admin;
-    if (admin) this.sendLayout({ type: 'menu', title: t.results }, admin.id);
+    if (admin) this.sendLayout({ type: 'menu', title: tFor(admin.lang).results }, admin.id);
   }
 
   // ---------------- games ----------------
 
   private gamePlayers(): GamePlayer[] {
-    return this.players.map((p) => ({ id: p.id, nickname: p.nickname, avatar: p.avatar, color: colorFor(p.avatar), connected: p.connected, isAdmin: p.isAdmin }));
+    return this.players.map((p) => ({ id: p.id, nickname: p.nickname, avatar: p.avatar, color: colorFor(p.avatar), connected: p.connected, isAdmin: p.isAdmin, lang: p.lang }));
   }
 
   private startGame(manifest: GameManifest): void {
@@ -618,7 +626,7 @@ export class HostApp {
     const iframe = h('iframe', {
       class: 'game-frame',
       src: `/games/${manifest.id}/${manifest.entry}`,
-      title: manifest.name[lang()],
+      title: pick(manifest.name, lang()),
       // No allow-same-origin: the game gets an opaque origin and cannot touch the console or its storage.
       sandbox: 'allow-scripts',
       allow: 'autoplay',
@@ -635,6 +643,7 @@ export class HostApp {
     }, GAME_READY_TIMEOUT_MS);
     this.game = { manifest, iframe, ready: false, timer };
     this.sendLayout({ type: 'message', text: t.loadingGame });
+    for (const p of this.players) if (p.connected && p.lang !== lang()) this.sendLayout({ type: 'message', text: tFor(p.lang).loadingGame }, p.id);
   }
 
   private stopGame(): void {

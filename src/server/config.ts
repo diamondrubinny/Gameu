@@ -8,6 +8,8 @@ export interface AppConfig {
   appRoot: string;
   logLevel: LogLevel;
   kiosk: boolean;
+  /** How long a disconnected phone keeps its slot (reconnect window). */
+  reconnectGraceMs: number;
 }
 
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
@@ -34,7 +36,15 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env, argv: string[] 
     appRoot,
     logLevel: ['debug', 'info', 'warn', 'error'].includes(level) ? level : 'info',
     kiosk: argv.includes('--kiosk'),
+    reconnectGraceMs: parseGrace(env.GAMEU_RECONNECT_GRACE_MS),
   };
+}
+
+function parseGrace(raw: string | undefined): number {
+  if (!raw?.trim()) return 120_000;
+  const ms = Number(raw);
+  if (!Number.isInteger(ms) || ms < 1000 || ms > 600_000) throw new Error(`Invalid GAMEU_RECONNECT_GRACE_MS: ${raw} (1000..600000)`);
+  return ms;
 }
 
 function parsePort(raw: string): number {

@@ -1,12 +1,30 @@
 {
   "id": "snake",
   "version": "1.0.0",
-  "name": { "he": "נחשים", "en": "Snakes" },
-  "description": { "he": "אספו פירות, התארכו והתחמקו מהנחשים של כולם. עד 8 שחקנים.", "en": "Eat fruit, grow longer and dodge everyone else's snake. Up to 8 players." },
+  "name": {
+    "he": "נחשים",
+    "en": "Snakes",
+    "ar": "الثعابين",
+    "ru": "Змейки",
+    "es": "Serpientes",
+    "fr": "Serpents"
+  },
+  "description": {
+    "he": "אספו פירות, התארכו והתחמקו מהנחשים של כולם. עד 8 שחקנים.",
+    "en": "Eat fruit, grow longer and dodge everyone else's snake. Up to 8 players.",
+    "ar": "كلوا الفاكهة، وطوّلوا ثعبانكم، وتجنّبوا ثعابين الآخرين. حتى 8 لاعبين.",
+    "ru": "Ешьте фрукты, растите и уворачивайтесь от чужих змеек. До 8 игроков.",
+    "es": "Coman fruta, crezcan y esquiven las serpientes de los demás. Hasta 8 jugadores.",
+    "fr": "Mangez des fruits, grandissez et évitez les serpents des autres. Jusqu’à 8 joueurs."
+  },
   "minPlayers": 1,
   "maxPlayers": 8,
   "entry": "index.html",
   "icon": "icon.svg",
   "controller": "dpad",
-  "accessibility": { "colorIndependent": true, "extendedTime": true, "noFlashing": true }
+  "accessibility": {
+    "colorIndependent": true,
+    "extendedTime": true,
+    "noFlashing": true
+  }
 }

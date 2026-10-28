@@ -1,113 +1,44 @@
-const he = {
-  title: 'Gameu — שלט',
-  joinTitle: 'הצטרפות למשחק',
-  roomCode: 'קוד חדר',
-  roomCodeHelp: '4 תווים, מופיע על מסך הטלוויזיה',
-  nickname: 'כינוי',
-  nicknameHelp: 'עד 16 תווים. מומלץ כינוי ולא שם מלא.',
-  avatar: 'בחרו דמות',
-  join: 'הצטרפות',
-  joining: 'מצטרף/ת…',
-  privacyNote: 'אנחנו לא שומרים מידע אישי. הכינוי נשמר רק במכשיר שלך ובזיכרון הקונסולה עד סיום המשחק.',
-  privacyLink: 'פרטיות',
-  a11yLink: 'הצהרת נגישות',
-  connecting: 'מתחבר…',
-  reconnecting: 'החיבור נותק, מתחבר מחדש…',
-  hostOffline: 'מסך הקונסולה לא מחובר כרגע',
-  admin: 'מנהל/ת',
-  menu: 'תפריט',
-  up: 'למעלה',
-  down: 'למטה',
-  left: 'שמאלה',
-  right: 'ימינה',
-  ok: 'אישור',
-  back: 'חזרה',
-  home: 'בית',
-  send: 'שליחה',
-  sent: 'נשלח ✓',
-  clear: 'ניקוי',
-  color: 'צבע',
-  brush: 'עובי מכחול',
-  chosen: 'הבחירה נשלחה',
-  options: 'אפשרויות',
-  fullscreen: 'מסך מלא',
-  vibration: 'רטט',
-  leftHand: 'מצב יד שמאל',
-  leave: 'יציאה מהחדר',
-  close: 'סגירה',
-  settings: 'הגדרות שלט',
-  joystick: 'ג׳ויסטיק',
-  drawArea: 'אזור ציור',
-  errors: {
-    bad_room: 'קוד החדר שגוי. בדקו את הקוד על מסך הטלוויזיה.',
-    room_full: 'החדר מלא (עד 8 שחקנים).',
-    room_locked: 'החדר נעול. בקשו מהמנהל/ת לפתוח אותו בהגדרות.',
-    invalid: 'הנתונים לא תקינים. בדקו את הכינוי ונסו שוב.',
-    rate_limited: 'יותר מדי ניסיונות. המתינו דקה ונסו שוב.',
-    kicked: 'הוצאת מהחדר על ידי המנהל/ת.',
-    not_joined: 'יש להצטרף קודם.',
-    replaced: 'השלט נפתח בחלון או מכשיר אחר.',
-    network: 'לא ניתן להתחבר לקונסולה. ודאו שהטלפון באותה רשת Wi‑Fi.',
-  },
-};
+import { detectLang, isLang, isRtl, type Lang } from '../shared/i18n';
+import { storage } from '../ui/dom';
+import { ar } from './locales/ar';
+import { en } from './locales/en';
+import { es } from './locales/es';
+import { fr } from './locales/fr';
+import { he, type ControllerDict } from './locales/he';
+import { ru } from './locales/ru';
 
-type Dict = typeof he;
+const DICTS: Record<Lang, ControllerDict> = { he, en, ar, ru, es, fr };
+const STORAGE_KEY = 'gameu.lang';
 
-const en: Dict = {
-  title: 'Gameu — Controller',
-  joinTitle: 'Join the game',
-  roomCode: 'Room code',
-  roomCodeHelp: '4 characters, shown on the TV screen',
-  nickname: 'Nickname',
-  nicknameHelp: 'Up to 16 characters. Use a nickname, not your full name.',
-  avatar: 'Pick a character',
-  join: 'Join',
-  joining: 'Joining…',
-  privacyNote: 'We do not store personal data. Your nickname stays on your device and in console memory until the game ends.',
-  privacyLink: 'Privacy',
-  a11yLink: 'Accessibility statement',
-  connecting: 'Connecting…',
-  reconnecting: 'Connection lost, reconnecting…',
-  hostOffline: 'The console screen is not connected right now',
-  admin: 'Admin',
-  menu: 'Menu',
-  up: 'Up',
-  down: 'Down',
-  left: 'Left',
-  right: 'Right',
-  ok: 'OK',
-  back: 'Back',
-  home: 'Home',
-  send: 'Send',
-  sent: 'Sent ✓',
-  clear: 'Clear',
-  color: 'Color',
-  brush: 'Brush size',
-  chosen: 'Answer sent',
-  options: 'Options',
-  fullscreen: 'Full screen',
-  vibration: 'Vibration',
-  leftHand: 'Left-hand mode',
-  leave: 'Leave room',
-  close: 'Close',
-  settings: 'Controller settings',
-  joystick: 'Joystick',
-  drawArea: 'Drawing area',
-  errors: {
-    bad_room: 'Wrong room code. Check the code on the TV.',
-    room_full: 'The room is full (up to 8 players).',
-    room_locked: 'The room is locked. Ask the admin to unlock it in settings.',
-    invalid: 'Invalid data. Check your nickname and try again.',
-    rate_limited: 'Too many attempts. Wait a minute and try again.',
-    kicked: 'You were removed from the room by the admin.',
-    not_joined: 'Please join first.',
-    replaced: 'The controller was opened in another window or device.',
-    network: 'Cannot reach the console. Make sure your phone is on the same Wi‑Fi.',
-  },
-};
+function initialLang(): Lang {
+  const saved = storage.get(STORAGE_KEY);
+  if (isLang(saved)) return saved;
+  const prefs = navigator.languages?.length ? navigator.languages : [navigator.language || 'en'];
+  return detectLang(prefs, 'en');
+}
 
-export const lang: 'he' | 'en' = (navigator.language || 'he').toLowerCase().startsWith('he') ? 'he' : navigator.language ? 'en' : 'he';
-export const t: Dict = lang === 'en' ? en : he;
+let currentLang: Lang = initialLang();
+let current: ControllerDict = DICTS[currentLang];
+
+export function lang(): Lang {
+  return currentLang;
+}
+
+/** Switches the phone's language (remembered on this device). */
+export function setLang(l: Lang): void {
+  currentLang = l;
+  current = DICTS[l] ?? en;
+  storage.set(STORAGE_KEY, l);
+  applyDocumentLang();
+}
+
+export function applyDocumentLang(): void {
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = isRtl(currentLang) ? 'rtl' : 'ltr';
+  document.title = current.title;
+}
+
+export const t = new Proxy({} as ControllerDict, { get: (_t, key: string) => current[key as keyof ControllerDict] });
 
 /** Layout texts the server sends as keys rather than prose. */
 export function layoutText(text: string): string {

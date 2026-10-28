@@ -117,7 +117,7 @@ describe('HTTP', () => {
     const put = (headers: Record<string, string>, body: string) => fetch(`${base}/api/settings`, { method: 'PUT', headers, body });
     expect((await put({ 'Content-Type': 'application/json' }, '{"language":"en"}')).status).toBe(403);
     expect((await put({ 'Content-Type': 'text/plain', 'X-Gameu-Host': app.hostSecret }, '{}')).status).toBe(415);
-    expect((await put({ 'Content-Type': 'application/json', 'X-Gameu-Host': app.hostSecret }, '{"language":"fr"}')).status).toBe(400);
+    expect((await put({ 'Content-Type': 'application/json', 'X-Gameu-Host': app.hostSecret }, '{"language":"xx"}')).status).toBe(400);
     expect((await put({ 'Content-Type': 'application/json', 'X-Gameu-Host': app.hostSecret }, 'x'.repeat(5000))).status).toBe(413);
     const ok = await put({ 'Content-Type': 'application/json', 'X-Gameu-Host': app.hostSecret }, '{"language":"en","textScale":1.5}');
     expect(ok.status).toBe(200);

@@ -1,0 +1,227 @@
+{
+  "body-001": {
+    "q": "Quel est le plus grand organe du corps humain ?",
+    "a": [
+      "Le foie",
+      "Le cœur",
+      "La peau",
+      "Le cerveau"
+    ]
+  },
+  "body-002": {
+    "q": "Quel organe pompe le sang dans tout le corps ?",
+    "a": [
+      "Le cœur",
+      "Les poumons",
+      "Le foie",
+      "Les reins"
+    ]
+  },
+  "body-003": {
+    "q": "Quel organe nous permet de respirer ?",
+    "a": [
+      "Estomac",
+      "Foie",
+      "Reins",
+      "Poumons"
+    ]
+  },
+  "body-004": {
+    "q": "Traditionnellement, combien de sens dit-on que l’être humain possède ?",
+    "a": [
+      "3",
+      "5",
+      "7",
+      "10"
+    ]
+  },
+  "body-005": {
+    "q": "Quelle structure osseuse protège le cerveau ?",
+    "a": [
+      "Le crâne",
+      "Les côtes",
+      "Le bassin",
+      "La colonne vertébrale"
+    ]
+  },
+  "body-006": {
+    "q": "Quel est l’os le plus long du corps humain ?",
+    "a": [
+      "Le tibia",
+      "L’humérus",
+      "Le fémur",
+      "La clavicule"
+    ]
+  },
+  "body-007": {
+    "q": "Quel est le rôle principal des globules rouges ?",
+    "a": [
+      "Transporter le sucre",
+      "Transporter l’oxygène",
+      "Transporter l’eau",
+      "Transporter les graisses"
+    ]
+  },
+  "body-008": {
+    "q": "Quel organe filtre le sang et produit l’urine ?",
+    "a": [
+      "Le cœur",
+      "Les poumons",
+      "L’estomac",
+      "Les reins"
+    ]
+  },
+  "body-009": {
+    "q": "Quelle est, environ, la température normale du corps humain ?",
+    "a": [
+      "37 °C",
+      "34 °C",
+      "40 °C",
+      "42 °C"
+    ]
+  },
+  "body-010": {
+    "q": "Où se trouvent les papilles gustatives ?",
+    "a": [
+      "Sur le nez",
+      "Sur les lèvres",
+      "Sur la langue",
+      "Sur les dents"
+    ]
+  },
+  "body-011": {
+    "q": "Quel organe produit l’insuline ?",
+    "a": [
+      "Le foie",
+      "Le pancréas",
+      "Le rein",
+      "La rate"
+    ]
+  },
+  "body-012": {
+    "q": "Combien de dents de lait un enfant a-t-il généralement ?",
+    "a": [
+      "12",
+      "32",
+      "20",
+      "40"
+    ]
+  },
+  "body-013": {
+    "q": "Combien de cavités compte le cœur humain ?",
+    "a": [
+      "2",
+      "3",
+      "6",
+      "4"
+    ]
+  },
+  "body-014": {
+    "q": "Comment s’appelle la partie colorée de l’œil ?",
+    "a": [
+      "L’iris",
+      "La pupille",
+      "La rétine",
+      "La cornée"
+    ]
+  },
+  "body-015": {
+    "q": "Combien d’os compte le corps d’un être humain adulte ?",
+    "a": [
+      "156",
+      "206",
+      "256",
+      "306"
+    ]
+  },
+  "body-016": {
+    "q": "Quelle vitamine la peau produit-elle grâce à la lumière du soleil ?",
+    "a": [
+      "Vitamine A",
+      "Vitamine B12",
+      "Vitamine C",
+      "Vitamine D"
+    ]
+  },
+  "body-017": {
+    "q": "Dans quel organe la plupart des nutriments sont-ils absorbés par le corps ?",
+    "a": [
+      "L’estomac",
+      "Le gros intestin",
+      "L’intestin grêle",
+      "L’œsophage"
+    ]
+  },
+  "body-018": {
+    "q": "Quel est le plus grand organe interne plein du corps ?",
+    "a": [
+      "Le foie",
+      "Le cœur",
+      "L’estomac",
+      "La rate"
+    ]
+  },
+  "body-019": {
+    "q": "Quels vaisseaux sanguins transportent le sang du cœur vers le reste du corps ?",
+    "a": [
+      "Les veines",
+      "Les artères",
+      "Les capillaires",
+      "Les vaisseaux lymphatiques"
+    ]
+  },
+  "body-020": {
+    "q": "Quel gaz, déchet de l’organisme, les poumons rejettent-ils ?",
+    "a": [
+      "Oxygène",
+      "Azote",
+      "Dioxyde de carbone",
+      "Hélium"
+    ]
+  },
+  "body-021": {
+    "q": "Quel est le plus petit os du corps humain ?",
+    "a": [
+      "Le marteau",
+      "L’enclume",
+      "Le coccyx",
+      "L’étrier"
+    ]
+  },
+  "body-022": {
+    "q": "Quelle partie du cerveau est principalement responsable de l’équilibre et de la coordination ?",
+    "a": [
+      "Le cervelet",
+      "Le lobe frontal",
+      "L’hippocampe",
+      "Le thalamus"
+    ]
+  },
+  "body-023": {
+    "q": "Quelle protéine des globules rouges transporte l’oxygène ?",
+    "a": [
+      "Insuline",
+      "Kératine",
+      "Hémoglobine",
+      "Collagène"
+    ]
+  },
+  "body-024": {
+    "q": "Combien de paires de chromosomes contient une cellule humaine typique ?",
+    "a": [
+      "12",
+      "23",
+      "30",
+      "48"
+    ]
+  },
+  "body-025": {
+    "q": "Comment s’appelle le conduit qui amène les aliments de la gorge à l’estomac ?",
+    "a": [
+      "La trachée",
+      "Le larynx",
+      "L’intestin",
+      "L’œsophage"
+    ]
+  }
+}

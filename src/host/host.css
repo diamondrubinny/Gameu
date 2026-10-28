@@ -32,7 +32,7 @@ html, body { margin: 0; height: 100%; }
 body {
   background: radial-gradient(1200px 800px at 80% -10%, #2b2f6b 0%, transparent 60%), var(--bg);
   color: var(--text);
-  font: 400 var(--base)/1.45 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Hebrew', Arial, sans-serif;
+  font: 400 var(--base)/1.45 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Hebrew', 'Noto Sans Arabic', Tahoma, Arial, sans-serif;
   overflow: hidden;
   cursor: none;
 }

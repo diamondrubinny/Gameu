@@ -6,12 +6,17 @@
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); }
-body { font: 16px/1.45 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Hebrew', Arial, sans-serif; overscroll-behavior: none; }
+body { font: 16px/1.45 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Hebrew', 'Noto Sans Arabic', Tahoma, Arial, sans-serif; overscroll-behavior: none; }
 .app { min-height: 100%; display: flex; flex-direction: column; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 a { color: var(--focus); }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 button { font: inherit; color: inherit; }
+
+/* language picker */
+.lang-row { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-bottom: 4px; }
+.lang-select { font: inherit; min-height: 44px; padding: 6px 10px; border-radius: 10px; border: 2px solid #4a5196; background: var(--panel); color: var(--text); }
+.sheet .lang-row { justify-content: flex-start; margin: 8px 0 12px; }
 
 /* join */
 .join-screen { padding: 20px 16px 32px; max-width: 480px; width: 100%; margin: 0 auto; }

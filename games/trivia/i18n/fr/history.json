@@ -1,0 +1,227 @@
+{
+  "history-001": {
+    "q": "Quel peuple a construit les pyramides de Gizeh ?",
+    "a": [
+      "Les Grecs",
+      "Les Romains",
+      "Les Égyptiens de l’Antiquité",
+      "Les Perses"
+    ]
+  },
+  "history-002": {
+    "q": "Quel explorateur a navigué en 1492 et atteint les Amériques ?",
+    "a": [
+      "Christophe Colomb",
+      "Vasco de Gama",
+      "Marco Polo",
+      "James Cook"
+    ]
+  },
+  "history-003": {
+    "q": "Quel instrument de navigation, qui indique la direction du nord, a été inventé en Chine ?",
+    "a": [
+      "Le télescope",
+      "La boussole",
+      "L’horloge mécanique",
+      "Les jumelles"
+    ]
+  },
+  "history-004": {
+    "q": "Quelle était la langue principale des Romains de l’Antiquité ?",
+    "a": [
+      "Le grec",
+      "L’araméen",
+      "Le gaulois",
+      "Le latin"
+    ]
+  },
+  "history-005": {
+    "q": "Dans quel pays a été construite la Grande Muraille ?",
+    "a": [
+      "Japon",
+      "Inde",
+      "Corée",
+      "Chine"
+    ]
+  },
+  "history-006": {
+    "q": "Quelle reine célèbre a régné sur l’Égypte antique et fut l’alliée de Jules César ?",
+    "a": [
+      "Néfertiti",
+      "Hatchepsout",
+      "Cléopâtre",
+      "Victoria"
+    ]
+  },
+  "history-007": {
+    "q": "Quel artiste et inventeur de la Renaissance a dessiné des plans de machines volantes ?",
+    "a": [
+      "Michel-Ange",
+      "Léonard de Vinci",
+      "Raphaël",
+      "Donatello"
+    ]
+  },
+  "history-008": {
+    "q": "Qui a été le premier président des États-Unis ?",
+    "a": [
+      "Abraham Lincoln",
+      "Thomas Jefferson",
+      "George Washington",
+      "Benjamin Franklin"
+    ]
+  },
+  "history-009": {
+    "q": "Quel moyen de transport Henry Ford a-t-il rendu abordable grâce à la production en série ?",
+    "a": [
+      "La voiture",
+      "Le vélo",
+      "L’avion",
+      "Le train"
+    ]
+  },
+  "history-010": {
+    "q": "Dans quelle ville antique a été construit le Colisée ?",
+    "a": [
+      "Rome",
+      "Athènes",
+      "Alexandrie",
+      "Carthage"
+    ]
+  },
+  "history-011": {
+    "q": "Marco Polo est célèbre pour son voyage à la cour de Kubilaï Khan. Dans quel pays se trouvait-elle ?",
+    "a": [
+      "Inde",
+      "Japon",
+      "Perse",
+      "Chine"
+    ]
+  },
+  "history-012": {
+    "q": "Quel peuple a fondé la cité antique de Carthage ?",
+    "a": [
+      "Les Grecs",
+      "Les Phéniciens",
+      "Les Romains",
+      "Les Égyptiens"
+    ]
+  },
+  "history-013": {
+    "q": "Quelle civilisation a bâti le Machu Picchu, au Pérou ?",
+    "a": [
+      "Les Aztèques",
+      "Les Mayas",
+      "Les Incas",
+      "Les Olmèques"
+    ]
+  },
+  "history-014": {
+    "q": "Qui a dirigé la première expédition à atteindre le pôle Sud ?",
+    "a": [
+      "Robert Scott",
+      "Ernest Shackleton",
+      "Robert Peary",
+      "Roald Amundsen"
+    ]
+  },
+  "history-015": {
+    "q": "En quelle année les frères Wright ont-ils réalisé leur premier vol motorisé ?",
+    "a": [
+      "1883",
+      "1903",
+      "1923",
+      "1943"
+    ]
+  },
+  "history-016": {
+    "q": "Laquelle des Sept Merveilles du monde antique se dressait à Alexandrie ?",
+    "a": [
+      "Le Phare",
+      "Les Jardins suspendus",
+      "Le Colosse de Rhodes",
+      "Le Temple d’Artémis"
+    ]
+  },
+  "history-017": {
+    "q": "Quel empire Gengis Khan a-t-il fondé ?",
+    "a": [
+      "L’Empire ottoman",
+      "L’Empire mongol",
+      "L’Empire perse",
+      "L’Empire byzantin"
+    ]
+  },
+  "history-018": {
+    "q": "La pierre de Rosette a permis de déchiffrer quelle écriture ?",
+    "a": [
+      "Le cunéiforme",
+      "Le linéaire B",
+      "Les hiéroglyphes égyptiens",
+      "L’écriture maya"
+    ]
+  },
+  "history-019": {
+    "q": "Dans quel pays la révolution industrielle a-t-elle commencé ?",
+    "a": [
+      "Grande-Bretagne",
+      "France",
+      "Allemagne",
+      "États-Unis"
+    ]
+  },
+  "history-020": {
+    "q": "Dans quel pays actuel la Renaissance a-t-elle commencé ?",
+    "a": [
+      "France",
+      "Angleterre",
+      "Espagne",
+      "Italie"
+    ]
+  },
+  "history-021": {
+    "q": "Quel roi franc a été couronné empereur en l’an 800 ?",
+    "a": [
+      "Clovis",
+      "Charlemagne",
+      "Pépin le Bref",
+      "Charles Martel"
+    ]
+  },
+  "history-022": {
+    "q": "Qui a été le premier explorateur à naviguer d’Europe jusqu’en Inde en contournant l’Afrique ?",
+    "a": [
+      "Bartolomeu Dias",
+      "Pedro Cabral",
+      "Vasco de Gama",
+      "Fernand de Magellan"
+    ]
+  },
+  "history-023": {
+    "q": "Quel roi de Babylone est célèbre pour l’un des plus anciens codes de lois écrits ?",
+    "a": [
+      "Hammurabi",
+      "Assurbanipal",
+      "Sargon",
+      "Darius"
+    ]
+  },
+  "history-024": {
+    "q": "En quelle année le canal de Suez a-t-il été inauguré ?",
+    "a": [
+      "1809",
+      "1829",
+      "1849",
+      "1869"
+    ]
+  },
+  "history-025": {
+    "q": "Quelle civilisation a inventé l’écriture cunéiforme ?",
+    "a": [
+      "Les Étrusques",
+      "Les Sumériens",
+      "Les Hittites",
+      "Les Minoens"
+    ]
+  }
+}

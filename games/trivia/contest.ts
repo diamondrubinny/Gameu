@@ -1,7 +1,8 @@
 /** Pure contest logic (no DOM): question selection, answer shuffling, scoring and ranking. */
+import type { Lang } from '../../src/shared/i18n';
 
+export type { Lang };
 export type Difficulty = 1 | 2 | 3;
-export type Lang = 'he' | 'en';
 
 export interface Localized {
   q: string;
@@ -16,6 +17,15 @@ export interface Question {
   c: number;
   he: Localized;
   en: Localized;
+  /** Translations (same answer order); missing ones fall back to English. */
+  ar?: Localized;
+  ru?: Localized;
+  es?: Localized;
+  fr?: Localized;
+}
+
+export function textOf(q: Question, lang: Lang): Localized {
+  return q[lang] ?? q.en;
 }
 
 export type DifficultyMode = 'easy' | 'mixed' | 'hard';
@@ -83,16 +93,22 @@ export interface PreparedQuestion {
   id: string;
   cat: string;
   d: Difficulty;
-  text: string;
-  answers: string[];
+  /** Shuffled answer order, shared by every language so answer indexes match on all phones. */
+  order: number[];
   correct: number;
+  source: Question;
 }
 
-/** Localizes and shuffles the answer order (so the position of the right answer can't be memorized). */
-export function prepare(q: Question, lang: Lang, rng: Rng = Math.random): PreparedQuestion {
-  const loc = q[lang];
+/** Shuffles the answer order once (so the position of the right answer can't be memorized). */
+export function prepare(q: Question, rng: Rng = Math.random): PreparedQuestion {
   const order = shuffle([0, 1, 2, 3], rng);
-  return { id: q.id, cat: q.cat, d: q.d, text: loc.q, answers: order.map((i) => loc.a[i] as string), correct: order.indexOf(q.c) };
+  return { id: q.id, cat: q.cat, d: q.d, order, correct: order.indexOf(q.c), source: q };
+}
+
+/** The question and its answers in one language, in the prepared order. */
+export function localize(p: PreparedQuestion, lang: Lang): { text: string; answers: string[] } {
+  const loc = textOf(p.source, lang);
+  return { text: loc.q, answers: p.order.map((i) => loc.a[i] as string) };
 }
 
 export const BASE_POINTS: Record<Difficulty, number> = { 1: 500, 2: 750, 3: 1000 };

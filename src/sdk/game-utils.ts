@@ -1,4 +1,6 @@
 /** Helpers shared by the bundled games (not part of the public SDK surface). */
+import { isRtl, type Lang } from '../shared/i18n';
+
 export { h, clear, $ } from '../ui/dom';
 
 export function shuffle<T>(arr: readonly T[]): T[] {
@@ -15,10 +17,10 @@ export function sleep(ms: number): Promise<void> {
 }
 
 /** Sets the language/direction of the game document from console settings. */
-export function applyDocumentSettings(settings: { language: 'he' | 'en'; textScale: number; highContrast: boolean; reduceMotion: boolean }): void {
+export function applyDocumentSettings(settings: { language: Lang; textScale: number; highContrast: boolean; reduceMotion: boolean }): void {
   const html = document.documentElement;
   html.lang = settings.language;
-  html.dir = settings.language === 'he' ? 'rtl' : 'ltr';
+  html.dir = isRtl(settings.language) ? 'rtl' : 'ltr';
   html.style.setProperty('--text-scale', String(settings.textScale));
   html.classList.toggle('high-contrast', settings.highContrast);
   html.classList.toggle('reduce-motion', settings.reduceMotion);

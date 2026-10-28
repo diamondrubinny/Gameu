@@ -2,7 +2,8 @@ import { createSdk, type GamePlayer, type Input } from '../../src/sdk/gameu';
 import { AVATARS } from '../../src/shared/constants';
 import { $, announce, applyDocumentSettings, clear, h, shuffle, sleep } from '../../src/sdk/game-utils';
 import { isCorrectGuess } from './guess';
-import { WORDS, type Word } from './words';
+import { DICTS } from './locales';
+import { WORD_KEYS, type WordKey } from './words';
 
 const MAX_ROUNDS = 6;
 const COLORS = ['#000000', '#e63946', '#1d4ed8', '#16a34a', '#f59e0b', '#8b5cf6', '#8b4513', '#ffffff'];
@@ -16,7 +17,7 @@ let roundSeconds = 75;
 
 interface RoundState {
   drawer: GamePlayer;
-  word: Word;
+  word: WordKey;
   answers: string[];
   guessed: Set<string>;
   start: number;
@@ -35,9 +36,10 @@ sdk.onInit(async (ctx) => {
   players = ctx.players;
   roundSeconds = ctx.settings.extendedTime ? 110 : 75;
   for (const p of players) scores.set(p.id, 0);
-  $('#title').textContent = `🎨 ${sdk.t('צייר ונחש', 'Draw & Guess')}`;
-  $('#feed-title').textContent = sdk.t('ניחושים', 'Guesses');
-  canvas.setAttribute('aria-label', sdk.t('הציור של השחקן/ית', "The drawer's picture"));
+  const tv = sdk.tr(DICTS);
+  $('#title').textContent = `🎨 ${tv.title}`;
+  $('#feed-title').textContent = tv.guesses;
+  canvas.setAttribute('aria-label', tv.canvasLabel);
   fit();
   window.addEventListener('resize', fit);
   renderScores();
@@ -76,9 +78,10 @@ sdk.onInput((playerId: string, input: Input) => {
     const pts = 100 + Math.round((200 * remaining) / (roundSeconds * 1000));
     scores.set(playerId, (scores.get(playerId) ?? 0) + pts);
     scores.set(r.drawer.id, (scores.get(r.drawer.id) ?? 0) + 50);
-    feed(`✓ ${player.nickname} ${sdk.t('ניחש/ה!', 'guessed it!')}`, true);
-    announce(`${player.nickname} ${sdk.t('ניחש/ה נכון', 'guessed correctly')}`);
-    sdk.setLayout({ type: 'message', text: sdk.t('ניחשת! 🎉', 'You got it! 🎉'), subtext: sdk.t(`+${pts} נקודות`, `+${pts} points`) }, playerId);
+    feed(sdk.tr(DICTS).guessedFeed(player.nickname), true);
+    announce(sdk.tr(DICTS).guessedAnnounce(player.nickname));
+    const pt = sdk.trFor(playerId, DICTS);
+    sdk.setLayout({ type: 'message', text: pt.youGotIt, subtext: pt.plusPoints(pts) }, playerId);
     sdk.haptic([60, 40, 60], playerId);
     sdk.haptic([30], r.drawer.id);
     renderScores();
@@ -101,7 +104,7 @@ function allGuessed(): boolean {
 
 async function run(): Promise<void> {
   const drawers = shuffle(connected()).slice(0, MAX_ROUNDS);
-  const words = shuffle(WORDS);
+  const words = shuffle(WORD_KEYS);
   for (let i = 0; i < drawers.length; i++) {
     const drawer = players.find((p) => p.id === drawers[i]!.id);
     if (!drawer?.connected) continue;
@@ -111,24 +114,37 @@ async function run(): Promise<void> {
   sdk.end([...scores.entries()].map(([playerId, score]) => ({ playerId, score })));
 }
 
-async function playRound(drawer: GamePlayer, word: Word, index: number, total: number): Promise<void> {
-  const lang = sdk.settings?.language ?? 'he';
-  const secret = word[lang];
+/** The word in a given player's language (first form), or in the TV language. */
+function wordFor(word: WordKey, playerId?: string): string {
+  const dict = playerId ? sdk.trFor(playerId, DICTS) : sdk.tr(DICTS);
+  return dict.words[word]?.[0] ?? DICTS.en.words[word][0] ?? word;
+}
+
+/** Every accepted form of the word, in every language. */
+function allForms(word: WordKey): string[] {
+  return Object.values(DICTS).flatMap((d) => d.words[word] ?? []);
+}
+
+async function playRound(drawer: GamePlayer, word: WordKey, index: number, total: number): Promise<void> {
+  const tv = sdk.tr(DICTS);
+  const secret = wordFor(word);
   strokes = [];
   strokeIndex = new Map();
   redraw();
   clear($('#feed'));
 
-  await showCard(sdk.t(`סיבוב ${index + 1} מתוך ${total}`, `Round ${index + 1} of ${total}`), `${AVATARS[drawer.avatar] ?? ''} ${drawer.nickname} ${sdk.t('מצייר/ת', 'is drawing')}`);
-  sdk.setLayout({ type: 'message', text: sdk.t('מתכוננים…', 'Get ready…') });
+  await showCard(tv.round(index + 1, total), `${AVATARS[drawer.avatar] ?? ''} ${tv.isDrawing(drawer.nickname)}`);
+  for (const p of connected()) sdk.setLayout({ type: 'message', text: sdk.trFor(p.id, DICTS).getReady }, p.id);
 
   $('#hint').textContent = [...secret].map((c) => (c === ' ' ? '  ' : '_')).join(' ');
-  sdk.setLayout({ type: 'draw', id: 'canvas', prompt: sdk.t(`ציירו: ${secret}`, `Draw: ${secret}`), colors: COLORS }, drawer.id);
+  sdk.setLayout({ type: 'draw', id: 'canvas', prompt: sdk.trFor(drawer.id, DICTS).drawPrompt(wordFor(word, drawer.id)), colors: COLORS }, drawer.id);
   for (const p of connected()) {
-    if (p.id !== drawer.id) sdk.setLayout({ type: 'text', id: 'guess', prompt: sdk.t(`מה ${drawer.nickname} מצייר/ת?`, `What is ${drawer.nickname} drawing?`), maxLength: 40, placeholder: sdk.t('הניחוש שלך', 'Your guess') }, p.id);
+    if (p.id === drawer.id) continue;
+    const pt = sdk.trFor(p.id, DICTS);
+    sdk.setLayout({ type: 'text', id: 'guess', prompt: pt.guessPrompt(drawer.nickname), maxLength: 40, placeholder: pt.guessPlaceholder }, p.id);
   }
   sdk.haptic([80], drawer.id);
-  announce(sdk.t(`${drawer.nickname} מצייר/ת. נחשו מהטלפון`, `${drawer.nickname} is drawing. Guess on your phone`));
+  announce(tv.drawingAnnounce(drawer.nickname));
 
   const total_ms = roundSeconds * 1000;
   const timer = $('#timer');
@@ -140,7 +156,7 @@ async function playRound(drawer: GamePlayer, word: Word, index: number, total: n
       if (round) round.active = false;
       resolve();
     };
-    round = { drawer, word, answers: [word.he, word.en, ...(word.alt ?? [])], guessed: new Set(), start: performance.now(), active: true, last: new Map(), finish };
+    round = { drawer, word, answers: allForms(word), guessed: new Set(), start: performance.now(), active: true, last: new Map(), finish };
     renderScores();
     const tick = () => {
       if (done) return;
@@ -156,15 +172,16 @@ async function playRound(drawer: GamePlayer, word: Word, index: number, total: n
   const guessed = round?.guessed ?? new Set<string>();
   for (const p of connected()) {
     if (p.id === drawer.id) {
-      sdk.setLayout({ type: 'message', text: sdk.t(`${guessed.size} ניחשו את הציור שלך`, `${guessed.size} guessed your drawing`), subtext: secret }, p.id);
+      sdk.setLayout({ type: 'message', text: sdk.trFor(p.id, DICTS).guessedYourDrawing(guessed.size), subtext: wordFor(word, p.id) }, p.id);
     } else if (guessed.has(p.id)) {
-      sdk.setLayout({ type: 'message', text: sdk.t('ניחשת! 🎉', 'You got it! 🎉'), subtext: sdk.t(`המילה: ${secret}`, `The word: ${secret}`) }, p.id);
+      const pt = sdk.trFor(p.id, DICTS);
+      sdk.setLayout({ type: 'message', text: pt.youGotIt, subtext: pt.theWord(wordFor(word, p.id)) }, p.id);
     } else {
-      sdk.setLayout({ type: 'message', text: sdk.t(`המילה הייתה: ${secret}`, `The word was: ${secret}`) }, p.id);
+      sdk.setLayout({ type: 'message', text: sdk.trFor(p.id, DICTS).theWordWas(wordFor(word, p.id)) }, p.id);
     }
   }
-  announce(sdk.t(`המילה הייתה ${secret}`, `The word was ${secret}`));
-  await showCard(sdk.t('המילה הייתה', 'The word was'), secret, 4000);
+  announce(tv.theWordWas(secret));
+  await showCard(tv.theWordWasTitle, secret, 4000);
   round = null;
 }
 

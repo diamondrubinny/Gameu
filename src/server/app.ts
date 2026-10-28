@@ -38,7 +38,7 @@ const HEARTBEAT_MS = 15_000;
 
 export function createApp(deps: AppDeps): App {
   const { config, logger: log, settings, games } = deps;
-  const room = deps.room ?? new Room({ logger: log });
+  const room = deps.room ?? new Room({ logger: log, reconnectGraceMs: config.reconnectGraceMs });
   const hostSecret = randomToken();
   const gate = new ConnectionGate();
   const publicDir = path.join(config.appRoot, 'public');

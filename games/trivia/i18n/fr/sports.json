@@ -1,0 +1,227 @@
+{
+  "sports-001": {
+    "q": "Combien de joueurs chaque équipe a-t-elle sur le terrain lors d’un match de football ?",
+    "a": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ]
+  },
+  "sports-002": {
+    "q": "Combien de joueurs chaque équipe a-t-elle sur le terrain au basket-ball ?",
+    "a": [
+      "5",
+      "6",
+      "7",
+      "9"
+    ]
+  },
+  "sports-003": {
+    "q": "Combien d’anneaux compte le symbole olympique ?",
+    "a": [
+      "3",
+      "4",
+      "6",
+      "5"
+    ]
+  },
+  "sports-004": {
+    "q": "Dans quel sport les joueurs réalisent-ils des « dunks » ?",
+    "a": [
+      "Volley-ball",
+      "Basket-ball",
+      "Tennis",
+      "Handball"
+    ]
+  },
+  "sports-005": {
+    "q": "Dans quel sport utilise-t-on un volant ?",
+    "a": [
+      "Tennis",
+      "Squash",
+      "Badminton",
+      "Tennis de table"
+    ]
+  },
+  "sports-006": {
+    "q": "Dans quel sport peut-on marquer un « touchdown » ?",
+    "a": [
+      "Baseball",
+      "Football américain",
+      "Hockey sur glace",
+      "Golf"
+    ]
+  },
+  "sports-007": {
+    "q": "Quel sport se joue au tournoi de Wimbledon ?",
+    "a": [
+      "Golf",
+      "Cricket",
+      "Football",
+      "Tennis"
+    ]
+  },
+  "sports-008": {
+    "q": "À quelle fréquence ont lieu les Jeux olympiques d’été ?",
+    "a": [
+      "Tous les ans",
+      "Tous les 2 ans",
+      "Tous les 4 ans",
+      "Tous les 5 ans"
+    ]
+  },
+  "sports-009": {
+    "q": "Combien de trous compte un parcours de golf standard complet ?",
+    "a": [
+      "9",
+      "18",
+      "12",
+      "24"
+    ]
+  },
+  "sports-010": {
+    "q": "De quelle couleur est le carton montré à un joueur de football expulsé ?",
+    "a": [
+      "Rouge",
+      "Jaune",
+      "Vert",
+      "Bleu"
+    ]
+  },
+  "sports-011": {
+    "q": "Quelle est la distance d’un marathon ?",
+    "a": [
+      "21,1 km",
+      "30 km",
+      "50 km",
+      "42,195 km"
+    ]
+  },
+  "sports-012": {
+    "q": "Dans quelle ville se sont déroulés les premiers Jeux olympiques modernes, en 1896 ?",
+    "a": [
+      "Athènes",
+      "Paris",
+      "Londres",
+      "Rome"
+    ]
+  },
+  "sports-013": {
+    "q": "Combien de joueurs chaque équipe a-t-elle sur le terrain au volley-ball en salle ?",
+    "a": [
+      "4",
+      "5",
+      "7",
+      "6"
+    ]
+  },
+  "sports-014": {
+    "q": "Quelle est la longueur d’une piscine olympique ?",
+    "a": [
+      "25 mètres",
+      "50 mètres",
+      "75 mètres",
+      "100 mètres"
+    ]
+  },
+  "sports-015": {
+    "q": "Dans quel pays le judo est-il né ?",
+    "a": [
+      "Japon",
+      "Chine",
+      "Corée",
+      "Thaïlande"
+    ]
+  },
+  "sports-016": {
+    "q": "Dans quel sport les nations s’affrontent-elles pour la coupe Davis ?",
+    "a": [
+      "Golf",
+      "Voile",
+      "Cyclisme",
+      "Tennis"
+    ]
+  },
+  "sports-017": {
+    "q": "Au handball, combien de joueurs (gardien compris) chaque équipe a-t-elle sur le terrain ?",
+    "a": [
+      "6",
+      "7",
+      "9",
+      "11"
+    ]
+  },
+  "sports-018": {
+    "q": "Quel pays a accueilli la première Coupe du monde de la FIFA, en 1930 ?",
+    "a": [
+      "Brésil",
+      "Italie",
+      "Uruguay",
+      "Argentine"
+    ]
+  },
+  "sports-019": {
+    "q": "Combien de minutes dure un match de football normal, sans le temps additionnel ni les prolongations ?",
+    "a": [
+      "60",
+      "80",
+      "90",
+      "100"
+    ]
+  },
+  "sports-020": {
+    "q": "Quel tournoi du Grand Chelem de tennis se joue sur terre battue ?",
+    "a": [
+      "Wimbledon",
+      "Roland-Garros (Internationaux de France)",
+      "US Open",
+      "Open d’Australie"
+    ]
+  },
+  "sports-021": {
+    "q": "Qui a inventé le basket-ball ?",
+    "a": [
+      "Walter Camp",
+      "Abner Doubleday",
+      "William Morgan",
+      "James Naismith"
+    ]
+  },
+  "sports-022": {
+    "q": "Qui est considéré comme le fondateur des Jeux olympiques modernes ?",
+    "a": [
+      "Pierre de Coubertin",
+      "Avery Brundage",
+      "Jules Rimet",
+      "Juan Antonio Samaranch"
+    ]
+  },
+  "sports-023": {
+    "q": "Dans quel sport Israël a-t-il remporté sa première médaille olympique, en 1992 ?",
+    "a": [
+      "Voile",
+      "Athlétisme",
+      "Judo",
+      "Gymnastique"
+    ]
+  },
+  "sports-024": {
+    "q": "Au football, à quelle distance de la ligne de but se trouve le point de penalty ?",
+    "a": [
+      "9 mètres",
+      "11 mètres",
+      "16,5 mètres",
+      "20 mètres"
+    ]
+  },
+  "sports-025": {
+    "q": "À quelle hauteur du sol se trouve un panier de basket-ball ?",
+    "a": [
+      "2,45 mètres",
+      "2,75 mètres",
+      "3,05 mètres",
+      "3,65 mètres"
+    ]
+  }
+}

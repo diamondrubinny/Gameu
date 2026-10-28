@@ -5,6 +5,8 @@ import { expect, test, devices, type Browser, type BrowserContext, type Page } f
 const phoneContexts: BrowserContext[] = [];
 test.afterEach(async () => {
   await Promise.all(phoneContexts.splice(0).map((c) => c.close()));
+  // The e2e server keeps disconnected players for 1s (GAMEU_RECONNECT_GRACE_MS); let them expire.
+  await new Promise((r) => setTimeout(r, 1500));
 });
 
 /** Opens a phone controller in its own browser context (separate localStorage = separate device). */
@@ -115,19 +117,84 @@ test('TV host + two phones: join, navigate, play trivia, exit, play snake', asyn
   expect(errors, errors.join('\n')).toEqual([]);
 });
 
-test('settings persist and switch the TV to English', async ({ page: host }) => {
+test('TV language cycles through all 6 languages, persists, and sets direction', async ({ page: host }) => {
   await host.goto('/');
   await expect(host.locator('.code')).toHaveText(/^[A-Z2-9]{4}$/);
   await host.locator('[data-id="settings"]').click();
-  await host.locator('[data-id="lang"]').click();
-  await expect(host.getByRole('heading', { name: 'Settings' })).toBeVisible();
-  await expect(host.locator('html')).toHaveAttribute('dir', 'ltr');
-  await host.reload();
-  await expect(host.getByRole('heading', { name: 'Games' })).toBeVisible();
-  // restore
-  await host.locator('[data-id="settings"]').click();
-  await host.locator('[data-id="lang"]').click();
-  await expect(host.locator('html')).toHaveAttribute('dir', 'rtl');
+  const html = host.locator('html');
+  const expected: [string, 'rtl' | 'ltr'][] = [['en', 'ltr'], ['ar', 'rtl'], ['ru', 'ltr'], ['es', 'ltr'], ['fr', 'ltr'], ['he', 'rtl']];
+  for (const [code, dir] of expected) {
+    await host.locator('[data-id="lang"]').click();
+    await expect(html).toHaveAttribute('lang', code);
+    await expect(html).toHaveAttribute('dir', dir);
+    // The settings heading is translated (not left in another language).
+    if (code === 'en') await expect(host.getByRole('heading', { name: 'Settings' })).toBeVisible();
+    if (code === 'he') await expect(host.getByRole('heading', { name: 'הגדרות' })).toBeVisible();
+    if (code === 'en') {
+      await host.reload();
+      await expect(host.getByRole('heading', { name: 'Games' })).toBeVisible();
+      await host.locator('[data-id="settings"]').click();
+    }
+  }
+});
+
+test('each phone gets trivia in its own language while the TV stays in Hebrew', async ({ page: host, browser, baseURL }) => {
+  await host.goto('/');
+  await expect(host.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);
+  const code = (await host.locator('.code').textContent())!;
+  const he = await openPhone(browser, baseURL!, code, 'Noa');
+  // Second phone switches to English on the join screen before joining.
+  const ctx = await browser.newContext({ ...devices['Pixel 7'], locale: 'he-IL', baseURL });
+  phoneContexts.push(ctx);
+  const en = await ctx.newPage();
+  await en.goto(`/c?r=${code}`);
+  await en.locator('#lang-select').selectOption('en');
+  await expect(en.locator('html')).toHaveAttribute('dir', 'ltr');
+  await expect(en.getByLabel('Nickname')).toBeVisible();
+  await en.getByLabel('Nickname').fill('Sam');
+  await en.getByRole('button', { name: 'Join' }).click();
+  await expect(en.locator('.bar .me-name')).toHaveText('Sam');
+  await expect(en.locator('.message-text')).toContainText('is choosing');
+
+  for (let i = 0; i < 6 && (await activeId(host)) !== 'game:trivia'; i++) await press(he, 'שמאלה');
+  await press(he, 'אישור');
+  const game = host.frameLocator('.game-frame');
+  await expect(game.locator('#opt-start')).toHaveClass(/focused/, { timeout: 10_000 });
+  await expect(en.locator('.message-text')).toContainText('is choosing topics');
+  await press(he, 'בחירה');
+  await expect(game.locator('.question')).toBeVisible({ timeout: 12_000 });
+
+  // TV in Hebrew, English phone gets the English text with the same answer order.
+  const tvQuestion = (await game.locator('.question').textContent())!;
+  expect(tvQuestion).toMatch(/[\u0590-\u05FF]/);
+  await expect(en.locator('.choice')).toHaveCount(4);
+  const enPrompt = (await en.locator('.layout-title').textContent())!;
+  expect(enPrompt).not.toMatch(/[\u0590-\u05FF]/);
+  expect(enPrompt).toMatch(/[A-Za-z]/);
+  await expect(he.locator('.layout-title')).toHaveText(tvQuestion);
+
+  // Both pick the same position → both get the same result (correct or not).
+  await he.locator('.choice').nth(2).click();
+  await en.locator('.choice').nth(2).click();
+  await expect(he.locator('.message-text')).toBeVisible();
+  const heResult = (await he.locator('.message-text').textContent())!;
+  const enResult = (await en.locator('.message-text').textContent())!;
+  expect(heResult.startsWith('נכון')).toBe(enResult.startsWith('Correct'));
+  await press(he, 'בית');
+  await press(he, 'שמאלה');
+  await press(he, 'אישור');
+});
+
+test('a phone can switch language mid-game from its settings', async ({ page: host, browser, baseURL }) => {
+  await host.goto('/');
+  await expect(host.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);
+  const code = (await host.locator('.code').textContent())!;
+  const phone = await openPhone(browser, baseURL!, code, 'Lea');
+  await phone.getByRole('button', { name: 'הגדרות שלט' }).click();
+  await phone.locator('#lang-select').selectOption('en');
+  await expect(phone.locator('html')).toHaveAttribute('lang', 'en');
+  // The TV re-sends the menu in the phone's new language.
+  await expect(phone.locator('.layout-title')).toHaveText('Choose a game');
 });
 
 test('controller shows a clear error for a wrong room code', async ({ browser, baseURL }) => {

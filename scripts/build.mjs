@@ -50,8 +50,8 @@ async function copyStatic() {
   await copyFile(path.join(root, 'src/sdk/game-base.css'), path.join(pub, 'sdk/game-base.css'));
   await copyFile(path.join(root, 'src/tv/index.html'), path.join(pub, 'tv/index.html'));
   await copyDir(path.join(root, 'src/public'), pub);
-  // Game assets (TypeScript sources and data/*.json are bundled into main.js instead).
-  await copyDir(path.join(root, 'games'), path.join(dist, 'games'), (f) => !f.endsWith('.ts') && path.relative(path.join(root, 'games'), f).split(path.sep)[1] !== 'data');
+  // Game assets (TypeScript sources, data/ and i18n/ JSON are bundled into main.js instead).
+  await copyDir(path.join(root, 'games'), path.join(dist, 'games'), (f) => !f.endsWith('.ts') && !['data', 'i18n'].includes(path.relative(path.join(root, 'games'), f).split(path.sep)[1] ?? ''));
   // Static game index for the Android TV app (no server API there); validated at runtime.
   const manifests = [];
   for (const id of await gameIds()) {

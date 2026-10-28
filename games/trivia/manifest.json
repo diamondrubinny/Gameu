@@ -3,11 +3,19 @@
   "version": "2.0.0",
   "name": {
     "he": "טריוויה — תחרות",
-    "en": "Trivia Contest"
+    "en": "Trivia Contest",
+    "ar": "مسابقة المعلومات",
+    "ru": "Викторина",
+    "es": "Concurso de trivia",
+    "fr": "Grand quiz"
   },
   "description": {
     "he": "תחרות טריוויה ב־16 נושאים ו־400 שאלות: בוחרים נושאים ורמה, עונים מהטלפון, בונוס על רצף ושאלת אלופים כפולה.",
-    "en": "A trivia contest with 400 questions in 16 topics: pick topics and level, answer on your phone, streak bonuses and a double-points final."
+    "en": "A trivia contest with 400 questions in 16 topics: pick topics and level, answer on your phone, streak bonuses and a double-points final.",
+    "ar": "مسابقة معلومات فيها 400 سؤال في 16 موضوعًا: اختاروا المواضيع والمستوى، وأجيبوا من الهاتف، مع مكافأة للإجابات المتتالية وسؤال أخير بنقاط مضاعفة.",
+    "ru": "Викторина: 400 вопросов в 16 темах. Выбирайте темы и уровень, отвечайте с телефона, получайте бонус за серию и двойные очки в финале.",
+    "es": "Un concurso de trivia con 400 preguntas en 16 temas: elijan temas y nivel, respondan desde el teléfono, con bonus por racha y una pregunta final de puntos dobles.",
+    "fr": "Un quiz de 400 questions sur 16 thèmes : choisissez les thèmes et le niveau, répondez depuis votre téléphone, bonus de série et finale à points doubles."
   },
   "minPlayers": 1,
   "maxPlayers": 8,

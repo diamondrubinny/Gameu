@@ -1,0 +1,227 @@
+{
+  "nature-001": {
+    "q": "Quel est l’animal terrestre le plus rapide ?",
+    "a": [
+      "Lion",
+      "Guépard",
+      "Cheval",
+      "Loup"
+    ]
+  },
+  "nature-002": {
+    "q": "Quel est le plus grand animal vivant aujourd’hui ?",
+    "a": [
+      "Baleine bleue",
+      "Éléphant d’Afrique",
+      "Requin-baleine",
+      "Girafe"
+    ]
+  },
+  "nature-003": {
+    "q": "Quel est l’animal le plus grand en hauteur ?",
+    "a": [
+      "Éléphant",
+      "Chameau",
+      "Autruche",
+      "Girafe"
+    ]
+  },
+  "nature-004": {
+    "q": "Que fabriquent les abeilles ?",
+    "a": [
+      "De la soie",
+      "Du lait",
+      "Du miel",
+      "Des perles"
+    ]
+  },
+  "nature-005": {
+    "q": "Quel animal est célèbre pour ses rayures noires et blanches ?",
+    "a": [
+      "Girafe",
+      "Zèbre",
+      "Léopard",
+      "Chameau"
+    ]
+  },
+  "nature-006": {
+    "q": "Comment s’appelle le processus par lequel les plantes fabriquent leur nourriture grâce à la lumière du soleil ?",
+    "a": [
+      "Photosynthèse",
+      "Pollinisation",
+      "Germination",
+      "Évaporation"
+    ]
+  },
+  "nature-007": {
+    "q": "En quoi se transforme une chenille ?",
+    "a": [
+      "Grenouille",
+      "Abeille",
+      "Araignée",
+      "Papillon"
+    ]
+  },
+  "nature-008": {
+    "q": "Quel animal est surnommé le « roi des animaux » ?",
+    "a": [
+      "Tigre",
+      "Éléphant",
+      "Lion",
+      "Ours"
+    ]
+  },
+  "nature-009": {
+    "q": "Quel est le plus grand oiseau du monde ?",
+    "a": [
+      "Aigle",
+      "Autruche",
+      "Manchot",
+      "Flamant rose"
+    ]
+  },
+  "nature-010": {
+    "q": "Comment appelle-t-on le petit de la grenouille qui vit dans l’eau ?",
+    "a": [
+      "Têtard",
+      "Ourson",
+      "Veau",
+      "Poussin"
+    ]
+  },
+  "nature-011": {
+    "q": "Quel est le seul mammifère capable de vraiment voler ?",
+    "a": [
+      "Écureuil volant",
+      "Poisson volant",
+      "Chauve-souris",
+      "Colibri"
+    ]
+  },
+  "nature-012": {
+    "q": "Combien de cœurs a une pieuvre ?",
+    "a": [
+      "1",
+      "2",
+      "4",
+      "3"
+    ]
+  },
+  "nature-013": {
+    "q": "De quoi se nourrit principalement le koala ?",
+    "a": [
+      "Bambou",
+      "Feuilles d’eucalyptus",
+      "Insectes",
+      "Fruits"
+    ]
+  },
+  "nature-014": {
+    "q": "Quel est le plus grand des grands félins ?",
+    "a": [
+      "Tigre",
+      "Lion",
+      "Jaguar",
+      "Léopard"
+    ]
+  },
+  "nature-015": {
+    "q": "Que stocke principalement la bosse du chameau ?",
+    "a": [
+      "De l’eau",
+      "De la graisse",
+      "De l’air",
+      "Du sang"
+    ]
+  },
+  "nature-016": {
+    "q": "Quel mammifère terrestre a la gestation la plus longue, près de deux ans ?",
+    "a": [
+      "Girafe",
+      "Éléphant",
+      "Rhinocéros",
+      "Cheval"
+    ]
+  },
+  "nature-017": {
+    "q": "À quel groupe d’animaux appartient la baleine ?",
+    "a": [
+      "Poissons",
+      "Reptiles",
+      "Amphibiens",
+      "Mammifères"
+    ]
+  },
+  "nature-018": {
+    "q": "Quel arbre produit des glands ?",
+    "a": [
+      "Chêne",
+      "Pin",
+      "Érable",
+      "Olivier"
+    ]
+  },
+  "nature-019": {
+    "q": "Chez les hippocampes, quel parent porte les œufs jusqu’à l’éclosion ?",
+    "a": [
+      "La femelle",
+      "Le mâle",
+      "Les deux parents",
+      "Aucun des deux"
+    ]
+  },
+  "nature-020": {
+    "q": "Combien de pattes a un insecte ?",
+    "a": [
+      "4",
+      "8",
+      "6",
+      "10"
+    ]
+  },
+  "nature-021": {
+    "q": "Quel est le plus grand reptile vivant ?",
+    "a": [
+      "Dragon de Komodo",
+      "Tortue luth",
+      "Crocodile marin",
+      "Anaconda"
+    ]
+  },
+  "nature-022": {
+    "q": "Quelle espèce d’arbre est la plus haute du monde ?",
+    "a": [
+      "Baobab",
+      "Chêne",
+      "Cèdre du Liban",
+      "Séquoia côtier"
+    ]
+  },
+  "nature-023": {
+    "q": "Quel oiseau atteint la plus grande vitesse en piqué ?",
+    "a": [
+      "Faucon pèlerin",
+      "Albatros",
+      "Autruche",
+      "Colibri"
+    ]
+  },
+  "nature-024": {
+    "q": "Lequel de ces mammifères pond des œufs ?",
+    "a": [
+      "Kangourou",
+      "Ornithorynque",
+      "Koala",
+      "Paresseux"
+    ]
+  },
+  "nature-025": {
+    "q": "Quel est le plus grand poisson du monde ?",
+    "a": [
+      "Grand requin blanc",
+      "Espadon",
+      "Requin-baleine",
+      "Raie manta"
+    ]
+  }
+}

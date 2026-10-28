@@ -1,0 +1,227 @@
+{
+  "geography-001": {
+    "q": "Quelle est la capitale de la France ?",
+    "a": [
+      "Lyon",
+      "Marseille",
+      "Paris",
+      "Nice"
+    ]
+  },
+  "geography-002": {
+    "q": "Quel est le plus grand océan du monde ?",
+    "a": [
+      "Océan Atlantique",
+      "Océan Indien",
+      "Océan Arctique",
+      "Océan Pacifique"
+    ]
+  },
+  "geography-003": {
+    "q": "Sur quel continent se trouve l’Inde ?",
+    "a": [
+      "Asie",
+      "Afrique",
+      "Europe",
+      "Océanie"
+    ]
+  },
+  "geography-004": {
+    "q": "Quelle est la capitale du Japon ?",
+    "a": [
+      "Osaka",
+      "Kyoto",
+      "Yokohama",
+      "Tokyo"
+    ]
+  },
+  "geography-005": {
+    "q": "Quel pays a la forme d’une botte sur la carte ?",
+    "a": [
+      "Espagne",
+      "Grèce",
+      "Italie",
+      "Portugal"
+    ]
+  },
+  "geography-006": {
+    "q": "Quelle feuille figure sur le drapeau du Canada ?",
+    "a": [
+      "Feuille de chêne",
+      "Feuille d’érable",
+      "Feuille d’olivier",
+      "Feuille de palmier"
+    ]
+  },
+  "geography-007": {
+    "q": "Quel est le continent le plus froid du monde ?",
+    "a": [
+      "Antarctique",
+      "Europe",
+      "Asie",
+      "Amérique du Nord"
+    ]
+  },
+  "geography-008": {
+    "q": "Quel est le plus grand pays du monde par sa superficie ?",
+    "a": [
+      "Canada",
+      "Chine",
+      "États-Unis",
+      "Russie"
+    ]
+  },
+  "geography-009": {
+    "q": "Dans quel pays se trouve la statue de la Liberté ?",
+    "a": [
+      "Royaume-Uni",
+      "États-Unis",
+      "Australie",
+      "Canada"
+    ]
+  },
+  "geography-010": {
+    "q": "Comment s’appelle l’immense désert qui couvre une grande partie de l’Afrique du Nord ?",
+    "a": [
+      "Sahara",
+      "Gobi",
+      "Kalahari",
+      "Atacama"
+    ]
+  },
+  "geography-011": {
+    "q": "Quelle est la capitale de l’Australie ?",
+    "a": [
+      "Sydney",
+      "Canberra",
+      "Melbourne",
+      "Perth"
+    ]
+  },
+  "geography-012": {
+    "q": "Quelle est la capitale du Canada ?",
+    "a": [
+      "Toronto",
+      "Vancouver",
+      "Montréal",
+      "Ottawa"
+    ]
+  },
+  "geography-013": {
+    "q": "Quelle est la plus haute montagne du monde au-dessus du niveau de la mer ?",
+    "a": [
+      "K2",
+      "Everest",
+      "Mont Blanc",
+      "Aconcagua"
+    ]
+  },
+  "geography-014": {
+    "q": "Quel fleuve traverse Paris ?",
+    "a": [
+      "Seine",
+      "Tamise",
+      "Danube",
+      "Rhin"
+    ]
+  },
+  "geography-015": {
+    "q": "Dans quel pays se trouve le Kilimandjaro ?",
+    "a": [
+      "Kenya",
+      "Ouganda",
+      "Tanzanie",
+      "Éthiopie"
+    ]
+  },
+  "geography-016": {
+    "q": "Quelle est la capitale de la Turquie ?",
+    "a": [
+      "Istanbul",
+      "Ankara",
+      "Izmir",
+      "Antalya"
+    ]
+  },
+  "geography-017": {
+    "q": "Quel détroit sépare l’Europe de l’Afrique ?",
+    "a": [
+      "Bosphore",
+      "Détroit de Béring",
+      "Détroit de Magellan",
+      "Détroit de Gibraltar"
+    ]
+  },
+  "geography-018": {
+    "q": "Quel pays a un drapeau carré rouge avec une croix blanche au centre ?",
+    "a": [
+      "Autriche",
+      "Suède",
+      "Suisse",
+      "Finlande"
+    ]
+  },
+  "geography-019": {
+    "q": "Quel océan se trouve entre l’Afrique et l’Australie ?",
+    "a": [
+      "Océan Indien",
+      "Océan Atlantique",
+      "Océan Pacifique",
+      "Océan Arctique"
+    ]
+  },
+  "geography-020": {
+    "q": "Quelle est la capitale du Brésil ?",
+    "a": [
+      "Rio de Janeiro",
+      "São Paulo",
+      "Salvador",
+      "Brasília"
+    ]
+  },
+  "geography-021": {
+    "q": "Quelle est la capitale de la Nouvelle-Zélande ?",
+    "a": [
+      "Auckland",
+      "Christchurch",
+      "Wellington",
+      "Queenstown"
+    ]
+  },
+  "geography-022": {
+    "q": "Le lac Titicaca se trouve à la frontière entre le Pérou et quel pays ?",
+    "a": [
+      "Bolivie",
+      "Chili",
+      "Équateur",
+      "Colombie"
+    ]
+  },
+  "geography-023": {
+    "q": "Quelle est la capitale du Maroc ?",
+    "a": [
+      "Casablanca",
+      "Rabat",
+      "Marrakech",
+      "Fès"
+    ]
+  },
+  "geography-024": {
+    "q": "Dans quelle mer se jette le Danube ?",
+    "a": [
+      "Mer Baltique",
+      "Mer Adriatique",
+      "Mer du Nord",
+      "Mer Noire"
+    ]
+  },
+  "geography-025": {
+    "q": "Dans quel pays se trouve la ville de Tombouctou ?",
+    "a": [
+      "Niger",
+      "Tchad",
+      "Mali",
+      "Sénégal"
+    ]
+  }
+}

@@ -15,8 +15,6 @@ export const LIMITS = {
 export const ROOM_CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
 export const AVATARS = ['🦊', '🐼', '🐸', '🐙', '🦁', '🐵', '🐧', '🦄', '🐢', '🐝', '🐳', '🐯'] as const;
-export const AVATAR_NAMES_HE = ['שועל', 'פנדה', 'צפרדע', 'תמנון', 'אריה', 'קוף', 'פינגווין', 'חד־קרן', 'צב', 'דבורה', 'לווייתן', 'נמר'] as const;
-export const AVATAR_NAMES_EN = ['Fox', 'Panda', 'Frog', 'Octopus', 'Lion', 'Monkey', 'Penguin', 'Unicorn', 'Turtle', 'Bee', 'Whale', 'Tiger'] as const;
 export const PLAYER_COLORS = ['#ff7a1a', '#e6e6e6', '#3ddc84', '#c77dff', '#ffd23f', '#a0522d', '#4cc9f0', '#ff4fa3', '#2ec4b6', '#f9c74f', '#4361ee', '#f3722c'] as const;
 
 export function colorFor(avatar: number): string {

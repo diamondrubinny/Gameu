@@ -1,0 +1,227 @@
+{
+  "space-001": {
+    "q": "Quelle planète est surnommée la « planète rouge » ?",
+    "a": [
+      "Vénus",
+      "Jupiter",
+      "Mars",
+      "Saturne"
+    ]
+  },
+  "space-002": {
+    "q": "Quelle est la plus grande planète du Système solaire ?",
+    "a": [
+      "Jupiter",
+      "Saturne",
+      "Neptune",
+      "La Terre"
+    ]
+  },
+  "space-003": {
+    "q": "Qui a été la première personne à marcher sur la Lune ?",
+    "a": [
+      "Youri Gagarine",
+      "Neil Armstrong",
+      "Buzz Aldrin",
+      "John Glenn"
+    ]
+  },
+  "space-004": {
+    "q": "Quelle planète est la plus proche du Soleil ?",
+    "a": [
+      "Vénus",
+      "Mars",
+      "La Terre",
+      "Mercure"
+    ]
+  },
+  "space-005": {
+    "q": "Quelle planète est célèbre pour ses anneaux bien visibles ?",
+    "a": [
+      "Mars",
+      "Saturne",
+      "Mercure",
+      "Vénus"
+    ]
+  },
+  "space-006": {
+    "q": "Quelle est l’étoile la plus proche de la Terre ?",
+    "a": [
+      "Sirius",
+      "L’étoile Polaire",
+      "Le Soleil",
+      "Bételgeuse"
+    ]
+  },
+  "space-007": {
+    "q": "Combien de planètes compte le Système solaire ?",
+    "a": [
+      "6",
+      "7",
+      "10",
+      "8"
+    ]
+  },
+  "space-008": {
+    "q": "Comment s’appelle la galaxie dans laquelle nous vivons ?",
+    "a": [
+      "Andromède",
+      "Le Grand Nuage de Magellan",
+      "La Voie lactée",
+      "La galaxie du Triangle"
+    ]
+  },
+  "space-009": {
+    "q": "Qui a été le premier être humain à voyager dans l’espace ?",
+    "a": [
+      "Youri Gagarine",
+      "Neil Armstrong",
+      "Alan Shepard",
+      "John Glenn"
+    ]
+  },
+  "space-010": {
+    "q": "Combien de temps faut-il à la Terre pour faire un tour complet autour du Soleil ?",
+    "a": [
+      "24 heures",
+      "Environ 365 jours",
+      "Environ 30 jours",
+      "Environ 100 jours"
+    ]
+  },
+  "space-011": {
+    "q": "Quelle est la planète la plus chaude du Système solaire ?",
+    "a": [
+      "Mercure",
+      "Mars",
+      "Vénus",
+      "Jupiter"
+    ]
+  },
+  "space-012": {
+    "q": "En quelle année Apollo 11 s’est-il posé sur la Lune ?",
+    "a": [
+      "1961",
+      "1969",
+      "1975",
+      "1981"
+    ]
+  },
+  "space-013": {
+    "q": "Combien de temps la lumière du Soleil met-elle environ pour atteindre la Terre ?",
+    "a": [
+      "Environ 8 secondes",
+      "Environ 1 heure",
+      "Environ 1 jour",
+      "Environ 8 minutes"
+    ]
+  },
+  "space-014": {
+    "q": "Comment s’appelait le premier satellite artificiel lancé dans l’espace ?",
+    "a": [
+      "Spoutnik 1",
+      "Explorer 1",
+      "Vostok 1",
+      "Apollo 1"
+    ]
+  },
+  "space-015": {
+    "q": "Sur quelle planète se trouve Olympus Mons, l’un des plus grands volcans du Système solaire ?",
+    "a": [
+      "Vénus",
+      "La Terre",
+      "Mars",
+      "Mercure"
+    ]
+  },
+  "space-016": {
+    "q": "Qui a été la première femme dans l’espace ?",
+    "a": [
+      "Sally Ride",
+      "Valentina Terechkova",
+      "Mae Jemison",
+      "Eileen Collins"
+    ]
+  },
+  "space-017": {
+    "q": "Quelle planète tourne presque « couchée sur le côté », avec un axe incliné d’environ 98 degrés ?",
+    "a": [
+      "Neptune",
+      "Saturne",
+      "Mars",
+      "Uranus"
+    ]
+  },
+  "space-018": {
+    "q": "Qui a été le premier astronaute israélien ?",
+    "a": [
+      "Ilan Ramon",
+      "Eytan Stibbe",
+      "Dan Shechtman",
+      "Ada Yonath"
+    ]
+  },
+  "space-019": {
+    "q": "Sur quelle planète se trouve la « Grande Tache rouge » ?",
+    "a": [
+      "Mars",
+      "Saturne",
+      "Jupiter",
+      "Neptune"
+    ]
+  },
+  "space-020": {
+    "q": "Quelle est l’étoile la plus brillante du ciel nocturne (en dehors du Soleil) ?",
+    "a": [
+      "L’étoile Polaire",
+      "Sirius",
+      "Véga",
+      "Bételgeuse"
+    ]
+  },
+  "space-021": {
+    "q": "Comment s’appelait le module lunaire d’Apollo 11 ?",
+    "a": [
+      "Columbia",
+      "Falcon",
+      "Odyssey",
+      "Eagle"
+    ]
+  },
+  "space-022": {
+    "q": "Quelle planète a la journée la plus courte (la rotation la plus rapide sur son axe) ?",
+    "a": [
+      "Jupiter",
+      "Mercure",
+      "La Terre",
+      "Mars"
+    ]
+  },
+  "space-023": {
+    "q": "En quelle année Pluton a-t-elle été reclassée comme « planète naine » ?",
+    "a": [
+      "1990",
+      "2006",
+      "2015",
+      "1979"
+    ]
+  },
+  "space-024": {
+    "q": "Quelle est la plus grande lune du Système solaire ?",
+    "a": [
+      "Titan",
+      "Callisto",
+      "Ganymède",
+      "Europe"
+    ]
+  },
+  "space-025": {
+    "q": "Quelle est la distance moyenne approximative entre la Terre et la Lune ?",
+    "a": [
+      "Environ 38 000 km",
+      "Environ 3,8 millions de km",
+      "Environ 150 millions de km",
+      "Environ 384 000 km"
+    ]
+  }
+}

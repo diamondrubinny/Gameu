@@ -3,8 +3,10 @@ import { AVATARS } from '../../src/shared/constants';
 import { $, announce, applyDocumentSettings, clear, h, sleep } from '../../src/sdk/game-utils';
 import { nextInDirection, type Direction } from '../../src/host/spatial';
 import { CATEGORIES } from './categories';
-import { prepare, rank, scoreAnswer, selectQuestions, type ContestOptions, type DifficultyMode, type PreparedQuestion, type Ranked } from './contest';
+import { localize, prepare, rank, scoreAnswer, selectQuestions, type ContestOptions, type DifficultyMode, type PreparedQuestion, type Ranked } from './contest';
 import { QUESTIONS } from './db';
+import { DICTS } from './locales';
+import type { TriviaDict } from './locales/he';
 
 const SHAPES = ['▲', '◆', '●', '■'];
 const COUNTS = [10, 15, 20, 30];
@@ -33,14 +35,23 @@ let controllerId: string | null = null;
 let focused: HTMLElement | null = null;
 let startContest: (() => void) | null = null;
 
-const t = (he: string, en: string) => sdk.t(he, en);
-const lang = () => (sdk.settings?.language === 'en' ? 'en' : 'he');
-const catName = (id: string) => {
+/** TV texts (console language). */
+const tv = (): TriviaDict => sdk.tr(DICTS);
+/** One player's texts (phone language). */
+const pt = (playerId: string): TriviaDict => sdk.trFor(playerId, DICTS);
+const catName = (id: string, dict: TriviaDict = tv()) => {
   const c = CATEGORIES.find((x) => x.id === id);
-  return c ? `${c.icon} ${c[lang()]}` : id;
+  const name = (dict.categories as Record<string, string>)[id] ?? id;
+  return c ? `${c.icon} ${name}` : id;
 };
+const topicsText = (dict: TriviaDict) => (options.categories.length ? options.categories.map((c) => catName(c, dict)).join(' · ') : dict.allTopics);
 const nameOf = (id: string) => players.find((p) => p.id === id)?.nickname ?? '';
 const connected = () => players.filter((p) => p.connected);
+
+/** Sends each connected phone a message built in its own language. */
+function messageEach(build: (d: TriviaDict, p: GamePlayer) => { text: string; subtext?: string }): void {
+  for (const p of connected()) sdk.setLayout({ type: 'message', ...build(pt(p.id), p) }, p.id);
+}
 
 sdk.onInit(async (ctx) => {
   applyDocumentSettings(ctx.settings);
@@ -55,7 +66,8 @@ sdk.onPlayers((p) => {
   players = p;
   for (const pl of p) ensurePlayer(pl.id);
   if (phase === 'setup') {
-    if (pickController() !== controllerId) setupLayouts();
+    // A new player, a language change or a controller change: refresh every phone.
+    setupLayouts();
     renderSetupHint();
   } else {
     renderAnswered();
@@ -73,7 +85,8 @@ sdk.onInput((playerId: string, input: Input) => {
   if (!accepting || input.kind !== 'choice' || input.id !== 'answer') return;
   if (answers.has(playerId) || input.index > 3) return;
   answers.set(playerId, { index: input.index, at: performance.now() });
-  sdk.setLayout({ type: 'message', text: t('התשובה נקלטה ✓', 'Answer locked in ✓'), subtext: t('ממתינים לשאר השחקנים…', 'Waiting for the others…') }, playerId);
+  const d = pt(playerId);
+  sdk.setLayout({ type: 'message', text: d.answerLocked, subtext: d.waitingOthers }, playerId);
   renderAnswered();
   if (everyoneAnswered()) resolveRound?.();
 });
@@ -93,12 +106,13 @@ function pickController(): string | null {
 function setupLayouts(): void {
   controllerId = pickController();
   const name = controllerId ? nameOf(controllerId) : '';
-  sdk.setLayout({ type: 'message', text: t(`${name} בוחר/ת נושאים…`, `${name} is choosing topics…`), subtext: t('התחרות תתחיל בעוד רגע', 'The contest starts soon') });
-  if (controllerId) {
-    sdk.setLayout(
-      { type: 'dpad', title: t('הגדרת התחרות — חצים ובחירה', 'Contest setup — arrows and Select'), buttons: [{ id: 'ok', label: t('בחירה', 'Select'), color: 'primary' }] },
-      controllerId,
-    );
+  for (const p of connected()) {
+    const d = pt(p.id);
+    if (p.id === controllerId) {
+      sdk.setLayout({ type: 'dpad', title: d.setupPadTitle, buttons: [{ id: 'ok', label: d.select, color: 'primary' }] }, p.id);
+    } else {
+      sdk.setLayout({ type: 'message', text: d.choosingTopics(name), subtext: d.startsSoon }, p.id);
+    }
   }
 }
 
@@ -106,7 +120,7 @@ async function runSetup(): Promise<void> {
   phase = 'setup';
   setupLayouts(); // assigns the controller before the hint is drawn
   renderSetup();
-  announce(t('הגדרת תחרות טריוויה. בחרו נושאים, מספר שאלות ורמת קושי.', 'Trivia contest setup. Choose topics, number of questions and difficulty.'));
+  announce(tv().setupAnnounce);
   await new Promise<void>((resolve) => (startContest = resolve));
   startContest = null;
 }
@@ -117,20 +131,22 @@ function available(): number {
 }
 
 function difficultyLabel(d: DifficultyMode): string {
-  return d === 'easy' ? t('קל', 'Easy') : d === 'hard' ? t('קשה', 'Hard') : t('מעורב (מתחיל קל ומתקשה)', 'Mixed (gets harder)');
+  const t = tv();
+  return d === 'easy' ? t.easy : d === 'hard' ? t.hard : t.mixed;
 }
 
 function renderSetup(): void {
+  const t = tv();
   clear(stage);
-  const grid = h('div', { class: 'cats', role: 'group', 'aria-label': t('נושאים', 'Topics') });
-  const all = h('button', { class: 'cat', 'data-nav': true, 'data-cat': 'all', type: 'button' }, h('span', { class: 'cat-icon', 'aria-hidden': 'true' }, '🌈'), h('span', {}, t('כל הנושאים', 'All topics')));
+  const grid = h('div', { class: 'cats', role: 'group', 'aria-label': t.topics });
+  const all = h('button', { class: 'cat', 'data-nav': true, 'data-cat': 'all', type: 'button' }, h('span', { class: 'cat-icon', 'aria-hidden': 'true' }, '🌈'), h('span', {}, t.allTopics));
   all.addEventListener('click', () => {
     options.categories = [];
     refreshSetup();
   });
   grid.append(all);
   for (const c of CATEGORIES) {
-    const tile = h('button', { class: 'cat', 'data-nav': true, 'data-cat': c.id, type: 'button' }, h('span', { class: 'cat-icon', 'aria-hidden': 'true' }, c.icon), h('span', {}, c[lang()]));
+    const tile = h('button', { class: 'cat', 'data-nav': true, 'data-cat': c.id, type: 'button' }, h('span', { class: 'cat-icon', 'aria-hidden': 'true' }, c.icon), h('span', {}, (t.categories as Record<string, string>)[c.id] ?? c.en));
     tile.addEventListener('click', () => {
       const set = new Set(options.categories);
       if (set.has(c.id)) set.delete(c.id);
@@ -150,7 +166,7 @@ function renderSetup(): void {
     options.difficulty = DIFFICULTIES[(DIFFICULTIES.indexOf(options.difficulty) + 1) % DIFFICULTIES.length] ?? 'mixed';
     refreshSetup();
   });
-  const start = h('button', { class: 'opt start', 'data-nav': true, id: 'opt-start', type: 'button' }, '▶ ', t('התחילו!', 'Start!'));
+  const start = h('button', { class: 'opt start', 'data-nav': true, id: 'opt-start', type: 'button' }, '▶ ', t.start);
   start.addEventListener('click', () => {
     if (available() === 0) return;
     startContest?.();
@@ -159,7 +175,7 @@ function renderSetup(): void {
     h(
       'div',
       { class: 'setup' },
-      h('h1', { class: 'setup-title' }, '❓ ', t('טריוויה — תחרות', 'Trivia contest')),
+      h('h1', { class: 'setup-title' }, '❓ ', t.title),
       h('p', { class: 'setup-hint', id: 'setup-hint' }),
       grid,
       h('div', { class: 'opts' }, countBtn, diffBtn, start),
@@ -175,24 +191,21 @@ function renderSetupHint(): void {
   const el = document.getElementById('setup-hint');
   if (!el) return;
   const name = controllerId ? nameOf(controllerId) : '';
-  el.textContent = name ? t(`${name} 👑 בוחר/ת מהטלפון: חצים לניווט, "בחירה" לסימון`, `${name} 👑 chooses on their phone: arrows to move, "Select" to pick`) : t('ממתינים לשחקנים…', 'Waiting for players…');
+  el.textContent = name ? tv().setupHint(name) : tv().waitingPlayers;
 }
 
 function refreshSetup(): void {
+  const t = tv();
   const selected = new Set(options.categories);
   for (const el of stage.querySelectorAll<HTMLElement>('.cat')) {
     const id = el.dataset.cat ?? '';
     const on = id === 'all' ? selected.size === 0 : selected.has(id);
     el.setAttribute('aria-pressed', String(on));
   }
-  $('#opt-count').textContent = t(`מספר שאלות: ${options.count}`, `Questions: ${options.count}`);
-  $('#opt-diff').textContent = t(`רמה: ${difficultyLabel(options.difficulty)}`, `Level: ${difficultyLabel(options.difficulty)}`);
+  $('#opt-count').textContent = t.questionsOpt(options.count);
+  $('#opt-diff').textContent = t.levelOpt(difficultyLabel(options.difficulty));
   const n = available();
-  const topics = selected.size === 0 ? t('כל הנושאים', 'all topics') : [...selected].map(catName).join(' · ');
-  $('#setup-summary').textContent =
-    n === 0
-      ? t('אין שאלות בבחירה הזו — בחרו נושא או רמה אחרים', 'No questions for this choice — pick another topic or level')
-      : t(`${Math.min(n, options.count)} שאלות מתוך ${n} זמינות · ${topics}`, `${Math.min(n, options.count)} of ${n} available questions · ${topics}`);
+  $('#setup-summary').textContent = n === 0 ? t.noQuestions : t.summary(Math.min(n, options.count), n, topicsText(t));
   $('#opt-start').toggleAttribute('disabled', n === 0);
 }
 
@@ -214,25 +227,18 @@ function moveFocus(dir: Direction): void {
 
 async function runContest(): Promise<void> {
   phase = 'play';
+  const t = tv();
   const picked = selectQuestions(QUESTIONS, options);
   const total = picked.length;
   clear(stage);
-  stage.append(
-    h(
-      'div',
-      { class: 'intro pop' },
-      h('h1', {}, '❓ ', t('התחרות מתחילה!', 'The contest begins!')),
-      h('p', {}, t(`${total} שאלות · ${options.categories.length ? options.categories.map(catName).join(' · ') : 'כל הנושאים'}`, `${total} questions · ${options.categories.length ? options.categories.map(catName).join(' · ') : 'all topics'}`)),
-      h('p', { class: 'rules' }, t('מהר יותר = יותר נקודות · 3 תשובות נכונות ברצף = בונוס 🔥 · השאלה האחרונה כפולה!', 'Faster = more points · 3 right in a row = bonus 🔥 · The last question counts double!')),
-    ),
-  );
-  sdk.setLayout({ type: 'message', text: t('מתכוננים…', 'Get ready…') });
-  announce(t(`התחרות מתחילה. ${total} שאלות.`, `The contest begins. ${total} questions.`));
+  stage.append(h('div', { class: 'intro pop' }, h('h1', {}, '❓ ', t.contestBegins), h('p', {}, t.introLine(total, topicsText(t))), h('p', { class: 'rules' }, t.rules)));
+  messageEach((d) => ({ text: d.getReady }));
+  announce(t.beginsAnnounce(total));
   await sleep(4500);
 
   for (let i = 0; i < total; i++) {
     const isFinal = i === total - 1 && total >= 5;
-    await playRound(prepare(picked[i]!, lang()), i, total, isFinal);
+    await playRound(prepare(picked[i]!), i, total, isFinal);
     if ((i + 1) % LEADERBOARD_EVERY === 0 && i + 1 < total) await showLeaderboard(i + 1, total);
   }
   await showPodium();
@@ -245,18 +251,20 @@ function everyoneAnswered(): boolean {
 }
 
 async function playRound(q: PreparedQuestion, index: number, total: number, isFinal: boolean): Promise<void> {
+  const t = tv();
+  const onTv = localize(q, sdk.lang);
   answers = new Map();
   if (isFinal) {
     clear(stage);
-    stage.append(h('div', { class: 'intro pop final' }, h('h1', {}, '🏆 ', t('שאלת האלופים', 'Champion question')), h('p', {}, t('ניקוד כפול!', 'Double points!'))));
-    announce(t('שאלה אחרונה, ניקוד כפול', 'Final question, double points'));
-    sdk.setLayout({ type: 'message', text: t('🏆 שאלת האלופים — ניקוד כפול!', '🏆 Champion question — double points!') });
+    stage.append(h('div', { class: 'intro pop final' }, h('h1', {}, '🏆 ', t.championTitle), h('p', {}, t.doublePoints)));
+    announce(t.finalAnnounce);
+    messageEach((d) => ({ text: d.championPhone }));
     await sleep(2500);
   }
   clear(stage);
   const seconds = baseSeconds + (q.d === 3 ? 5 : 0);
   const timerBar = h('div');
-  const answerEls = q.answers.map((a, i) =>
+  const answerEls = onTv.answers.map((a, i) =>
     h('div', { class: `answer a${i}` }, h('span', { class: 'shape', 'aria-hidden': 'true' }, SHAPES[i]), h('span', { class: 'answer-text' }, a), h('span', { class: 'count' })),
   );
   stage.append(
@@ -264,18 +272,23 @@ async function playRound(q: PreparedQuestion, index: number, total: number, isFi
       'div',
       { class: 'meta' },
       h('span', { class: 'badge' }, catName(q.cat)),
-      h('span', { class: 'stars', 'aria-label': t(`רמה ${q.d} מתוך 3`, `Difficulty ${q.d} of 3`) }, '★'.repeat(q.d) + '☆'.repeat(3 - q.d)),
-      h('span', {}, t(`שאלה ${index + 1} מתוך ${total}`, `Question ${index + 1} of ${total}`)),
+      h('span', { class: 'stars', 'aria-label': t.difficultyAria(q.d) }, '★'.repeat(q.d) + '☆'.repeat(3 - q.d)),
+      h('span', {}, t.questionOf(index + 1, total)),
       isFinal ? h('span', { class: 'badge double' }, '×2') : null,
     ),
-    h('h1', { class: 'question pop' }, q.text),
+    h('h1', { class: 'question pop' }, onTv.text),
     h('div', { class: 'answers' }, ...answerEls),
     h('div', { class: 'reveal', id: 'reveal' }),
     h('div', { class: 'footer' }, h('div', { class: 'answered', id: 'answered', 'aria-hidden': 'true' }), h('div', { class: 'timer' }, timerBar)),
   );
   renderAnswered();
-  announce(`${q.text} ${q.answers.map((a, i) => `${i + 1}: ${a}`).join(', ')}`);
-  sdk.setLayout({ type: 'choices', id: 'answer', prompt: q.text, options: q.answers });
+  announce(`${onTv.text} ${onTv.answers.map((a, i) => `${i + 1}: ${a}`).join(', ')}`);
+  // Every phone gets the question in its own language; the answer order is the same everywhere.
+  sdk.setLayout({ type: 'choices', id: 'answer', prompt: onTv.text, options: onTv.answers });
+  for (const p of connected()) {
+    const mine = localize(q, sdk.langOf(p.id));
+    if (sdk.langOf(p.id) !== sdk.lang) sdk.setLayout({ type: 'choices', id: 'answer', prompt: mine.text, options: mine.answers }, p.id);
+  }
   sdk.haptic([40]);
 
   accepting = true;
@@ -298,7 +311,6 @@ async function playRound(q: PreparedQuestion, index: number, total: number, isFi
   // ---- scoring + reveal ----
   const counts = [0, 0, 0, 0];
   const gains: { id: string; points: number; streak: number }[] = [];
-  const correctText = q.answers[q.correct] ?? '';
   for (const p of connected()) {
     const a = answers.get(p.id);
     if (a) counts[a.index] = (counts[a.index] ?? 0) + 1;
@@ -307,13 +319,14 @@ async function playRound(q: PreparedQuestion, index: number, total: number, isFi
     streaks.set(p.id, streak);
     const { points, bonus } = scoreAnswer({ correct, d: q.d, remainingMs: a ? totalMs - (a.at - roundStart) : 0, totalMs, streak, double: isFinal });
     scores.set(p.id, (scores.get(p.id) ?? 0) + points);
+    const d = pt(p.id);
     if (correct) {
       gains.push({ id: p.id, points, streak });
-      sdk.setLayout({ type: 'message', text: t(`נכון! +${points}`, `Correct! +${points}`), subtext: bonus ? t(`🔥 ${streak} ברצף (+${bonus} בונוס)`, `🔥 ${streak} in a row (+${bonus} bonus)`) : undefined }, p.id);
+      sdk.setLayout({ type: 'message', text: d.correctPlus(points), subtext: bonus ? d.streak(streak, bonus) : undefined }, p.id);
       sdk.haptic([60, 40, 60], p.id);
     } else {
-      const text = a ? t('לא הפעם 😕', 'Not this time 😕') : t('נגמר הזמן ⏰', "Time's up ⏰");
-      sdk.setLayout({ type: 'message', text, subtext: t(`התשובה: ${correctText}`, `Answer: ${correctText}`) }, p.id);
+      const mineCorrect = localize(q, sdk.langOf(p.id)).answers[q.correct] ?? '';
+      sdk.setLayout({ type: 'message', text: a ? d.notThisTime : d.timesUp, subtext: d.answerIs(mineCorrect) }, p.id);
     }
   }
   answerEls.forEach((el, i) => {
@@ -323,12 +336,12 @@ async function playRound(q: PreparedQuestion, index: number, total: number, isFi
   });
   const reveal = $('#reveal');
   clear(reveal);
-  if (gains.length === 0) reveal.textContent = t('אף אחד לא צדק הפעם', 'Nobody got it this time');
+  if (gains.length === 0) reveal.textContent = t.nobody;
   for (const g of gains.sort((a, b) => b.points - a.points)) {
     const p = players.find((x) => x.id === g.id);
     reveal.append(h('span', { class: 'gain pop' }, `${AVATARS[p?.avatar ?? 0] ?? ''} ${p?.nickname ?? ''} +${g.points}${g.streak >= 3 ? ` 🔥${g.streak}` : ''}`));
   }
-  announce(t(`התשובה הנכונה: ${correctText}. ${gains.length} ענו נכון.`, `The answer: ${correctText}. ${gains.length} answered correctly.`));
+  announce(t.revealAnnounce(onTv.answers[q.correct] ?? '', gains.length));
   await sleep(REVEAL_MS);
 }
 
@@ -345,6 +358,7 @@ function standings(): Ranked[] {
 }
 
 async function showLeaderboard(done: number, total: number): Promise<void> {
+  const t = tv();
   const ranked = standings();
   clear(stage);
   const list = h('ol', { class: 'board' });
@@ -358,21 +372,25 @@ async function showLeaderboard(done: number, total: number): Promise<void> {
       h('span', { class: 'rank' }, String(r.rank)),
       h('span', { 'aria-hidden': 'true' }, AVATARS[p?.avatar ?? 0] ?? ''),
       h('span', { class: 'n' }, p?.nickname ?? ''),
-      move ? h('span', { class: move === '▲' ? 'up' : 'down', 'aria-label': move === '▲' ? t('עלה/תה', 'up') : t('ירד/ה', 'down') }, move) : null,
+      move ? h('span', { class: move === '▲' ? 'up' : 'down', 'aria-label': move === '▲' ? t.movedUp : t.movedDown }, move) : null,
       h('span', { class: 's' }, String(r.score)),
     );
     li.style.setProperty('--c', p?.color ?? '#fff');
     list.append(li);
   }
-  stage.append(h('div', { class: 'leaderboard' }, h('h1', {}, '📊 ', t(`טבלת המובילים · ${done}/${total}`, `Leaderboard · ${done}/${total}`)), list));
-  for (const r of ranked) sdk.setLayout({ type: 'message', text: t(`מקום ${r.rank} מתוך ${ranked.length}`, `Place ${r.rank} of ${ranked.length}`), subtext: t(`${r.score} נקודות`, `${r.score} points`) }, r.playerId);
+  stage.append(h('div', { class: 'leaderboard' }, h('h1', {}, '📊 ', t.leaderboard(done, total)), list));
+  for (const r of ranked) {
+    const d = pt(r.playerId);
+    sdk.setLayout({ type: 'message', text: d.place(r.rank, ranked.length), subtext: d.points(r.score) }, r.playerId);
+  }
   const top = ranked[0];
-  if (top) announce(t(`במקום הראשון: ${nameOf(top.playerId)} עם ${top.score} נקודות`, `In first place: ${nameOf(top.playerId)} with ${top.score} points`));
+  if (top) announce(t.firstPlaceAnnounce(nameOf(top.playerId), top.score));
   previousRanks = new Map(ranked.map((r) => [r.playerId, r.rank]));
   await sleep(LEADERBOARD_MS);
 }
 
 async function showPodium(): Promise<void> {
+  const t = tv();
   const ranked = standings();
   clear(stage);
   const podium = h('div', { class: 'podium' });
@@ -389,16 +407,17 @@ async function showPodium(): Promise<void> {
         { class: `step step-${r.rank} pop` },
         h('div', { class: 'medal', 'aria-hidden': 'true' }, medals[r.rank - 1] ?? ''),
         h('div', { class: 'who' }, AVATARS[p?.avatar ?? 0] ?? '', ' ', tied.join(' & ')),
-        h('div', { class: 'pts' }, t(`${r.score} נק׳`, `${r.score} pts`)),
+        h('div', { class: 'pts' }, t.pts(r.score)),
         h('div', { class: 'block' }, String(r.rank)),
       ),
     );
   }
   const winners = ranked.filter((r) => r.rank === 1).map((r) => nameOf(r.playerId));
-  stage.append(h('div', { class: 'final-screen' }, h('h1', {}, '🏆 ', t('האלופים!', 'Champions!')), podium));
-  announce(t(`המנצחים: ${winners.join(' ו')}`, `Winner: ${winners.join(' and ')}`));
+  stage.append(h('div', { class: 'final-screen' }, h('h1', {}, '🏆 ', t.champions), podium));
+  announce(t.winnersAnnounce(winners));
   for (const r of ranked) {
-    sdk.setLayout({ type: 'message', text: r.rank === 1 ? t('🏆 ניצחת!', '🏆 You won!') : t(`מקום ${r.rank}`, `Place ${r.rank}`), subtext: t(`${r.score} נקודות`, `${r.score} points`) }, r.playerId);
+    const d = pt(r.playerId);
+    sdk.setLayout({ type: 'message', text: r.rank === 1 ? d.youWon : d.placeN(r.rank), subtext: d.points(r.score) }, r.playerId);
   }
   sdk.haptic([80, 60, 80, 60, 160]);
   await sleep(PODIUM_MS);
