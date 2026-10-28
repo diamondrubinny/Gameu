@@ -1,27 +1,577 @@
 [
-  {"id":"geography-001","d":1,"c":2,"he":{"q":"מהי בירת צרפת?","a":["ליון","מרסיי","פריז","ניס"]},"en":{"q":"What is the capital of France?","a":["Lyon","Marseille","Paris","Nice"]}},
-  {"id":"geography-002","d":1,"c":3,"he":{"q":"מהו האוקיינוס הגדול ביותר בעולם?","a":["האוקיינוס האטלנטי","האוקיינוס ההודי","האוקיינוס הארקטי","האוקיינוס השקט"]},"en":{"q":"What is the largest ocean in the world?","a":["Atlantic Ocean","Indian Ocean","Arctic Ocean","Pacific Ocean"]}},
-  {"id":"geography-003","d":1,"c":0,"he":{"q":"באיזו יבשת נמצאת הודו?","a":["אסיה","אפריקה","אירופה","אוקיאניה"]},"en":{"q":"On which continent is India?","a":["Asia","Africa","Europe","Oceania"]}},
-  {"id":"geography-004","d":1,"c":3,"he":{"q":"מהי בירת יפן?","a":["אוסקה","קיוטו","יוקוהמה","טוקיו"]},"en":{"q":"What is the capital of Japan?","a":["Osaka","Kyoto","Yokohama","Tokyo"]}},
-  {"id":"geography-005","d":1,"c":2,"he":{"q":"לאיזו מדינה יש צורה של מגף על המפה?","a":["ספרד","יוון","איטליה","פורטוגל"]},"en":{"q":"Which country is shaped like a boot on the map?","a":["Spain","Greece","Italy","Portugal"]}},
-  {"id":"geography-006","d":1,"c":1,"he":{"q":"איזה עלה מופיע בדגל קנדה?","a":["עלה אלון","עלה מייפל","עלה זית","עלה דקל"]},"en":{"q":"Which leaf appears on the flag of Canada?","a":["Oak leaf","Maple leaf","Olive leaf","Palm leaf"]}},
-  {"id":"geography-007","d":1,"c":0,"he":{"q":"מהי היבשת הקרה ביותר בעולם?","a":["אנטארקטיקה","אירופה","אסיה","צפון אמריקה"]},"en":{"q":"What is the coldest continent in the world?","a":["Antarctica","Europe","Asia","North America"]}},
-  {"id":"geography-008","d":1,"c":3,"he":{"q":"מהי המדינה הגדולה ביותר בעולם בשטחה?","a":["קנדה","סין","ארצות הברית","רוסיה"]},"en":{"q":"What is the largest country in the world by area?","a":["Canada","China","United States","Russia"]}},
-  {"id":"geography-009","d":1,"c":1,"he":{"q":"באיזו מדינה נמצא פסל החירות?","a":["בריטניה","ארצות הברית","צרפת","קנדה"]},"en":{"q":"In which country is the Statue of Liberty located?","a":["United Kingdom","United States","France","Canada"]}},
-  {"id":"geography-010","d":1,"c":0,"he":{"q":"איך נקרא המדבר העצום שמשתרע על פני רוב צפון אפריקה?","a":["סהרה","גובי","קלהארי","אטקמה"]},"en":{"q":"What is the name of the vast desert that covers much of North Africa?","a":["Sahara","Gobi","Kalahari","Atacama"]}},
-  {"id":"geography-011","d":2,"c":1,"he":{"q":"מהי בירת אוסטרליה?","a":["סידני","קנברה","מלבורן","פרת׳"]},"en":{"q":"What is the capital of Australia?","a":["Sydney","Canberra","Melbourne","Perth"]}},
-  {"id":"geography-012","d":2,"c":3,"he":{"q":"מהי בירת קנדה?","a":["טורונטו","ונקובר","מונטריאול","אוטווה"]},"en":{"q":"What is the capital of Canada?","a":["Toronto","Vancouver","Montreal","Ottawa"]}},
-  {"id":"geography-013","d":2,"c":1,"he":{"q":"מהו ההר הגבוה בעולם מעל פני הים?","a":["K2","האוורסט","מון בלאן","אקונקגואה"]},"en":{"q":"What is the highest mountain in the world above sea level?","a":["K2","Everest","Mont Blanc","Aconcagua"]}},
-  {"id":"geography-014","d":2,"c":0,"he":{"q":"איזה נהר זורם דרך פריז?","a":["הסן","התמזה","הדנובה","הריין"]},"en":{"q":"Which river flows through Paris?","a":["Seine","Thames","Danube","Rhine"]}},
-  {"id":"geography-015","d":2,"c":2,"he":{"q":"באיזו מדינה נמצא הר קילימנג׳רו?","a":["קניה","אוגנדה","טנזניה","אתיופיה"]},"en":{"q":"In which country is Mount Kilimanjaro?","a":["Kenya","Uganda","Tanzania","Ethiopia"]}},
-  {"id":"geography-016","d":2,"c":1,"he":{"q":"מהי בירת טורקיה?","a":["איסטנבול","אנקרה","איזמיר","אנטליה"]},"en":{"q":"What is the capital of Turkey?","a":["Istanbul","Ankara","Izmir","Antalya"]}},
-  {"id":"geography-017","d":2,"c":3,"he":{"q":"איזה מצר מפריד בין אירופה לאפריקה?","a":["מצר הבוספורוס","מצר ברינג","מצר מגלן","מצר גיברלטר"]},"en":{"q":"Which strait separates Europe from Africa?","a":["Bosphorus","Bering Strait","Strait of Magellan","Strait of Gibraltar"]}},
-  {"id":"geography-018","d":2,"c":2,"he":{"q":"לאיזו מדינה יש דגל מרובע אדום ובמרכזו צלב לבן?","a":["אוסטריה","שוודיה","שווייץ","פינלנד"]},"en":{"q":"Which country has a square red flag with a white cross in the center?","a":["Austria","Sweden","Switzerland","Finland"]}},
-  {"id":"geography-019","d":2,"c":0,"he":{"q":"איזה אוקיינוס נמצא בין אפריקה לאוסטרליה?","a":["האוקיינוס ההודי","האוקיינוס האטלנטי","האוקיינוס השקט","האוקיינוס הארקטי"]},"en":{"q":"Which ocean lies between Africa and Australia?","a":["Indian Ocean","Atlantic Ocean","Pacific Ocean","Arctic Ocean"]}},
-  {"id":"geography-020","d":2,"c":3,"he":{"q":"מהי בירת ברזיל?","a":["ריו דה ז׳נרו","סאו פאולו","סלבדור","ברזיליה"]},"en":{"q":"What is the capital of Brazil?","a":["Rio de Janeiro","São Paulo","Salvador","Brasília"]}},
-  {"id":"geography-021","d":3,"c":2,"he":{"q":"מהי בירת ניו זילנד?","a":["אוקלנד","קרייסטצ׳רץ׳","ולינגטון","קווינסטאון"]},"en":{"q":"What is the capital of New Zealand?","a":["Auckland","Christchurch","Wellington","Queenstown"]}},
-  {"id":"geography-022","d":3,"c":0,"he":{"q":"אגם טיטיקקה נמצא על הגבול בין פרו לאיזו מדינה?","a":["בוליביה","צ׳ילה","אקוודור","קולומביה"]},"en":{"q":"Lake Titicaca lies on the border between Peru and which country?","a":["Bolivia","Chile","Ecuador","Colombia"]}},
-  {"id":"geography-023","d":3,"c":1,"he":{"q":"מהי בירת מרוקו?","a":["קזבלנקה","רבאט","מרקש","פס"]},"en":{"q":"What is the capital of Morocco?","a":["Casablanca","Rabat","Marrakesh","Fez"]}},
-  {"id":"geography-024","d":3,"c":3,"he":{"q":"לאיזה ים נשפך נהר הדנובה?","a":["הים הבלטי","הים האדריאטי","הים הצפוני","הים השחור"]},"en":{"q":"Into which sea does the Danube River flow?","a":["Baltic Sea","Adriatic Sea","North Sea","Black Sea"]}},
-  {"id":"geography-025","d":3,"c":2,"he":{"q":"באיזו מדינה נמצאת העיר טימבוקטו?","a":["ניז׳ר","צ׳אד","מאלי","סנגל"]},"en":{"q":"In which country is the city of Timbuktu?","a":["Niger","Chad","Mali","Senegal"]}}
+  {
+    "id": "geography-001",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "מהי בירת צרפת?",
+      "a": [
+        "ליון",
+        "מרסיי",
+        "פריז",
+        "ניס"
+      ]
+    },
+    "en": {
+      "q": "What is the capital of France?",
+      "a": [
+        "Lyon",
+        "Marseille",
+        "Paris",
+        "Nice"
+      ]
+    }
+  },
+  {
+    "id": "geography-002",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "מהו האוקיינוס הגדול ביותר בעולם?",
+      "a": [
+        "האוקיינוס האטלנטי",
+        "האוקיינוס ההודי",
+        "האוקיינוס הארקטי",
+        "האוקיינוס השקט"
+      ]
+    },
+    "en": {
+      "q": "What is the largest ocean in the world?",
+      "a": [
+        "Atlantic Ocean",
+        "Indian Ocean",
+        "Arctic Ocean",
+        "Pacific Ocean"
+      ]
+    }
+  },
+  {
+    "id": "geography-003",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "באיזו יבשת נמצאת הודו?",
+      "a": [
+        "אסיה",
+        "אפריקה",
+        "אירופה",
+        "אוקיאניה"
+      ]
+    },
+    "en": {
+      "q": "On which continent is India?",
+      "a": [
+        "Asia",
+        "Africa",
+        "Europe",
+        "Oceania"
+      ]
+    }
+  },
+  {
+    "id": "geography-004",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "מהי בירת יפן?",
+      "a": [
+        "אוסקה",
+        "קיוטו",
+        "יוקוהמה",
+        "טוקיו"
+      ]
+    },
+    "en": {
+      "q": "What is the capital of Japan?",
+      "a": [
+        "Osaka",
+        "Kyoto",
+        "Yokohama",
+        "Tokyo"
+      ]
+    }
+  },
+  {
+    "id": "geography-005",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "לאיזו מדינה יש צורה של מגף על המפה?",
+      "a": [
+        "ספרד",
+        "יוון",
+        "איטליה",
+        "פורטוגל"
+      ]
+    },
+    "en": {
+      "q": "Which country is shaped like a boot on the map?",
+      "a": [
+        "Spain",
+        "Greece",
+        "Italy",
+        "Portugal"
+      ]
+    }
+  },
+  {
+    "id": "geography-006",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "איזה עלה מופיע בדגל קנדה?",
+      "a": [
+        "עלה אלון",
+        "עלה מייפל",
+        "עלה זית",
+        "עלה דקל"
+      ]
+    },
+    "en": {
+      "q": "Which leaf appears on the flag of Canada?",
+      "a": [
+        "Oak leaf",
+        "Maple leaf",
+        "Olive leaf",
+        "Palm leaf"
+      ]
+    }
+  },
+  {
+    "id": "geography-007",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מהי היבשת הקרה ביותר בעולם?",
+      "a": [
+        "אנטארקטיקה",
+        "אירופה",
+        "אסיה",
+        "צפון אמריקה"
+      ]
+    },
+    "en": {
+      "q": "What is the coldest continent in the world?",
+      "a": [
+        "Antarctica",
+        "Europe",
+        "Asia",
+        "North America"
+      ]
+    }
+  },
+  {
+    "id": "geography-008",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "מהי המדינה הגדולה ביותר בעולם בשטחה?",
+      "a": [
+        "קנדה",
+        "סין",
+        "ארצות הברית",
+        "רוסיה"
+      ]
+    },
+    "en": {
+      "q": "What is the largest country in the world by area?",
+      "a": [
+        "Canada",
+        "China",
+        "United States",
+        "Russia"
+      ]
+    }
+  },
+  {
+    "id": "geography-009",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "באיזו מדינה נמצא פסל החירות?",
+      "a": [
+        "בריטניה",
+        "ארצות הברית",
+        "אוסטרליה",
+        "קנדה"
+      ]
+    },
+    "en": {
+      "q": "In which country is the Statue of Liberty located?",
+      "a": [
+        "United Kingdom",
+        "United States",
+        "Australia",
+        "Canada"
+      ]
+    }
+  },
+  {
+    "id": "geography-010",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "איך נקרא המדבר העצום שמשתרע על פני רוב צפון אפריקה?",
+      "a": [
+        "סהרה",
+        "גובי",
+        "קלהארי",
+        "אטקמה"
+      ]
+    },
+    "en": {
+      "q": "What is the name of the vast desert that covers much of North Africa?",
+      "a": [
+        "Sahara",
+        "Gobi",
+        "Kalahari",
+        "Atacama"
+      ]
+    }
+  },
+  {
+    "id": "geography-011",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מהי בירת אוסטרליה?",
+      "a": [
+        "סידני",
+        "קנברה",
+        "מלבורן",
+        "פרת׳"
+      ]
+    },
+    "en": {
+      "q": "What is the capital of Australia?",
+      "a": [
+        "Sydney",
+        "Canberra",
+        "Melbourne",
+        "Perth"
+      ]
+    }
+  },
+  {
+    "id": "geography-012",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מהי בירת קנדה?",
+      "a": [
+        "טורונטו",
+        "ונקובר",
+        "מונטריאול",
+        "אוטווה"
+      ]
+    },
+    "en": {
+      "q": "What is the capital of Canada?",
+      "a": [
+        "Toronto",
+        "Vancouver",
+        "Montreal",
+        "Ottawa"
+      ]
+    }
+  },
+  {
+    "id": "geography-013",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מהו ההר הגבוה בעולם מעל פני הים?",
+      "a": [
+        "K2",
+        "האוורסט",
+        "מון בלאן",
+        "אקונקגואה"
+      ]
+    },
+    "en": {
+      "q": "What is the highest mountain in the world above sea level?",
+      "a": [
+        "K2",
+        "Everest",
+        "Mont Blanc",
+        "Aconcagua"
+      ]
+    }
+  },
+  {
+    "id": "geography-014",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "איזה נהר זורם דרך פריז?",
+      "a": [
+        "הסן",
+        "התמזה",
+        "הדנובה",
+        "הריין"
+      ]
+    },
+    "en": {
+      "q": "Which river flows through Paris?",
+      "a": [
+        "Seine",
+        "Thames",
+        "Danube",
+        "Rhine"
+      ]
+    }
+  },
+  {
+    "id": "geography-015",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "באיזו מדינה נמצא הר קילימנג׳רו?",
+      "a": [
+        "קניה",
+        "אוגנדה",
+        "טנזניה",
+        "אתיופיה"
+      ]
+    },
+    "en": {
+      "q": "In which country is Mount Kilimanjaro?",
+      "a": [
+        "Kenya",
+        "Uganda",
+        "Tanzania",
+        "Ethiopia"
+      ]
+    }
+  },
+  {
+    "id": "geography-016",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מהי בירת טורקיה?",
+      "a": [
+        "איסטנבול",
+        "אנקרה",
+        "איזמיר",
+        "אנטליה"
+      ]
+    },
+    "en": {
+      "q": "What is the capital of Turkey?",
+      "a": [
+        "Istanbul",
+        "Ankara",
+        "Izmir",
+        "Antalya"
+      ]
+    }
+  },
+  {
+    "id": "geography-017",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "איזה מצר מפריד בין אירופה לאפריקה?",
+      "a": [
+        "מצר הבוספורוס",
+        "מצר ברינג",
+        "מצר מגלן",
+        "מצר גיברלטר"
+      ]
+    },
+    "en": {
+      "q": "Which strait separates Europe from Africa?",
+      "a": [
+        "Bosphorus",
+        "Bering Strait",
+        "Strait of Magellan",
+        "Strait of Gibraltar"
+      ]
+    }
+  },
+  {
+    "id": "geography-018",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "לאיזו מדינה יש דגל ריבועי אדום ובמרכזו צלב לבן?",
+      "a": [
+        "אוסטריה",
+        "שוודיה",
+        "שווייץ",
+        "פינלנד"
+      ]
+    },
+    "en": {
+      "q": "Which country has a square red flag with a white cross in the center?",
+      "a": [
+        "Austria",
+        "Sweden",
+        "Switzerland",
+        "Finland"
+      ]
+    }
+  },
+  {
+    "id": "geography-019",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "איזה אוקיינוס נמצא בין אפריקה לאוסטרליה?",
+      "a": [
+        "האוקיינוס ההודי",
+        "האוקיינוס האטלנטי",
+        "האוקיינוס השקט",
+        "האוקיינוס הארקטי"
+      ]
+    },
+    "en": {
+      "q": "Which ocean lies between Africa and Australia?",
+      "a": [
+        "Indian Ocean",
+        "Atlantic Ocean",
+        "Pacific Ocean",
+        "Arctic Ocean"
+      ]
+    }
+  },
+  {
+    "id": "geography-020",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מהי בירת ברזיל?",
+      "a": [
+        "ריו דה ז׳נרו",
+        "סאו פאולו",
+        "סלבדור",
+        "ברזיליה"
+      ]
+    },
+    "en": {
+      "q": "What is the capital of Brazil?",
+      "a": [
+        "Rio de Janeiro",
+        "São Paulo",
+        "Salvador",
+        "Brasília"
+      ]
+    }
+  },
+  {
+    "id": "geography-021",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "מהי בירת ניו זילנד?",
+      "a": [
+        "אוקלנד",
+        "קרייסטצ׳רץ׳",
+        "ולינגטון",
+        "קווינסטאון"
+      ]
+    },
+    "en": {
+      "q": "What is the capital of New Zealand?",
+      "a": [
+        "Auckland",
+        "Christchurch",
+        "Wellington",
+        "Queenstown"
+      ]
+    }
+  },
+  {
+    "id": "geography-022",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "אגם טיטיקקה נמצא על הגבול בין פרו לאיזו מדינה?",
+      "a": [
+        "בוליביה",
+        "צ׳ילה",
+        "אקוודור",
+        "קולומביה"
+      ]
+    },
+    "en": {
+      "q": "Lake Titicaca lies on the border between Peru and which country?",
+      "a": [
+        "Bolivia",
+        "Chile",
+        "Ecuador",
+        "Colombia"
+      ]
+    }
+  },
+  {
+    "id": "geography-023",
+    "d": 3,
+    "c": 1,
+    "he": {
+      "q": "מהי בירת מרוקו?",
+      "a": [
+        "קזבלנקה",
+        "רבאט",
+        "מרקש",
+        "פס"
+      ]
+    },
+    "en": {
+      "q": "What is the capital of Morocco?",
+      "a": [
+        "Casablanca",
+        "Rabat",
+        "Marrakesh",
+        "Fez"
+      ]
+    }
+  },
+  {
+    "id": "geography-024",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "לאיזה ים נשפך נהר הדנובה?",
+      "a": [
+        "הים הבלטי",
+        "הים האדריאטי",
+        "הים הצפוני",
+        "הים השחור"
+      ]
+    },
+    "en": {
+      "q": "Into which sea does the Danube River flow?",
+      "a": [
+        "Baltic Sea",
+        "Adriatic Sea",
+        "North Sea",
+        "Black Sea"
+      ]
+    }
+  },
+  {
+    "id": "geography-025",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "באיזו מדינה נמצאת העיר טימבוקטו?",
+      "a": [
+        "ניז׳ר",
+        "צ׳אד",
+        "מאלי",
+        "סנגל"
+      ]
+    },
+    "en": {
+      "q": "In which country is the city of Timbuktu?",
+      "a": [
+        "Niger",
+        "Chad",
+        "Mali",
+        "Senegal"
+      ]
+    }
+  }
 ]

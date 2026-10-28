@@ -15,7 +15,7 @@ Turn any TV into a party game console that runs from a USB drive, with players' 
 
 - **TV host**: a 10‑foot UI in Hebrew (RTL) or English, a QR code and room code, a player list, and a game menu you navigate from the admin's phone (👑).
 - **Phone controller**: a d‑pad, joystick, answer buttons, text input or drawing canvas. The game decides what each phone shows. It also has vibration, left‑hand mode and automatic reconnect.
-- **3 games**: Snakes (arcade, 1–8 players), Trivia (1–8) and Draw & Guess (2–8).
+- **3 games**: Snakes (arcade, 1–8 players), Trivia Contest (1–8; 400 questions in 16 topics, Hebrew + English; see [docs/TRIVIA.md](docs/TRIVIA.md)) and Draw & Guess (2–8).
 - **Game SDK**: games are sandboxed iframes (`sandbox="allow-scripts"`, opaque origin, `connect-src 'none'`). See [docs/GAME-SDK.md](docs/GAME-SDK.md).
 - **Portable USB build** for Windows, macOS (Intel and Apple Silicon) and Linux (x64 and arm64, including Raspberry Pi 64‑bit).
 

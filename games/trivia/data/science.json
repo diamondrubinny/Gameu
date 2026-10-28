@@ -1,27 +1,577 @@
 [
-  {"id":"science-001","d":1,"c":1,"he":{"q":"מהי הנוסחה הכימית של מים?","a":["CO₂","H₂O","O₂","NaCl"]},"en":{"q":"What is the chemical formula of water?","a":["CO₂","H₂O","O₂","NaCl"]}},
-  {"id":"science-002","d":1,"c":2,"he":{"q":"איך נקרא המעבר של מים ממצב נוזלי למצב גזי?","a":["התעבות","המסה","התאדות","קפיאה"]},"en":{"q":"What is the change of water from a liquid to a gas called?","a":["Condensation","Melting","Evaporation","Freezing"]}},
-  {"id":"science-003","d":1,"c":3,"he":{"q":"איזה גז קולטים הצמחים מהאוויר לצורך פוטוסינתזה?","a":["חמצן","חנקן","הליום","פחמן דו-חמצני"]},"en":{"q":"Which gas do plants take in from the air for photosynthesis?","a":["Oxygen","Nitrogen","Helium","Carbon dioxide"]}},
-  {"id":"science-004","d":1,"c":0,"he":{"q":"איזה כוח מושך חפצים אל כדור הארץ?","a":["כוח הכבידה","מגנטיות","חיכוך","חשמל סטטי"]},"en":{"q":"Which force pulls objects toward the Earth?","a":["Gravity","Magnetism","Friction","Static electricity"]}},
-  {"id":"science-005","d":1,"c":1,"he":{"q":"נדנדה (קרש עם ציר באמצע) היא דוגמה לאיזו מכונה פשוטה?","a":["גלגלת","מנוף","בורג","מישור משופע"]},"en":{"q":"A seesaw is an example of which simple machine?","a":["Pulley","Lever","Screw","Inclined plane"]}},
-  {"id":"science-006","d":1,"c":0,"he":{"q":"באיזה מצב צבירה נמצא קרח?","a":["מוצק","נוזל","גז","פלזמה"]},"en":{"q":"Which state of matter is ice?","a":["Solid","Liquid","Gas","Plasma"]}},
-  {"id":"science-007","d":1,"c":3,"he":{"q":"מי ניסח את תורת היחסות?","a":["אייזק ניוטון","ניקולה טסלה","גלילאו גליליי","אלברט איינשטיין"]},"en":{"q":"Who formulated the theory of relativity?","a":["Isaac Newton","Nikola Tesla","Galileo Galilei","Albert Einstein"]}},
-  {"id":"science-008","d":1,"c":1,"he":{"q":"באיזה מכשיר מודדים טמפרטורה?","a":["ברומטר","מדחום","מיקרוסקופ","מצפן"]},"en":{"q":"Which instrument is used to measure temperature?","a":["Barometer","Thermometer","Microscope","Compass"]}},
-  {"id":"science-009","d":1,"c":2,"he":{"q":"מה קורה כשמקרבים קוטב צפוני של מגנט לקוטב צפוני של מגנט אחר?","a":["הם נמשכים זה לזה","לא קורה דבר","הם דוחים זה את זה","הם מתחממים"]},"en":{"q":"What happens when you bring the north pole of a magnet close to the north pole of another magnet?","a":["They attract each other","Nothing happens","They repel each other","They heat up"]}},
-  {"id":"science-010","d":1,"c":0,"he":{"q":"מהי היחידה הבסיסית הקטנה ביותר של החיים?","a":["התא","האטום","המולקולה","הרקמה"]},"en":{"q":"What is the smallest basic unit of life?","a":["The cell","The atom","The molecule","The tissue"]}},
-  {"id":"science-011","d":2,"c":2,"he":{"q":"מהו הסמל הכימי של זהב?","a":["Ag","Al","Au","Gd"]},"en":{"q":"What is the chemical symbol for gold?","a":["Ag","Al","Au","Gd"]}},
-  {"id":"science-012","d":2,"c":2,"he":{"q":"מהי מהירות האור בריק, בקירוב?","a":["כ-3,000 ק״מ בשנייה","כ-30,000 ק״מ בשנייה","כ-300,000 ק״מ בשנייה","כ-3,000,000 ק״מ בשנייה"]},"en":{"q":"What is the approximate speed of light in a vacuum?","a":["About 3,000 km/s","About 30,000 km/s","About 300,000 km/s","About 3,000,000 km/s"]}},
-  {"id":"science-013","d":2,"c":3,"he":{"q":"מי גילה את הפניצילין?","a":["לואי פסטר","רוברט קוך","אדוארד ג׳נר","אלכסנדר פלמינג"]},"en":{"q":"Who discovered penicillin?","a":["Louis Pasteur","Robert Koch","Edward Jenner","Alexander Fleming"]}},
-  {"id":"science-014","d":2,"c":1,"he":{"q":"מהו הגז הנפוץ ביותר באטמוספרה של כדור הארץ?","a":["חמצן","חנקן","פחמן דו-חמצני","ארגון"]},"en":{"q":"What is the most abundant gas in Earth's atmosphere?","a":["Oxygen","Nitrogen","Carbon dioxide","Argon"]}},
-  {"id":"science-015","d":2,"c":0,"he":{"q":"מהי יחידת המידה של התנגדות חשמלית?","a":["אוהם","וולט","אמפר","ואט"]},"en":{"q":"What is the unit of electrical resistance?","a":["Ohm","Volt","Ampere","Watt"]}},
-  {"id":"science-016","d":2,"c":1,"he":{"q":"לאיזה חלקיק באטום יש מטען חשמלי שלילי?","a":["פרוטון","אלקטרון","נייטרון","גרעין"]},"en":{"q":"Which particle in an atom has a negative electric charge?","a":["Proton","Electron","Neutron","Nucleus"]}},
-  {"id":"science-017","d":2,"c":2,"he":{"q":"מי ניסח את שלושת חוקי התנועה ואת חוק הכבידה העולמי?","a":["גלילאו גליליי","יוהאנס קפלר","אייזק ניוטון","רנה דקארט"]},"en":{"q":"Who formulated the three laws of motion and the law of universal gravitation?","a":["Galileo Galilei","Johannes Kepler","Isaac Newton","René Descartes"]}},
-  {"id":"science-018","d":2,"c":3,"he":{"q":"מהי רמת החומציות (pH) של מים טהורים בטמפרטורה של 25°C?","a":["1","3","5","7"]},"en":{"q":"What is the pH of pure water at 25°C?","a":["1","3","5","7"]}},
-  {"id":"science-019","d":2,"c":0,"he":{"q":"מהו הסמל הכימי של נתרן?","a":["Na","S","Sn","N"]},"en":{"q":"What is the chemical symbol for sodium?","a":["Na","S","Sn","N"]}},
-  {"id":"science-020","d":2,"c":1,"he":{"q":"איזו מדענית זכתה בפרס נובל בשני מדעים שונים, פיזיקה וכימיה?","a":["רוזלינד פרנקלין","מארי קירי","עדה לאבלייס","ליזה מייטנר"]},"en":{"q":"Which scientist won Nobel Prizes in two different sciences, physics and chemistry?","a":["Rosalind Franklin","Marie Curie","Ada Lovelace","Lise Meitner"]}},
-  {"id":"science-021","d":3,"c":1,"he":{"q":"מהו המספר האטומי של פחמן?","a":["4","6","8","10"]},"en":{"q":"What is the atomic number of carbon?","a":["4","6","8","10"]}},
-  {"id":"science-022","d":3,"c":2,"he":{"q":"מהו בקירוב מספר אבוגדרו?","a":["3.00×10²³","1.60×10²³","6.02×10²³","9.81×10²³"]},"en":{"q":"What is the approximate value of Avogadro's number?","a":["3.00×10²³","1.60×10²³","6.02×10²³","9.81×10²³"]}},
-  {"id":"science-023","d":3,"c":3,"he":{"q":"איזו מתכת נמצאת במצב נוזלי בטמפרטורת החדר?","a":["עופרת","נתרן","בדיל","כספית"]},"en":{"q":"Which metal is liquid at room temperature?","a":["Lead","Sodium","Tin","Mercury"]}},
-  {"id":"science-024","d":3,"c":0,"he":{"q":"מי גילה את האלקטרון בשנת 1897?","a":["ג׳וזף ג׳ון תומסון","ארנסט רתרפורד","נילס בוהר","ג׳יימס צ׳דוויק"]},"en":{"q":"Who discovered the electron in 1897?","a":["J. J. Thomson","Ernest Rutherford","Niels Bohr","James Chadwick"]}},
-  {"id":"science-025","d":3,"c":3,"he":{"q":"מהי יחידת המידה של תדירות במערכת SI?","a":["ג׳אול","פסקל","טסלה","הרץ"]},"en":{"q":"What is the SI unit of frequency?","a":["Joule","Pascal","Tesla","Hertz"]}}
+  {
+    "id": "science-001",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "מהי הנוסחה הכימית של מים?",
+      "a": [
+        "CO₂",
+        "H₂O",
+        "O₂",
+        "NaCl"
+      ]
+    },
+    "en": {
+      "q": "What is the chemical formula of water?",
+      "a": [
+        "CO₂",
+        "H₂O",
+        "O₂",
+        "NaCl"
+      ]
+    }
+  },
+  {
+    "id": "science-002",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "איך נקרא המעבר של מים ממצב נוזלי למצב גזי?",
+      "a": [
+        "התעבות",
+        "התכה",
+        "התאדות",
+        "קפיאה"
+      ]
+    },
+    "en": {
+      "q": "What is the change of water from a liquid to a gas called?",
+      "a": [
+        "Condensation",
+        "Melting",
+        "Evaporation",
+        "Freezing"
+      ]
+    }
+  },
+  {
+    "id": "science-003",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "איזה גז קולטים הצמחים מהאוויר לצורך פוטוסינתזה?",
+      "a": [
+        "חמצן",
+        "חנקן",
+        "הליום",
+        "פחמן דו-חמצני"
+      ]
+    },
+    "en": {
+      "q": "Which gas do plants take in from the air for photosynthesis?",
+      "a": [
+        "Oxygen",
+        "Nitrogen",
+        "Helium",
+        "Carbon dioxide"
+      ]
+    }
+  },
+  {
+    "id": "science-004",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "איזה כוח מושך חפצים אל כדור הארץ?",
+      "a": [
+        "כוח הכבידה",
+        "מגנטיות",
+        "חיכוך",
+        "חשמל סטטי"
+      ]
+    },
+    "en": {
+      "q": "Which force pulls objects toward the Earth?",
+      "a": [
+        "Gravity",
+        "Magnetism",
+        "Friction",
+        "Static electricity"
+      ]
+    }
+  },
+  {
+    "id": "science-005",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "נדנדה (קרש עם ציר באמצע) היא דוגמה לאיזו מכונה פשוטה?",
+      "a": [
+        "גלגלת",
+        "מנוף",
+        "בורג",
+        "מישור משופע"
+      ]
+    },
+    "en": {
+      "q": "A seesaw is an example of which simple machine?",
+      "a": [
+        "Pulley",
+        "Lever",
+        "Screw",
+        "Inclined plane"
+      ]
+    }
+  },
+  {
+    "id": "science-006",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "באיזה מצב צבירה נמצא קרח?",
+      "a": [
+        "מוצק",
+        "נוזל",
+        "גז",
+        "פלזמה"
+      ]
+    },
+    "en": {
+      "q": "Which state of matter is ice?",
+      "a": [
+        "Solid",
+        "Liquid",
+        "Gas",
+        "Plasma"
+      ]
+    }
+  },
+  {
+    "id": "science-007",
+    "d": 1,
+    "c": 3,
+    "he": {
+      "q": "מי ניסח את תורת היחסות?",
+      "a": [
+        "אייזק ניוטון",
+        "ניקולה טסלה",
+        "גלילאו גליליי",
+        "אלברט איינשטיין"
+      ]
+    },
+    "en": {
+      "q": "Who formulated the theory of relativity?",
+      "a": [
+        "Isaac Newton",
+        "Nikola Tesla",
+        "Galileo Galilei",
+        "Albert Einstein"
+      ]
+    }
+  },
+  {
+    "id": "science-008",
+    "d": 1,
+    "c": 1,
+    "he": {
+      "q": "באיזה מכשיר מודדים טמפרטורה?",
+      "a": [
+        "ברומטר",
+        "מדחום",
+        "מיקרוסקופ",
+        "מצפן"
+      ]
+    },
+    "en": {
+      "q": "Which instrument is used to measure temperature?",
+      "a": [
+        "Barometer",
+        "Thermometer",
+        "Microscope",
+        "Compass"
+      ]
+    }
+  },
+  {
+    "id": "science-009",
+    "d": 1,
+    "c": 2,
+    "he": {
+      "q": "מה קורה כשמקרבים קוטב צפוני של מגנט לקוטב צפוני של מגנט אחר?",
+      "a": [
+        "הם נמשכים זה לזה",
+        "לא קורה דבר",
+        "הם דוחים זה את זה",
+        "הם מתחממים"
+      ]
+    },
+    "en": {
+      "q": "What happens when you bring the north pole of a magnet close to the north pole of another magnet?",
+      "a": [
+        "They attract each other",
+        "Nothing happens",
+        "They repel each other",
+        "They heat up"
+      ]
+    }
+  },
+  {
+    "id": "science-010",
+    "d": 1,
+    "c": 0,
+    "he": {
+      "q": "מהי היחידה הבסיסית הקטנה ביותר של החיים?",
+      "a": [
+        "התא",
+        "האטום",
+        "המולקולה",
+        "הרקמה"
+      ]
+    },
+    "en": {
+      "q": "What is the smallest basic unit of life?",
+      "a": [
+        "The cell",
+        "The atom",
+        "The molecule",
+        "The tissue"
+      ]
+    }
+  },
+  {
+    "id": "science-011",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "מהו הסמל הכימי של זהב?",
+      "a": [
+        "Ag",
+        "Al",
+        "Au",
+        "Gd"
+      ]
+    },
+    "en": {
+      "q": "What is the chemical symbol for gold?",
+      "a": [
+        "Ag",
+        "Al",
+        "Au",
+        "Gd"
+      ]
+    }
+  },
+  {
+    "id": "science-012",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "מהי מהירות האור בריק, בקירוב?",
+      "a": [
+        "כ-3,000 ק״מ בשנייה",
+        "כ-30,000 ק״מ בשנייה",
+        "כ-300,000 ק״מ בשנייה",
+        "כ-3,000,000 ק״מ בשנייה"
+      ]
+    },
+    "en": {
+      "q": "What is the approximate speed of light in a vacuum?",
+      "a": [
+        "About 3,000 km/s",
+        "About 30,000 km/s",
+        "About 300,000 km/s",
+        "About 3,000,000 km/s"
+      ]
+    }
+  },
+  {
+    "id": "science-013",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מי גילה את הפניצילין?",
+      "a": [
+        "לואי פסטר",
+        "רוברט קוך",
+        "אדוארד ג׳נר",
+        "אלכסנדר פלמינג"
+      ]
+    },
+    "en": {
+      "q": "Who discovered penicillin?",
+      "a": [
+        "Louis Pasteur",
+        "Robert Koch",
+        "Edward Jenner",
+        "Alexander Fleming"
+      ]
+    }
+  },
+  {
+    "id": "science-014",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "מהו הגז הנפוץ ביותר באטמוספרה של כדור הארץ?",
+      "a": [
+        "חמצן",
+        "חנקן",
+        "פחמן דו-חמצני",
+        "ארגון"
+      ]
+    },
+    "en": {
+      "q": "What is the most abundant gas in Earth's atmosphere?",
+      "a": [
+        "Oxygen",
+        "Nitrogen",
+        "Carbon dioxide",
+        "Argon"
+      ]
+    }
+  },
+  {
+    "id": "science-015",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "מהי יחידת המידה של התנגדות חשמלית?",
+      "a": [
+        "אוהם",
+        "וולט",
+        "אמפר",
+        "ואט"
+      ]
+    },
+    "en": {
+      "q": "What is the unit of electrical resistance?",
+      "a": [
+        "Ohm",
+        "Volt",
+        "Ampere",
+        "Watt"
+      ]
+    }
+  },
+  {
+    "id": "science-016",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "לאיזה חלקיק באטום יש מטען חשמלי שלילי?",
+      "a": [
+        "פרוטון",
+        "אלקטרון",
+        "נייטרון",
+        "גרעין"
+      ]
+    },
+    "en": {
+      "q": "Which particle in an atom has a negative electric charge?",
+      "a": [
+        "Proton",
+        "Electron",
+        "Neutron",
+        "Nucleus"
+      ]
+    }
+  },
+  {
+    "id": "science-017",
+    "d": 2,
+    "c": 2,
+    "he": {
+      "q": "מי ניסח את שלושת חוקי התנועה ואת חוק הכבידה העולמי?",
+      "a": [
+        "גלילאו גליליי",
+        "יוהאנס קפלר",
+        "אייזק ניוטון",
+        "רנה דקארט"
+      ]
+    },
+    "en": {
+      "q": "Who formulated the three laws of motion and the law of universal gravitation?",
+      "a": [
+        "Galileo Galilei",
+        "Johannes Kepler",
+        "Isaac Newton",
+        "René Descartes"
+      ]
+    }
+  },
+  {
+    "id": "science-018",
+    "d": 2,
+    "c": 3,
+    "he": {
+      "q": "מהי רמת החומציות (pH) של מים טהורים בטמפרטורה של 25°C?",
+      "a": [
+        "1",
+        "3",
+        "5",
+        "7"
+      ]
+    },
+    "en": {
+      "q": "What is the pH of pure water at 25°C?",
+      "a": [
+        "1",
+        "3",
+        "5",
+        "7"
+      ]
+    }
+  },
+  {
+    "id": "science-019",
+    "d": 2,
+    "c": 0,
+    "he": {
+      "q": "מהו הסמל הכימי של נתרן?",
+      "a": [
+        "Na",
+        "S",
+        "Sn",
+        "N"
+      ]
+    },
+    "en": {
+      "q": "What is the chemical symbol for sodium?",
+      "a": [
+        "Na",
+        "S",
+        "Sn",
+        "N"
+      ]
+    }
+  },
+  {
+    "id": "science-020",
+    "d": 2,
+    "c": 1,
+    "he": {
+      "q": "איזו מדענית זכתה בפרס נובל בשני מדעים שונים, פיזיקה וכימיה?",
+      "a": [
+        "רוזלינד פרנקלין",
+        "מארי קירי",
+        "עדה לאבלייס",
+        "ליזה מייטנר"
+      ]
+    },
+    "en": {
+      "q": "Which scientist won Nobel Prizes in two different sciences, physics and chemistry?",
+      "a": [
+        "Rosalind Franklin",
+        "Marie Curie",
+        "Ada Lovelace",
+        "Lise Meitner"
+      ]
+    }
+  },
+  {
+    "id": "science-021",
+    "d": 3,
+    "c": 1,
+    "he": {
+      "q": "מהו המספר האטומי של פחמן?",
+      "a": [
+        "4",
+        "6",
+        "8",
+        "10"
+      ]
+    },
+    "en": {
+      "q": "What is the atomic number of carbon?",
+      "a": [
+        "4",
+        "6",
+        "8",
+        "10"
+      ]
+    }
+  },
+  {
+    "id": "science-022",
+    "d": 3,
+    "c": 2,
+    "he": {
+      "q": "מהו בקירוב מספר אבוגדרו?",
+      "a": [
+        "3.00×10²³",
+        "1.60×10²³",
+        "6.02×10²³",
+        "9.81×10²³"
+      ]
+    },
+    "en": {
+      "q": "What is the approximate value of Avogadro's number?",
+      "a": [
+        "3.00×10²³",
+        "1.60×10²³",
+        "6.02×10²³",
+        "9.81×10²³"
+      ]
+    }
+  },
+  {
+    "id": "science-023",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "איזו מתכת נמצאת במצב נוזלי בטמפרטורת החדר?",
+      "a": [
+        "עופרת",
+        "נתרן",
+        "בדיל",
+        "כספית"
+      ]
+    },
+    "en": {
+      "q": "Which metal is liquid at room temperature?",
+      "a": [
+        "Lead",
+        "Sodium",
+        "Tin",
+        "Mercury"
+      ]
+    }
+  },
+  {
+    "id": "science-024",
+    "d": 3,
+    "c": 0,
+    "he": {
+      "q": "מי גילה את האלקטרון בשנת 1897?",
+      "a": [
+        "ג׳וזף ג׳ון תומסון",
+        "ארנסט רתרפורד",
+        "נילס בוהר",
+        "ג׳יימס צ׳דוויק"
+      ]
+    },
+    "en": {
+      "q": "Who discovered the electron in 1897?",
+      "a": [
+        "J. J. Thomson",
+        "Ernest Rutherford",
+        "Niels Bohr",
+        "James Chadwick"
+      ]
+    }
+  },
+  {
+    "id": "science-025",
+    "d": 3,
+    "c": 3,
+    "he": {
+      "q": "מהי יחידת המידה של תדירות במערכת SI?",
+      "a": [
+        "ג׳אול",
+        "פסקל",
+        "טסלה",
+        "הרץ"
+      ]
+    },
+    "en": {
+      "q": "What is the SI unit of frequency?",
+      "a": [
+        "Joule",
+        "Pascal",
+        "Tesla",
+        "Hertz"
+      ]
+    }
+  }
 ]

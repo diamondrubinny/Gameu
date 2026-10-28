@@ -2,23 +2,23 @@
   {
     "id": "food-001",
     "d": 1,
-    "c": 2,
+    "c": 0,
     "he": {
-      "q": "מהו המרכיב העיקרי של החומוס?",
+      "q": "מלבד עגבניות, מהו המרכיב העיקרי בשקשוקה?",
       "a": [
-        "שעועית לבנה",
-        "עדשים",
-        "גרגרי חומוס",
-        "אפונה"
+        "ביצים",
+        "תפוחי אדמה",
+        "גבינה",
+        "חצילים"
       ]
     },
     "en": {
-      "q": "What is the main ingredient of hummus?",
+      "q": "Besides tomatoes, what is the main ingredient of shakshuka?",
       "a": [
-        "White beans",
-        "Lentils",
-        "Chickpeas",
-        "Peas"
+        "Eggs",
+        "Potatoes",
+        "Cheese",
+        "Eggplant"
       ]
     }
   },
