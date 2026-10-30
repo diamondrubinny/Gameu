@@ -56,6 +56,16 @@ export class HostApp {
 
   constructor(private readonly platform: HostPlatform) {
     window.addEventListener('keydown', (e) => this.onKey(e));
+    // Tab / screen-reader navigation moves DOM focus: the mark follows it.
+    document.addEventListener('focusin', (e) => {
+      const el = e.target;
+      if (el instanceof HTMLElement && el.matches('[data-nav]') && !el.classList.contains('nav-focus')) this.setFocus(el);
+    });
+    // Mouse/touch (e.g. a TV remote with a pointer) moves the selection mark too.
+    document.addEventListener('pointerover', (e) => {
+      const el = (e.target as Element | null)?.closest?.('[data-nav]');
+      if (el instanceof HTMLElement && !el.hasAttribute('disabled')) this.setFocus(el);
+    });
     window.addEventListener('message', (e) => this.onGameMessage(e));
   }
 
@@ -243,14 +253,9 @@ export class HostApp {
       case 'right':
         this.moveFocus(action, this.root);
         break;
-      case 'ok': {
-        const el = document.activeElement;
-        if (el instanceof HTMLElement && this.root.contains(el)) {
-          sfx.select();
-          el.click();
-        }
+      case 'ok':
+        this.activate(this.root);
         break;
-      }
       case 'back':
       case 'home':
         if (this.screen === 'settings') {
@@ -261,27 +266,74 @@ export class HostApp {
     }
   }
 
+  /**
+   * The selected item is tracked with a class, not only DOM focus: CSS :focus is not painted
+   * while the TV window itself is unfocused (kiosk browser, Android WebView, after a game iframe),
+   * which made the highlight disappear even though navigation worked.
+   */
+  private current(scope: HTMLElement): HTMLElement | null {
+    const marked = scope.querySelector<HTMLElement>('[data-nav].nav-focus');
+    if (marked && !marked.hasAttribute('disabled')) return marked;
+    const active = document.activeElement;
+    return active instanceof HTMLElement && active.matches('[data-nav]') && scope.contains(active) ? active : null;
+  }
+
+  private setFocus(el: HTMLElement): void {
+    for (const old of document.querySelectorAll('.nav-focus')) if (old !== el) old.classList.remove('nav-focus');
+    el.classList.add('nav-focus');
+    el.focus({ preventScroll: true });
+    el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    if (el.dataset.id && this.root.contains(el)) this.focusMemory.set(this.screen, el.dataset.id);
+  }
+
+  private navItems(scope: HTMLElement): HTMLElement[] {
+    return [...scope.querySelectorAll<HTMLElement>('[data-nav]:not([disabled])')];
+  }
+
   private moveFocus(dir: Direction, scope: HTMLElement): void {
-    const items = [...scope.querySelectorAll<HTMLElement>('[data-nav]:not([disabled])')];
-    const next = nextInDirection(document.activeElement, dir, items);
-    if (next instanceof HTMLElement && next !== document.activeElement) {
+    const from = this.current(scope);
+    const next = nextInDirection(from, dir, this.navItems(scope));
+    if (next instanceof HTMLElement && next !== from) {
       sfx.move();
-      next.focus();
-      next.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      this.setFocus(next);
+    } else if (from) {
+      // Edge of the screen: show that the press arrived.
+      this.flash(from, 'nav-bump');
     }
   }
 
+  /** OK: activates the selected item; with nothing selected, selects the first item instead. */
+  private activate(scope: HTMLElement): void {
+    const el = this.current(scope);
+    if (!el) {
+      const first = this.navItems(scope)[0];
+      if (first) this.setFocus(first);
+      return;
+    }
+    sfx.select();
+    this.flash(el, 'nav-press');
+    el.click();
+  }
+
+  private flash(el: HTMLElement, cls: string): void {
+    el.classList.remove(cls);
+    void el.offsetWidth; // restart the animation
+    el.classList.add(cls);
+    window.setTimeout(() => el.classList.remove(cls), 300);
+  }
+
   private go(screen: Screen): void {
-    const active = document.activeElement as HTMLElement | null;
-    if (active?.dataset.id) this.focusMemory.set(this.screen, active.dataset.id);
+    const cur = this.current(this.root);
+    if (cur?.dataset.id) this.focusMemory.set(this.screen, cur.dataset.id);
     this.screen = screen;
     this.render();
   }
 
   private restoreFocus(): void {
+    if (this.overlay) return;
     const id = this.focusMemory.get(this.screen);
     const target = (id && this.root.querySelector<HTMLElement>(`[data-nav][data-id="${CSS.escape(id)}"]`)) || this.root.querySelector<HTMLElement>('[data-nav]');
-    target?.focus();
+    if (target) this.setFocus(target);
   }
 
   // ---------------- controller layouts ----------------
@@ -306,6 +358,9 @@ export class HostApp {
   // ---------------- rendering ----------------
 
   private render(): void {
+    // Re-renders (players joining, room code changes) must keep the selection where it was.
+    const cur = this.current(this.root);
+    if (cur?.dataset.id) this.focusMemory.set(this.screen, cur.dataset.id);
     clear(this.root);
     if (this.connState === 'forbidden' || this.connState === 'replaced') {
       this.root.append(h('div', { class: 'center-message', role: 'alert' }, this.connState === 'forbidden' ? t.hostForbidden : t.hostReplaced));
@@ -497,12 +552,11 @@ export class HostApp {
 
   private openOverlay(build: (close: () => void) => { el: HTMLElement; handle?: (a: Action) => boolean }): void {
     this.overlay?.close();
-    const previous = document.activeElement as HTMLElement | null;
     const backdrop = h('div', { class: 'overlay' });
     const close = () => {
       backdrop.remove();
       if (this.overlay?.el === backdrop) this.overlay = null;
-      if (this.screen !== 'game') (previous && document.contains(previous) ? previous : this.root.querySelector<HTMLElement>('[data-nav]'))?.focus();
+      if (this.screen !== 'game') this.restoreFocus();
     };
     const built = build(close);
     backdrop.append(built.el);
@@ -513,11 +567,7 @@ export class HostApp {
       handle: (action) => {
         if (built.handle?.(action)) return;
         if (action === 'ok') {
-          const el = document.activeElement;
-          if (el instanceof HTMLElement && backdrop.contains(el)) {
-            sfx.select();
-            el.click();
-          }
+          this.activate(backdrop);
         } else if (action === 'back') {
           sfx.back();
           close();
@@ -527,7 +577,8 @@ export class HostApp {
       },
     };
     this.overlay = overlay;
-    backdrop.querySelector<HTMLElement>('[data-nav]')?.focus();
+    const first = backdrop.querySelector<HTMLElement>('[data-nav]');
+    if (first) this.setFocus(first);
   }
 
   private openDocument(src: string, title: string): void {
@@ -619,8 +670,8 @@ export class HostApp {
       this.announce(t.needPlayers(manifest.minPlayers));
       return;
     }
-    const active = document.activeElement as HTMLElement | null;
-    if (active?.dataset.id) this.focusMemory.set('home', active.dataset.id);
+    const cur = this.current(this.root);
+    if (cur?.dataset.id) this.focusMemory.set('home', cur.dataset.id);
     this.screen = 'game';
     clear(this.root);
     const iframe = h('iframe', {

@@ -138,6 +138,28 @@ test('TV language cycles through all 6 languages, persists, and sets direction',
   }
 });
 
+test('the TV selection mark is always drawn and survives re-renders', async ({ page: host, browser, baseURL }) => {
+  await host.goto('/');
+  await expect(host.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);
+  const code = (await host.locator('.code').textContent())!;
+  const marked = host.locator('[data-nav].nav-focus');
+  await expect(marked).toHaveCount(1);
+  const admin = await openPhone(browser, baseURL!, code, 'Mia');
+  // Move off the first item, then make the TV re-render (a second player joins).
+  await press(admin, 'שמאלה');
+  const before = await marked.getAttribute('data-id');
+  await openPhone(browser, baseURL!, code, 'Ori');
+  await expect(host.locator('#players .player:not(.offline)')).toHaveCount(2);
+  await expect(marked).toHaveCount(1);
+  expect(await marked.getAttribute('data-id')).toBe(before);
+  // Even when DOM focus is lost (window not focused), the mark stays and OK still works.
+  await host.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
+  await expect(marked).toHaveCount(1);
+  await expect(marked).not.toHaveCSS('box-shadow', 'none');
+  await press(admin, 'ימינה');
+  await expect(marked).toHaveCount(1);
+});
+
 test('each phone gets trivia in its own language while the TV stays in Hebrew', async ({ page: host, browser, baseURL }) => {
   await host.goto('/');
   await expect(host.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);

@@ -71,14 +71,22 @@ img.card-icon { width: 4.5em; height: 4.5em; font-size: inherit; display: block;
 .card-meta.warn::before { content: '⚠ '; }
 
 [data-nav]:focus { outline: none; }
-[data-nav]:focus, [data-nav]:focus-visible {
+/* .nav-focus is the source of truth (always painted); :focus kept for keyboard/screen readers. */
+[data-nav].nav-focus, [data-nav]:focus, [data-nav]:focus-visible {
   border-color: var(--focus);
   box-shadow: 0 0 0 .25em color-mix(in srgb, var(--focus) 45%, transparent), 0 1em 2.5em rgba(0,0,0,.45);
   transform: scale(1.04);
   background: #333a7a;
   background: color-mix(in srgb, var(--panel-2) 70%, #3a4290);
 }
-:root.high-contrast [data-nav]:focus { background: #222; outline: .25em solid var(--focus); outline-offset: .15em; }
+:root.high-contrast [data-nav].nav-focus, :root.high-contrast [data-nav]:focus { background: #222; outline: .25em solid var(--focus); outline-offset: .15em; }
+/* Selection marker: a small arrow so the choice is visible even without colour perception. */
+[data-nav].nav-focus::before { content: ''; position: absolute; inset-inline-start: -.55em; top: 50%; width: .5em; height: .5em; margin-top: -.25em; background: var(--focus); border-radius: 50%; box-shadow: 0 0 .6em var(--focus); }
+[data-nav] { position: relative; }
+@keyframes nav-press { 0% { transform: scale(1.04); } 40% { transform: scale(.95); filter: brightness(1.35); } 100% { transform: scale(1.04); } }
+@keyframes nav-bump { 0%, 100% { translate: 0; } 30% { translate: -.3em 0; } 60% { translate: .3em 0; } }
+.nav-press { animation: nav-press .28s ease-out; }
+.nav-bump { animation: nav-bump .25s ease-in-out; }
 
 /* settings */
 .settings-list { display: flex; flex-direction: column; gap: .7em; max-width: 50em; }
@@ -137,10 +145,10 @@ img.card-icon { width: 4.5em; height: 4.5em; font-size: inherit; display: block;
 .center-message { margin: auto; max-width: 40em; text-align: center; font-size: 1.5em; }
 
 :root.reduce-motion *, :root.reduce-motion *::before { transition: none !important; animation: none !important; }
-:root.reduce-motion [data-nav]:focus { transform: none; }
+:root.reduce-motion [data-nav]:focus, :root.reduce-motion [data-nav].nav-focus { transform: none; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
-  [data-nav]:focus { transform: none; }
+  [data-nav]:focus, [data-nav].nav-focus { transform: none; }
 }
 @media (max-width: 900px) {
   body { overflow: auto; }

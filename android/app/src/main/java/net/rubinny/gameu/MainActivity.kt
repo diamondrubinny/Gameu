@@ -126,7 +126,16 @@ class MainActivity : ComponentActivity() {
 
         setContentView(view)
         webView = view
+        // Without window focus the page never paints its focus ring and D-pad keys go nowhere.
+        view.isFocusable = true
+        view.isFocusableInTouchMode = true
+        view.requestFocus()
         view.loadUrl(WwwAssetHandler.START_URL)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) webView?.requestFocus()
     }
 
     override fun onStart() {

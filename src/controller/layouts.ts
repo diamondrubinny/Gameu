@@ -42,13 +42,34 @@ function menuButtons(isAdmin: boolean): ButtonDef[] {
 }
 
 /** Press/release button wired with pointer events (works for multi-touch). */
+/** Minimum time the pressed look stays visible, so quick taps are still seen. */
+const PRESS_VISIBLE_MS = 160;
+
 function pressButton(el: HTMLButtonElement, id: string, ctx: LayoutContext): void {
   let down = false;
-  const press = (e: Event) => {
+  let downAt = 0;
+  let unpressTimer = 0;
+  const showPressed = () => {
+    window.clearTimeout(unpressTimer);
+    el.classList.add('pressed');
+    downAt = performance.now();
+  };
+  const hidePressed = () => {
+    const left = PRESS_VISIBLE_MS - (performance.now() - downAt);
+    window.clearTimeout(unpressTimer);
+    unpressTimer = window.setTimeout(() => el.classList.remove('pressed'), Math.max(0, left));
+  };
+  const press = (e: PointerEvent) => {
     e.preventDefault();
     if (down) return;
     down = true;
-    el.classList.add('pressed');
+    // Keep receiving this finger's events even if it slides a little off the button.
+    try {
+      el.setPointerCapture(e.pointerId);
+    } catch {
+      /* not supported */
+    }
+    showPressed();
     ctx.haptic(15);
     ctx.send({ kind: 'button', id, pressed: true });
   };
@@ -56,16 +77,18 @@ function pressButton(el: HTMLButtonElement, id: string, ctx: LayoutContext): voi
     e.preventDefault();
     if (!down) return;
     down = false;
-    el.classList.remove('pressed');
+    hidePressed();
     ctx.send({ kind: 'button', id, pressed: false });
   };
   el.addEventListener('pointerdown', press);
   el.addEventListener('pointerup', release);
   el.addEventListener('pointercancel', release);
-  el.addEventListener('pointerleave', release);
+  el.addEventListener('lostpointercapture', release);
   // Keyboard / switch access / screen readers: click = press + release.
   el.addEventListener('click', (e) => {
     if ((e as PointerEvent).pointerType) return; // already handled by pointer events
+    showPressed();
+    hidePressed();
     ctx.send({ kind: 'button', id, pressed: true });
     ctx.send({ kind: 'button', id, pressed: false });
   });

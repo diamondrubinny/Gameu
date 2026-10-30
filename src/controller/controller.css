@@ -48,7 +48,7 @@ button { font: inherit; color: inherit; }
 .action.success { background: var(--success); color: #002611; }
 .action.wide { width: 100%; margin-top: 10px; }
 .action:disabled { opacity: .6; }
-.pressed { transform: scale(.94); filter: brightness(1.2); }
+.pressed { transform: scale(.92); filter: brightness(1.35); box-shadow: 0 0 0 4px var(--focus), 0 0 18px var(--focus); transition: none; }
 
 /* play */
 .bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--panel); border-bottom: 3px solid var(--player-color, var(--primary)); }
