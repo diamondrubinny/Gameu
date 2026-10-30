@@ -176,6 +176,7 @@ function step(now: number): void {
     s.body.forEach((c, i) => i % 3 === 1 && food.push(c));
     s.body = [];
     sdk.haptic([200, 80, 200], s.player.id);
+    sdk.sound('crash');
   }
   // food
   for (const s of live) {
@@ -187,6 +188,7 @@ function step(now: number): void {
       s.grow += 2;
       s.score += 10;
       sdk.haptic([30], s.player.id);
+      sdk.sound('eat');
     }
   }
   if (food.length > snakes.size * 6 + 10) food = food.slice(-(snakes.size * 6 + 10));
@@ -223,6 +225,7 @@ function finish(): void {
   clear(overlay);
   overlay.append(h('div', { class: 'big pop' }, sdk.tr(DICTS).timesUp));
   announce(sdk.tr(DICTS).timesUp);
+  sdk.sound('win');
   setTimeout(() => sdk.end([...snakes.values()].map((s) => ({ playerId: s.player.id, score: s.score }))), 2000);
 }
 
@@ -232,6 +235,7 @@ async function countdown(): Promise<void> {
     clear(overlay);
     overlay.append(h('div', { class: 'big pop' }, n));
     announce(n);
+    sdk.sound(n === sdk.tr(DICTS).go ? 'go' : 'countdown');
     await sleep(800);
   }
   clear(overlay);

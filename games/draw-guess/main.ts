@@ -84,6 +84,7 @@ sdk.onInput((playerId: string, input: Input) => {
     sdk.setLayout({ type: 'message', text: pt.youGotIt, subtext: pt.plusPoints(pts) }, playerId);
     sdk.haptic([60, 40, 60], playerId);
     sdk.haptic([30], r.drawer.id);
+    sdk.sound('correct');
     renderScores();
     if (allGuessed()) r.finish();
   } else {
@@ -144,6 +145,8 @@ async function playRound(drawer: GamePlayer, word: WordKey, index: number, total
     sdk.setLayout({ type: 'text', id: 'guess', prompt: pt.guessPrompt(drawer.nickname), maxLength: 40, placeholder: pt.guessPlaceholder }, p.id);
   }
   sdk.haptic([80], drawer.id);
+  sdk.sound('turn');
+  sdk.music('calm');
   announce(tv.drawingAnnounce(drawer.nickname));
 
   const total_ms = roundSeconds * 1000;
@@ -181,6 +184,7 @@ async function playRound(drawer: GamePlayer, word: WordKey, index: number, total
     }
   }
   announce(tv.theWordWas(secret));
+  sdk.sound('reveal');
   await showCard(tv.theWordWasTitle, secret, 4000);
   round = null;
 }

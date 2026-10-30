@@ -41,6 +41,7 @@ export const ar: HostDict = {
   reduceMotion: 'تقليل الحركة',
   extendedTime: 'وقت إضافي في الألعاب',
   volume: 'مستوى الصوت',
+  music: 'موسيقى الخلفية',
   roomLock: 'قفل الغرفة (لن يتمكن لاعبون جدد من الانضمام)',
   newCode: 'تغيير رمز الغرفة',
   kick: (name) => `إخراج ${name} من الغرفة`,

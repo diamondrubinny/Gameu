@@ -205,16 +205,26 @@ export const SettingsSchema = z.object({
   reduceMotion: z.boolean().default(false),
   extendedTime: z.boolean().default(false),
   volume: z.number().min(0).max(1).default(0.7),
+  music: z.boolean().default(true),
 });
 export type Settings = z.output<typeof SettingsSchema>;
 export const DEFAULT_SETTINGS: Settings = SettingsSchema.parse({});
 
 // ---------- host <-> game iframe (postMessage) ----------
 
+/** Sound effects a game can ask the TV to play (synthesized by the host). */
+export const SOUND_NAMES = ['tick', 'countdown', 'go', 'correct', 'wrong', 'reveal', 'chip', 'card', 'eat', 'crash', 'coin', 'win', 'fanfare', 'letter', 'turn', 'lose'] as const;
+export type GameSound = (typeof SOUND_NAMES)[number];
+/** Background music moods a game can request. */
+export const MUSIC_MOODS = ['menu', 'game', 'tense', 'calm', 'off'] as const;
+export type GameMusic = (typeof MUSIC_MOODS)[number];
+
 export const GameToHostSchema = z.discriminatedUnion('type', [
   z.object({ gameu: z.literal(1), type: z.literal('ready') }),
   z.object({ gameu: z.literal(1), type: z.literal('layout'), target: Target, layout: ControllerLayoutSchema }),
   z.object({ gameu: z.literal(1), type: z.literal('haptic'), target: Target, pattern: HapticPattern }),
+  z.object({ gameu: z.literal(1), type: z.literal('sound'), name: z.enum(SOUND_NAMES) }),
+  z.object({ gameu: z.literal(1), type: z.literal('music'), mood: z.enum(MUSIC_MOODS) }),
   z.object({
     gameu: z.literal(1),
     type: z.literal('end'),

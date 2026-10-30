@@ -3,9 +3,9 @@
  * The host validates every message; games never get network access.
  */
 import type { Lang } from '../shared/i18n';
-import type { ControllerLayout, GamePlayer, HostToGame, Input, Settings } from '../shared/protocol';
+import type { ControllerLayout, GameMusic, GamePlayer, GameSound, HostToGame, Input, Settings } from '../shared/protocol';
 
-export type { ControllerLayout, GamePlayer, Input, Lang, Settings };
+export type { ControllerLayout, GameMusic, GamePlayer, GameSound, Input, Lang, Settings };
 
 export interface GameContext {
   players: GamePlayer[];
@@ -22,6 +22,10 @@ export interface GameuSdk {
   onPlayers(cb: (players: GamePlayer[]) => void): void;
   setLayout(layout: ControllerLayout, target?: Target): void;
   haptic(pattern: number[], target?: Target): void;
+  /** Plays a synthesized sound effect on the TV (respects the console volume). */
+  sound(name: GameSound): void;
+  /** Switches the TV background music mood ('off' for silence); respects the music setting. */
+  music(mood: GameMusic): void;
   /** Ends the game; the console shows the results and returns to the menu. */
   end(results: { playerId: string; score: number }[]): void;
   readonly players: GamePlayer[];
@@ -90,6 +94,12 @@ export function createSdk(win: Window = window): GameuSdk {
     },
     haptic(pattern, target = 'all') {
       post({ type: 'haptic', target, pattern });
+    },
+    sound(name) {
+      post({ type: 'sound', name });
+    },
+    music(mood) {
+      post({ type: 'music', mood });
     },
     end(results) {
       if (ended) return;

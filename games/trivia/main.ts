@@ -290,16 +290,24 @@ async function playRound(q: PreparedQuestion, index: number, total: number, isFi
     if (sdk.langOf(p.id) !== sdk.lang) sdk.setLayout({ type: 'choices', id: 'answer', prompt: mine.text, options: mine.answers }, p.id);
   }
   sdk.haptic([40]);
+  sdk.sound('turn');
+  sdk.music(isFinal ? 'tense' : 'game');
 
   accepting = true;
   roundStart = performance.now();
   const totalMs = seconds * 1000;
   await new Promise<void>((resolve) => {
     resolveRound = resolve;
+    let lastSecond = Math.ceil(totalMs / 1000);
     const tick = () => {
       if (!accepting) return;
       const left = Math.max(0, totalMs - (performance.now() - roundStart));
       timerBar.style.transform = `scaleX(${left / totalMs})`;
+      const sec = Math.ceil(left / 1000);
+      if (sec < lastSecond) {
+        lastSecond = sec;
+        if (sec > 0 && sec <= 5) sdk.sound('tick');
+      }
       if (left <= 0) resolve();
       else requestAnimationFrame(tick);
     };
@@ -336,6 +344,7 @@ async function playRound(q: PreparedQuestion, index: number, total: number, isFi
   });
   const reveal = $('#reveal');
   clear(reveal);
+  sdk.sound(gains.length > 0 ? 'correct' : 'wrong');
   if (gains.length === 0) reveal.textContent = t.nobody;
   for (const g of gains.sort((a, b) => b.points - a.points)) {
     const p = players.find((x) => x.id === g.id);
@@ -420,5 +429,7 @@ async function showPodium(): Promise<void> {
     sdk.setLayout({ type: 'message', text: r.rank === 1 ? d.youWon : d.placeN(r.rank), subtext: d.points(r.score) }, r.playerId);
   }
   sdk.haptic([80, 60, 80, 60, 160]);
+  sdk.music('off');
+  sdk.sound('win');
   await sleep(PODIUM_MS);
 }

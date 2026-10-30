@@ -41,6 +41,7 @@ export const en: HostDict = {
   reduceMotion: 'Reduce motion',
   extendedTime: 'Extended time in games',
   volume: 'Sound volume',
+  music: 'Background music',
   roomLock: 'Lock room (new players cannot join)',
   newCode: 'Change room code',
   kick: (name) => `Remove ${name} from the room`,

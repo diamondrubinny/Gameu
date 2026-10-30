@@ -16,7 +16,7 @@ import { $, clear, h } from '../ui/dom';
 import type { HostConnectionState, HostPlatform } from './platform';
 import { LANG_CODES, languageName, pick } from '../shared/i18n';
 import { lang, setLang, t, tFor } from './i18n';
-import { sfx, setVolume } from './sfx';
+import { play, setMusic, setMusicEnabled, setVolume, sfx, unlockOnGesture } from './audio';
 import { nextInDirection, type Direction } from './spatial';
 
 type Action = Direction | 'ok' | 'back' | 'home';
@@ -56,6 +56,7 @@ export class HostApp {
 
   constructor(private readonly platform: HostPlatform) {
     window.addEventListener('keydown', (e) => this.onKey(e));
+    unlockOnGesture();
     // Tab / screen-reader navigation moves DOM focus: the mark follows it.
     document.addEventListener('focusin', (e) => {
       const el = e.target;
@@ -128,6 +129,7 @@ export class HostApp {
 
   private async loadSettings(): Promise<void> {
     this.applySettings(await this.platform.loadSettings());
+    setMusic('menu');
   }
 
   private async loadGames(): Promise<void> {
@@ -138,6 +140,7 @@ export class HostApp {
     this.settings = s;
     setLang(s.language);
     setVolume(s.volume);
+    setMusicEnabled(s.music);
     const html = document.documentElement;
     html.style.setProperty('--text-scale', String(s.textScale));
     html.classList.toggle('high-contrast', s.highContrast);
@@ -453,6 +456,7 @@ export class HostApp {
         this.render();
       });
     });
+    row('music', t.music, onOff(s.music), () => void this.saveSettings({ music: !s.music }).then(() => this.render()), s.music);
     const locked = this.room?.locked ?? false;
     row('lock', t.roomLock, onOff(locked), () => this.platform.send({ type: 'lock', locked: !locked }), locked);
     row('code', t.newCode, this.room?.code ?? '', () => {
@@ -628,6 +632,7 @@ export class HostApp {
     const byId = new Map(this.players.map((p) => [p.id, p]));
     const ranked = [...results].sort((a, b) => b.score - a.score);
     this.stopGame();
+    if (ranked.length) play('fanfare');
     this.openOverlay((close) => {
       const list = h('ol', { class: 'results' });
       ranked.forEach((r, i) => {
@@ -701,6 +706,7 @@ export class HostApp {
     if (this.game) clearTimeout(this.game.timer);
     this.game = null;
     this.screen = 'home';
+    setMusic('menu');
     this.render();
   }
 
@@ -729,6 +735,7 @@ export class HostApp {
       case 'ready':
         game.ready = true;
         clearTimeout(game.timer);
+        setMusic('game'); // default mood; the game may change it
         this.root.querySelector('.game-loading')?.remove();
         this.postToGame({ gameu: 1, type: 'init', players: this.gamePlayers(), settings: this.settings });
         break;
@@ -737,6 +744,12 @@ export class HostApp {
         break;
       case 'haptic':
         if (knownTarget(msg.target)) this.platform.send({ type: 'haptic', target: msg.target, pattern: msg.pattern });
+        break;
+      case 'sound':
+        play(msg.name);
+        break;
+      case 'music':
+        setMusic(msg.mood);
         break;
       case 'end':
         this.showResults(msg.results);

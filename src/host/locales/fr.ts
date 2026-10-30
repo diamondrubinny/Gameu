@@ -41,6 +41,7 @@ export const fr: HostDict = {
   reduceMotion: 'Réduire les animations',
   extendedTime: 'Temps prolongé dans les jeux',
   volume: 'Volume sonore',
+  music: 'Musique de fond',
   roomLock: 'Verrouiller la salle (aucun nouveau joueur ne pourra rejoindre)',
   newCode: 'Changer le code de la salle',
   kick: (name) => `Retirer ${name} de la salle`,

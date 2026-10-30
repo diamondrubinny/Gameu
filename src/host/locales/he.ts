@@ -41,6 +41,7 @@ export const he = {
   reduceMotion: 'הפחתת תנועה',
   extendedTime: 'זמן מורחב במשחקים',
   volume: 'עוצמת צלילים',
+  music: 'מוזיקת רקע',
   roomLock: 'נעילת חדר (שחקנים חדשים לא יוכלו להצטרף)',
   newCode: 'החלפת קוד חדר',
   kick: (name: string) => `הוצאת ${name} מהחדר`,

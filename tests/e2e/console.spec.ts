@@ -160,6 +160,18 @@ test('the TV selection mark is always drawn and survives re-renders', async ({ p
   await expect(marked).toHaveCount(1);
 });
 
+test('background music plays in the menu and can be switched off in settings', async ({ page: host }) => {
+  await host.goto('/');
+  const html = host.locator('html');
+  await expect(html).toHaveAttribute('data-music', 'menu');
+  await host.locator('[data-id="settings"]').click();
+  await host.locator('[data-id="music"]').click();
+  await expect(html).toHaveAttribute('data-music', 'off');
+  await expect(host.locator('[data-id="music"]')).toHaveAttribute('aria-pressed', 'false');
+  await host.locator('[data-id="music"]').click();
+  await expect(html).toHaveAttribute('data-music', 'menu');
+});
+
 test('each phone gets trivia in its own language while the TV stays in Hebrew', async ({ page: host, browser, baseURL }) => {
   await host.goto('/');
   await expect(host.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);
