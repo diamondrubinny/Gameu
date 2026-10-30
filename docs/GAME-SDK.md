@@ -37,7 +37,9 @@ TypeScript (bundled games): `import { createSdk } from '../../src/sdk/gameu'`. P
 | `music(mood)` | Background music mood: `menu game tense calm off`. The console starts `game` when your game is ready; the player's music setting always wins. |
 | `onInput((playerId, input) => …)` | `input.kind`: `button` {id, pressed}, `stick` {x, y ∈ [-1, 1], y up}, `choice` {index}, `text` {value}, `draw` {stroke, color, size, points[[x, y] ∈ 0..1]} |
 | `onPlayers(players => …)` | Fires when a player joins, leaves or reconnects (`connected` flag). `isAdmin` marks the room admin, who can drive setup screens. |
-| `setLayout(layout, target = 'all')` | Sets the controls on phones: `dpad`, `joystick`, `choices`, `text`, `draw`, `message`, `menu` |
+| `setLayout(layout, target = 'all')` | Sets the controls on phones: `dpad`, `joystick`, `choices`, `text`, `draw`, `message`, `menu`, `cards`, `letters` |
+| `cards` layout | `{ type: 'cards', id, title?, cards: ['As','Td'], dim?, info?: string[≤4], actions?: ButtonDef[≤6] }`. Private cards (send with a player id as `target`!), info lines and action buttons. A tap sends `{kind:'button', id, pressed}` and locks the buttons until the next layout. |
+| `letters` layout | `{ type: 'letters', id, prompt?, letters: string[≤40], used?: string[], solve?: boolean }`. A tap sends `{kind:'text', id, value: letter}`; the solve field sends `{kind:'text', id:'solve', value}`. |
 | `haptic([ms, pause, ms…], target)` | Vibrates phones (unsupported on iOS) |
 | `end([{ playerId, score }])` | Shows the results screen and returns to the menu |
 | `t(he, en)` | Picks a string for the console language |

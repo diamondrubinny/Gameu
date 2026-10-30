@@ -1,0 +1,33 @@
+/** Guess-the-word texts — Hebrew (source of truth; other locales must match its keys). */
+export const he = {
+  title: 'נחשו את המילה',
+  intro: 'בוחרים אות בתורכם. אות נכונה — עוד תור! אות שגויה — הבלון מתרוקן. אפשר גם לנחש את כל המילה.',
+  wordN: (n: number, total: number) => `מילה ${n} מתוך ${total}`,
+  category: (name: string) => `קטגוריה: ${name}`,
+  categories: { animals: 'חיות', food: 'אוכל', countries: 'מדינות', home: 'בבית', nature: 'טבע', sports: 'ספורט', jobs: 'מקצועות', transport: 'כלי תחבורה' },
+  misses: (n: number, max: number) => `טעויות: ${n} מתוך ${max}`,
+  usedLetters: 'אותיות שנבחרו',
+  inWord: 'במילה',
+  notInWord: 'לא במילה',
+  yourTurn: 'תורך! בחרו אות',
+  isPicking: (name: string) => `${name} בוחר/ת אות…`,
+  turnOf: (name: string) => `התור של ${name}`,
+  hit: (name: string, letter: string, n: number) => `${name}: ${letter} — מופיעה ${n === 1 ? 'פעם אחת' : `${n} פעמים`}!`,
+  miss: (name: string, letter: string) => `${name}: ${letter} — לא במילה`,
+  solvedBy: (name: string) => `${name} פתר/ה את המילה! 🎉`,
+  completedBy: (name: string) => `${name} השלים/ה את המילה! 🎉`,
+  wrongSolve: (name: string, guess: string) => `${name} ניחש/ה "${guess}" — לא נכון`,
+  popped: 'הבלון התפוצץ! 💥',
+  theWordWas: (word: string) => `המילה הייתה: ${word}`,
+  timeUp: (name: string) => `נגמר הזמן ל־${name}`,
+  plusPoints: (n: number) => `+${n} נקודות`,
+  nice: 'יפה! עוד תור 🎯',
+  oops: 'לא במילה 😅',
+  wrongWord: 'לא זאת המילה',
+  pts: (n: number) => `${n} נק׳`,
+  balloonLabel: (left: number) => `בלון: נשארו ${left} טעויות`,
+  wordLabel: (shown: string) => `המילה: ${shown}`,
+  blank: 'ריק',
+};
+
+export type WordDict = typeof he;

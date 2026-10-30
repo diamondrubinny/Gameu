@@ -1,0 +1,30 @@
+{
+  "id": "word-guess",
+  "version": "1.0.0",
+  "name": {
+    "he": "נחשו את המילה",
+    "en": "Guess the Word",
+    "ar": "خمّن الكلمة",
+    "ru": "Угадай слово",
+    "es": "Adivina la palabra",
+    "fr": "Devine le mot"
+  },
+  "description": {
+    "he": "בוחרים אותיות בתורות ומגלים את המילה לפני שהבלון מתפוצץ. עם רמז קטגוריה.",
+    "en": "Take turns picking letters and reveal the word before the balloon pops. With a category hint.",
+    "ar": "اختاروا الحروف بالتناوب واكشفوا الكلمة قبل أن ينفجر البالون. مع تلميح الفئة.",
+    "ru": "По очереди выбирайте буквы и откройте слово, пока шарик не лопнул. С подсказкой-категорией.",
+    "es": "Por turnos, elegid letras y descubrid la palabra antes de que explote el globo. Con pista de categoría.",
+    "fr": "Choisissez des lettres chacun votre tour et trouvez le mot avant que le ballon éclate. Avec un indice de catégorie."
+  },
+  "minPlayers": 1,
+  "maxPlayers": 8,
+  "entry": "index.html",
+  "icon": "icon.svg",
+  "controller": "mixed",
+  "accessibility": {
+    "colorIndependent": true,
+    "extendedTime": true,
+    "noFlashing": true
+  }
+}

@@ -29,12 +29,14 @@ async function activeId(host: Page): Promise<string | undefined> {
   return host.evaluate(() => (document.activeElement as HTMLElement | null)?.dataset.id);
 }
 
-/** Moves the TV selection to a menu item with the phone d-pad (works whatever the grid layout). */
+/** Moves the TV selection to a menu item with the phone d-pad: go to the top, then sweep each row. */
 async function navigateTo(host: Page, phone: Page, id: string): Promise<void> {
   await expect.poll(() => activeId(host)).toMatch(/^game:|settings/);
-  for (const dir of ['למעלה', 'ימינה', 'למטה', 'שמאלה', 'למטה', 'ימינה']) {
-    for (let i = 0; i < 6 && (await activeId(host)) !== id; i++) await press(phone, dir);
-    if ((await activeId(host)) === id) return;
+  const at = async () => (await activeId(host)) === id;
+  for (let i = 0; i < 6 && !(await at()); i++) await press(phone, 'למעלה');
+  for (let row = 0; row < 6 && !(await at()); row++) {
+    for (const dir of ['ימינה', 'שמאלה']) for (let i = 0; i < 8 && !(await at()); i++) await press(phone, dir);
+    if (!(await at())) await press(phone, 'למטה');
   }
   expect(await activeId(host)).toBe(id);
 }
@@ -261,6 +263,30 @@ test("Texas Hold'em: private cards on phones, actions, hand result", async ({ pa
   const winner = actor === a ? b : a;
   await expect(winner.locator('.message-text')).toContainText('זכית', { timeout: 10_000 });
   await expect(actor.locator('.message-text')).toContainText('הפסדת');
+  expect(errors).toEqual([]);
+});
+
+test('guess the word: letter picker on the phone updates the TV', async ({ page: host, browser, baseURL }) => {
+  const errors: string[] = [];
+  host.on('pageerror', (e) => errors.push(e.message));
+  host.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  await host.goto('/');
+  await expect(host.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);
+  const code = (await host.locator('.code').textContent())!;
+  const a = await openPhone(browser, baseURL!, code, 'Uri');
+  await host.locator('[data-id="game:word-guess"]').click();
+  const game = host.frameLocator('.game-frame');
+  // Hebrew TV → Hebrew keyboard with all 22 letters and a solve field.
+  await expect(a.locator('.letter-grid .letter')).toHaveCount(22, { timeout: 20_000 });
+  await expect(a.getByLabel('ניחוש כל המילה')).toBeVisible();
+  await a.locator('.letter', { hasText: 'י' }).click();
+  await expect(game.locator('#used li')).toHaveCount(1);
+  // A wrong whole-word guess counts as a miss.
+  await expect(a.locator('.letter-grid')).toBeVisible({ timeout: 10_000 });
+  const missesBefore = await game.locator('#misses').textContent();
+  await a.getByLabel('ניחוש כל המילה').fill('זזזזזזזזזזזזזזזזזזזזזזזז');
+  await a.getByRole('button', { name: 'שליחה' }).click();
+  await expect(game.locator('#misses')).not.toHaveText(missesBefore!);
   expect(errors).toEqual([]);
 });
 

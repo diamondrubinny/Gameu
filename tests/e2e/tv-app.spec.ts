@@ -74,7 +74,7 @@ test.describe('Android TV app (simulated WebView)', () => {
     await expect(page.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);
     await expect(page.locator('.url bdi')).toHaveText('http://192.168.1.44:8080/c');
     await expect(page.locator('.qr svg')).toBeVisible();
-    await expect(page.locator('.card[data-id^="game:"]')).toHaveCount(4);
+    await expect(page.locator('.card[data-id^="game:"]')).toHaveCount(5);
     expect(await nativeOut(page)).toContain('hello');
     expect(errors, errors.join('\n')).toEqual([]);
   });

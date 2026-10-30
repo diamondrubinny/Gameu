@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guess the Word</title>
+  <link rel="stylesheet" href="/sdk/game-base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <section class="stage">
+      <header class="top">
+        <h1 id="title"></h1>
+        <p id="word-n" class="muted"></p>
+      </header>
+      <p id="category" class="category"></p>
+      <div class="middle">
+        <div id="balloon" class="balloon" role="img">
+          <svg viewBox="0 0 100 140" aria-hidden="true"><path class="string" d="M50 98 C46 110 56 118 50 138" /><ellipse class="skin" cx="50" cy="52" rx="38" ry="46" /><path class="knot" d="M44 98 L56 98 L50 90 Z" /><ellipse class="shine" cx="36" cy="34" rx="8" ry="13" /></svg>
+          <span class="boom" aria-hidden="true">💥</span>
+        </div>
+        <div id="word" class="word" role="img"></div>
+      </div>
+      <p id="misses" class="misses"></p>
+      <ul id="used" class="used" role="list"></ul>
+      <p id="status" class="status"></p>
+      <div class="timer"><div id="timer"></div></div>
+    </section>
+    <aside class="side panel">
+      <ol class="scoreboard" id="scores"></ol>
+    </aside>
+  </main>
+  <div id="overlay" class="center"></div>
+  <div id="live" class="sr-only" aria-live="polite"></div>
+  <script src="main.js"></script>
+</body>
+</html>

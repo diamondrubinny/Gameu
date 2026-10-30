@@ -1,6 +1,6 @@
 # Plan: controls, audio, Texas Hold'em, Guess the Word
 
-Status: controls ✅ · audio ✅ · poker ✅ · guess-the-word ⏳
+Status: controls ✅ · audio ✅ · poker ✅ · guess-the-word ✅
 
 ## 1. Controls (done)
 - TV selection tracked with `.nav-focus` (painted even when the window is unfocused), kept across re-renders, follows Tab/pointer.
