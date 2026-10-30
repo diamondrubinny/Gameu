@@ -1,0 +1,30 @@
+{
+  "id": "poker",
+  "version": "1.0.0",
+  "name": {
+    "he": "טקסס הולדם",
+    "en": "Texas Hold'em",
+    "ar": "تكساس هولدم",
+    "ru": "Техасский холдем",
+    "es": "Texas Hold'em",
+    "fr": "Texas Hold'em"
+  },
+  "description": {
+    "he": "פוקר עם צ׳יפים וירטואליים בלבד. הקלפים שלך מוסתרים בטלפון, השולחן על הטלוויזיה.",
+    "en": "Poker with virtual chips only. Your cards stay hidden on your phone, the table is on the TV.",
+    "ar": "بوكر برقائق افتراضية فقط. أوراقك مخفية على هاتفك والطاولة على التلفاز.",
+    "ru": "Покер только на виртуальные фишки. Ваши карты — на телефоне, стол — на телевизоре.",
+    "es": "Póquer solo con fichas virtuales. Tus cartas, ocultas en tu teléfono; la mesa, en la tele.",
+    "fr": "Poker avec jetons virtuels uniquement. Vos cartes restent cachées sur votre téléphone, la table est à la télé."
+  },
+  "minPlayers": 2,
+  "maxPlayers": 8,
+  "entry": "index.html",
+  "icon": "icon.svg",
+  "controller": "mixed",
+  "accessibility": {
+    "colorIndependent": true,
+    "extendedTime": true,
+    "noFlashing": true
+  }
+}

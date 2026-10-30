@@ -42,6 +42,16 @@ export const es: ControllerDict = {
   settings: 'Ajustes del control',
   joystick: 'Joystick',
   drawArea: 'Área de dibujo',
+  cards: {
+    yours: 'Tus cartas',
+    hide: 'Ocultar cartas',
+    show: 'Mostrar cartas',
+    hidden: 'Cartas ocultas',
+    suits: { s: 'picas', h: 'corazones', d: 'diamantes', c: 'tréboles' },
+    ranks: { A: 'As', K: 'Rey', Q: 'Reina', J: 'Jota', T: '10' },
+    card: (rank: string, suit: string) => `${rank} de ${suit}`,
+  },
+  letters: { label: 'Letras', solve: 'Adivinar la palabra entera', solvePlaceholder: 'La palabra es…', used: 'ya elegida' },
   errors: {
     bad_room: 'Código de sala incorrecto. Revisa el código en el televisor.',
     room_full: 'La sala está llena (máximo 8 jugadores).',

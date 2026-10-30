@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Texas Hold'em</title>
+  <link rel="stylesheet" href="/sdk/game-base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1 id="title"></h1>
+      <p id="hand-info" class="hand-info"></p>
+    </header>
+    <section class="felt">
+      <div class="center-area">
+        <div id="board" class="board-cards" role="group"></div>
+        <div id="pot" class="pot"></div>
+        <p id="status" class="status"></p>
+      </div>
+      <ol id="seats" class="seats"></ol>
+    </section>
+  </main>
+  <div id="overlay" class="center"></div>
+  <div id="live" class="sr-only" aria-live="polite"></div>
+  <script src="main.js"></script>
+</body>
+</html>

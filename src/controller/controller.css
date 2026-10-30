@@ -113,3 +113,32 @@ button { font: inherit; color: inherit; }
   .dpad { grid-template-columns: repeat(3, 22vmin); grid-template-rows: repeat(3, 22vmin); }
   .choice-list { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ---- cards layout (poker) ---- */
+.cards-layout { flex: 1; display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+.hand { display: flex; justify-content: center; gap: 12px; min-height: 150px; align-items: center; }
+.hand.dim { opacity: .4; filter: grayscale(.7); }
+.pcard { width: 96px; height: 136px; border-radius: 12px; background: #fdfdfb; color: #1b1b1f; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(0,0,0,.45); border: 2px solid #d9d9e0; direction: ltr; }
+.pcard-rank { font-size: 2.6rem; font-weight: 900; line-height: 1; }
+.pcard-suit { font-size: 2.6rem; line-height: 1; }
+.pcard.suit-h, .pcard.suit-d { color: #c8102e; }
+/* Second cue besides colour: diamonds and hearts get a tinted face. */
+.pcard.suit-d { background: #fff6f0; }
+.pcard.suit-c { background: #f3fbf4; }
+.hand-hidden { font-weight: 800; color: var(--muted); }
+.hide-toggle { align-self: center; }
+.action.small { min-height: 44px; padding: 6px 14px; font-size: .95rem; }
+.cards-info { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; font-weight: 700; }
+.cards-info li { background: var(--panel); border-radius: 10px; padding: 4px 10px; }
+.card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+.card-actions .action { min-height: 64px; font-size: 1.15rem; }
+.card-actions .action.chosen { outline: 4px solid #fff; }
+
+/* ---- letters layout (word games) ---- */
+.letters-layout { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.letter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px; }
+.letter { min-height: 52px; border-radius: 12px; border: 2px solid #4a5196; background: var(--panel); color: var(--text); font: inherit; font-size: 1.4rem; font-weight: 800; cursor: pointer; }
+.letter:disabled { opacity: .3; text-decoration: line-through; }
+.letter.chosen { opacity: 1; background: var(--focus); color: #111; text-decoration: none; }
+.solve-form { margin-top: auto; }
+.solve-label { font-weight: 700; }

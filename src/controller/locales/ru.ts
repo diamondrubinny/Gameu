@@ -42,6 +42,16 @@ export const ru: ControllerDict = {
   settings: 'Настройки пульта',
   joystick: 'Джойстик',
   drawArea: 'Область рисования',
+  cards: {
+    yours: 'Ваши карты',
+    hide: 'Скрыть карты',
+    show: 'Показать карты',
+    hidden: 'Карты скрыты',
+    suits: { s: 'пик', h: 'червей', d: 'бубен', c: 'треф' },
+    ranks: { A: 'Туз', K: 'Король', Q: 'Дама', J: 'Валет', T: '10' },
+    card: (rank: string, suit: string) => `${rank} ${suit}`,
+  },
+  letters: { label: 'Буквы', solve: 'Угадать слово целиком', solvePlaceholder: 'Это слово…', used: 'уже выбрана' },
   errors: {
     bad_room: 'Неверный код комнаты. Проверьте код на экране телевизора.',
     room_full: 'Комната заполнена (до 8 игроков).',

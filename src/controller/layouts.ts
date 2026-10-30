@@ -24,6 +24,10 @@ export function renderLayout(container: HTMLElement, layout: ParsedLayout, ctx: 
       return renderText(container, layout, ctx);
     case 'draw':
       return renderDraw(container, layout, ctx);
+    case 'cards':
+      return renderCards(container, layout, ctx);
+    case 'letters':
+      return renderLetters(container, layout, ctx);
     case 'message':
       container.append(
         h('div', { class: 'message', role: 'status' }, h('p', { class: 'message-text' }, layoutText(layout.text)), layout.subtext ? h('p', { class: 'message-sub' }, layout.subtext) : null),
@@ -377,4 +381,114 @@ function round(n: number): number {
 
 function clamp01(n: number): number {
   return Math.max(0, Math.min(1, n));
+}
+
+// ---------------------------------------------------------------- cards (poker etc.)
+
+const SUIT_SYMBOL: Record<string, string> = { s: '\u2660', h: '\u2665', d: '\u2666', c: '\u2663' };
+/** Hide-cards toggle survives layout updates (privacy at a shared table). */
+let cardsHidden = false;
+
+export function cardName(code: string): string {
+  const rank = code[0] ?? '';
+  const suit = code[1] ?? '';
+  const ranks = t.cards.ranks as Record<string, string>;
+  const suits = t.cards.suits as Record<string, string>;
+  return t.cards.card(ranks[rank] ?? rank, suits[suit] ?? suit);
+}
+
+function cardEl(code: string): HTMLElement {
+  const suit = code[1] ?? 's';
+  const rank = code[0] === 'T' ? '10' : (code[0] ?? '');
+  return h(
+    'div',
+    { class: `pcard suit-${suit}`, role: 'img', 'aria-label': cardName(code) },
+    h('span', { class: 'pcard-rank', 'aria-hidden': 'true' }, rank),
+    h('span', { class: 'pcard-suit', 'aria-hidden': 'true' }, SUIT_SYMBOL[suit] ?? ''),
+  );
+}
+
+function renderCards(container: HTMLElement, layout: Extract<ParsedLayout, { type: 'cards' }>, ctx: LayoutContext): () => void {
+  const wrap = h('div', { class: 'cards-layout' });
+  if (layout.title) wrap.append(h('h2', { class: 'layout-title', role: 'status' }, layout.title));
+  if (layout.cards.length) {
+    const hand = h('div', { class: `hand${layout.dim ? ' dim' : ''}`, role: 'group', 'aria-label': t.cards.yours });
+    const toggle = h('button', { class: 'action secondary small hide-toggle', type: 'button', 'aria-pressed': String(cardsHidden) });
+    const paint = () => {
+      hand.replaceChildren(...(cardsHidden ? [h('p', { class: 'hand-hidden' }, t.cards.hidden)] : layout.cards.map(cardEl)));
+      toggle.textContent = cardsHidden ? t.cards.show : t.cards.hide;
+      toggle.setAttribute('aria-pressed', String(cardsHidden));
+    };
+    toggle.addEventListener('click', () => {
+      cardsHidden = !cardsHidden;
+      paint();
+    });
+    paint();
+    wrap.append(hand, toggle);
+  }
+  if (layout.info.length) wrap.append(h('ul', { class: 'cards-info' }, ...layout.info.map((line) => h('li', { dir: 'auto' }, line))));
+  if (layout.actions.length) {
+    const grid = h('div', { class: 'card-actions', role: 'group' });
+    const buttons = layout.actions.map((a) => {
+      const b = h('button', { class: `action ${a.color ?? 'secondary'}`, type: 'button', 'aria-label': a.aria ?? null }, a.label);
+      b.addEventListener('click', () => {
+        // One decision per turn: lock the buttons until the game sends the next layout.
+        for (const other of buttons) other.disabled = true;
+        b.classList.add('chosen', 'pressed');
+        ctx.haptic(30);
+        ctx.send({ kind: 'button', id: a.id, pressed: true });
+        ctx.send({ kind: 'button', id: a.id, pressed: false });
+      });
+      grid.append(b);
+      return b;
+    });
+    wrap.append(grid);
+  }
+  container.append(wrap);
+  return () => {};
+}
+
+// ---------------------------------------------------------------- letters (word games)
+
+function renderLetters(container: HTMLElement, layout: Extract<ParsedLayout, { type: 'letters' }>, ctx: LayoutContext): () => void {
+  const wrap = h('div', { class: 'letters-layout' });
+  if (layout.prompt) wrap.append(h('h2', { class: 'layout-title' }, layout.prompt));
+  const used = new Set(layout.used);
+  const grid = h('div', { class: 'letter-grid', role: 'group', 'aria-label': t.letters.label, dir: 'auto' });
+  const status = h('p', { class: 'choice-status', role: 'status' });
+  const buttons: HTMLButtonElement[] = [];
+  const lock = () => buttons.forEach((b) => (b.disabled = true));
+  for (const letter of layout.letters) {
+    const isUsed = used.has(letter);
+    const b = h('button', { class: 'letter', type: 'button', disabled: isUsed, 'aria-label': isUsed ? `${letter}, ${t.letters.used}` : letter }, letter);
+    b.addEventListener('click', () => {
+      lock();
+      b.classList.add('chosen');
+      ctx.haptic(20);
+      ctx.send({ kind: 'text', id: layout.id, value: letter });
+      status.textContent = `${t.sent}: ${letter}`;
+    });
+    buttons.push(b);
+    grid.append(b);
+  }
+  wrap.append(grid, status);
+  if (layout.solve) {
+    const inputId = 'solve-input';
+    const form = h('form', { class: 'text-form solve-form', novalidate: true });
+    const input = h('input', { id: inputId, type: 'text', maxlength: 40, placeholder: t.letters.solvePlaceholder, autocomplete: 'off', enterkeyhint: 'send', dir: 'auto' });
+    form.append(h('label', { for: inputId, class: 'solve-label' }, t.letters.solve), input, h('button', { type: 'submit', class: 'action primary' }, t.send));
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+      lock();
+      ctx.haptic(20);
+      ctx.send({ kind: 'text', id: 'solve', value });
+      input.value = '';
+      status.textContent = `${t.sent}: ${value}`;
+    });
+    wrap.append(form);
+  }
+  container.append(wrap);
+  return () => {};
 }

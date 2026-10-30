@@ -42,6 +42,16 @@ export const fr: ControllerDict = {
   settings: 'Paramètres de la manette',
   joystick: 'Joystick',
   drawArea: 'Zone de dessin',
+  cards: {
+    yours: 'Vos cartes',
+    hide: 'Masquer les cartes',
+    show: 'Afficher les cartes',
+    hidden: 'Cartes masquées',
+    suits: { s: 'pique', h: 'cœur', d: 'carreau', c: 'trèfle' },
+    ranks: { A: 'As', K: 'Roi', Q: 'Dame', J: 'Valet', T: '10' },
+    card: (rank: string, suit: string) => `${rank} de ${suit}`,
+  },
+  letters: { label: 'Lettres', solve: 'Deviner le mot entier', solvePlaceholder: 'Le mot est…', used: 'déjà choisie' },
   errors: {
     bad_room: 'Code de salle incorrect. Vérifiez le code sur la télévision.',
     room_full: 'La salle est pleine (8 joueurs maximum).',

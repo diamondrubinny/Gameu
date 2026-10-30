@@ -29,6 +29,16 @@ async function activeId(host: Page): Promise<string | undefined> {
   return host.evaluate(() => (document.activeElement as HTMLElement | null)?.dataset.id);
 }
 
+/** Moves the TV selection to a menu item with the phone d-pad (works whatever the grid layout). */
+async function navigateTo(host: Page, phone: Page, id: string): Promise<void> {
+  await expect.poll(() => activeId(host)).toMatch(/^game:|settings/);
+  for (const dir of ['למעלה', 'ימינה', 'למטה', 'שמאלה', 'למטה', 'ימינה']) {
+    for (let i = 0; i < 6 && (await activeId(host)) !== id; i++) await press(phone, dir);
+    if ((await activeId(host)) === id) return;
+  }
+  expect(await activeId(host)).toBe(id);
+}
+
 test('TV host + two phones: join, navigate, play trivia, exit, play snake', async ({ page: host, browser, baseURL }) => {
   const errors: string[] = [];
   host.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
@@ -48,9 +58,7 @@ test('TV host + two phones: join, navigate, play trivia, exit, play snake', asyn
   await expect(host.locator('#players .player:not(.offline)')).toHaveCount(2);
 
   // Admin navigates the TV menu with the phone d-pad until Trivia is focused.
-  await expect.poll(() => activeId(host)).toMatch(/^game:/);
-  for (let i = 0; i < 6 && (await activeId(host)) !== 'game:trivia'; i++) await press(admin, 'שמאלה');
-  expect(await activeId(host)).toBe('game:trivia');
+  await navigateTo(host, admin, 'game:trivia');
   await press(admin, 'אישור');
 
   const game = host.frameLocator('.game-frame');
@@ -97,8 +105,7 @@ test('TV host + two phones: join, navigate, play trivia, exit, play snake', asyn
   await expect(host.getByRole('heading', { name: 'משחקים' })).toBeVisible();
 
   // Snake: sandboxed game boots under the strict CSP and steers from the phone.
-  for (let i = 0; i < 6 && (await activeId(host)) !== 'game:snake'; i++) await press(admin, 'ימינה');
-  expect(await activeId(host)).toBe('game:snake');
+  await navigateTo(host, admin, 'game:snake');
   await press(admin, 'אישור');
   await expect(host.locator('.game-loading')).toHaveCount(0, { timeout: 10_000 });
   await expect(game.locator('#scores li')).toHaveCount(2);
@@ -190,7 +197,7 @@ test('each phone gets trivia in its own language while the TV stays in Hebrew', 
   await expect(en.locator('.bar .me-name')).toHaveText('Sam');
   await expect(en.locator('.message-text')).toContainText('is choosing');
 
-  for (let i = 0; i < 6 && (await activeId(host)) !== 'game:trivia'; i++) await press(he, 'שמאלה');
+  await navigateTo(host, he, 'game:trivia');
   await press(he, 'אישור');
   const game = host.frameLocator('.game-frame');
   await expect(game.locator('#opt-start')).toHaveClass(/focused/, { timeout: 10_000 });
@@ -229,6 +236,32 @@ test('a phone can switch language mid-game from its settings', async ({ page: ho
   await expect(phone.locator('html')).toHaveAttribute('lang', 'en');
   // The TV re-sends the menu in the phone's new language.
   await expect(phone.locator('.layout-title')).toHaveText('Choose a game');
+});
+
+test("Texas Hold'em: private cards on phones, actions, hand result", async ({ page: host, browser, baseURL }) => {
+  const errors: string[] = [];
+  host.on('pageerror', (e) => errors.push(e.message));
+  host.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  await host.goto('/');
+  await expect(host.locator('.code')).toHaveText(/^[A-HJ-NP-Z2-9]{4}$/);
+  const code = (await host.locator('.code').textContent())!;
+  const a = await openPhone(browser, baseURL!, code, 'Ace');
+  const b = await openPhone(browser, baseURL!, code, 'Bee');
+  await host.locator('[data-id="game:poker"]').click();
+  const game = host.frameLocator('.game-frame');
+  await expect(game.locator('.seat')).toHaveCount(2, { timeout: 15_000 });
+  // Both phones get exactly two private cards; the TV shows only card backs.
+  for (const p of [a, b]) await expect(p.locator('.hand .pcard')).toHaveCount(2, { timeout: 15_000 });
+  await expect(game.locator('.seat .pcard.back')).toHaveCount(4);
+  await expect(game.locator('.seat .pcard:not(.back)')).toHaveCount(0);
+  // Whoever is first to act folds: the other wins the blinds without a showdown.
+  const actor = (await a.locator('.card-actions button').count()) ? a : b;
+  await expect(actor.getByRole('button', { name: 'פרישה' })).toBeEnabled();
+  await actor.getByRole('button', { name: 'פרישה' }).click();
+  const winner = actor === a ? b : a;
+  await expect(winner.locator('.message-text')).toContainText('זכית', { timeout: 10_000 });
+  await expect(actor.locator('.message-text')).toContainText('הפסדת');
+  expect(errors).toEqual([]);
 });
 
 test('controller shows a clear error for a wrong room code', async ({ browser, baseURL }) => {

@@ -42,6 +42,16 @@ export const ar: ControllerDict = {
   settings: 'إعدادات جهاز التحكم',
   joystick: 'عصا التحكم',
   drawArea: 'منطقة الرسم',
+  cards: {
+    yours: 'أوراقك',
+    hide: 'إخفاء الأوراق',
+    show: 'إظهار الأوراق',
+    hidden: 'الأوراق مخفية',
+    suits: { s: 'بستوني', h: 'كبة', d: 'ديناري', c: 'سباتي' },
+    ranks: { A: 'آس', K: 'ملك', Q: 'ملكة', J: 'ولد', T: '10' },
+    card: (rank: string, suit: string) => `${rank} ${suit}`,
+  },
+  letters: { label: 'الحروف', solve: 'خمّن الكلمة كاملة', solvePlaceholder: 'الكلمة هي…', used: 'تم اختياره' },
   errors: {
     bad_room: 'رمز الغرفة غير صحيح. تحققوا من الرمز على شاشة التلفاز.',
     room_full: 'الغرفة ممتلئة (حتى 8 لاعبين).',

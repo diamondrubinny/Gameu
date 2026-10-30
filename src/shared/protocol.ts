@@ -38,6 +38,8 @@ const Token = z.string().regex(/^[A-Za-z0-9_-]{16,64}$/);
 const PlayerId = z.string().regex(/^[A-Za-z0-9-]{8,64}$/);
 const Label = z.string().min(1).max(24);
 const HexColor = z.string().regex(/^#[0-9a-f]{6}$/i);
+/** A playing card: rank 2-9, T, J, Q, K, A + suit s/h/d/c (e.g. "As", "Td"). */
+export const CardCodeSchema = z.string().regex(/^[2-9TJQKA][shdc]$/);
 
 // ---------- controller input ----------
 
@@ -92,6 +94,26 @@ export const ControllerLayoutSchema = z.discriminatedUnion('type', [
     colors: z.array(HexColor).min(1).max(8),
   }),
   z.object({ type: z.literal('message'), text: z.string().max(200), subtext: z.string().max(200).optional() }),
+  /** Private cards (e.g. poker hole cards) + info lines + action buttons (sent as button presses). */
+  z.object({
+    type: z.literal('cards'),
+    id: ControlId,
+    title: z.string().max(80).optional(),
+    cards: z.array(CardCodeSchema).max(5),
+    /** Shown greyed out (e.g. folded). */
+    dim: z.boolean().default(false),
+    info: z.array(z.string().max(60)).max(4).default([]),
+    actions: z.array(ButtonDef).max(6).default([]),
+  }),
+  /** Letter picker (word games): each tap sends {kind:'text', id, value: letter}; optional solve field sends id 'solve'. */
+  z.object({
+    type: z.literal('letters'),
+    id: ControlId,
+    prompt: z.string().max(200).optional(),
+    letters: z.array(z.string().min(1).max(2)).min(1).max(40),
+    used: z.array(z.string().max(2)).max(40).default([]),
+    solve: z.boolean().default(false),
+  }),
 ]);
 export type ControllerLayout = z.input<typeof ControllerLayoutSchema>;
 export type ParsedLayout = z.output<typeof ControllerLayoutSchema>;

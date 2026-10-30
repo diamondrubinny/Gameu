@@ -41,6 +41,16 @@ export const he = {
   settings: 'הגדרות שלט',
   joystick: 'ג׳ויסטיק',
   drawArea: 'אזור ציור',
+  cards: {
+    yours: 'הקלפים שלך',
+    hide: 'הסתרת קלפים',
+    show: 'הצגת קלפים',
+    hidden: 'הקלפים מוסתרים',
+    suits: { s: 'עלה', h: 'לב', d: 'יהלום', c: 'תלתן' },
+    ranks: { A: 'אס', K: 'מלך', Q: 'מלכה', J: 'נסיך', T: '10' },
+    card: (rank: string, suit: string) => `${rank} ${suit}`,
+  },
+  letters: { label: 'אותיות', solve: 'ניחוש כל המילה', solvePlaceholder: 'המילה היא…', used: 'כבר נבחרה' },
   errors: {
     bad_room: 'קוד החדר שגוי. בדקו את הקוד על מסך הטלוויזיה.',
     room_full: 'החדר מלא (עד 8 שחקנים).',
