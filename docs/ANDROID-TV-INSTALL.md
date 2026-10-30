@@ -1,6 +1,6 @@
 # התקנת Gameu על Android TV / Google TV
 
-> גרסת פיתוח (debug), 0.4.0. האפליקציה כוללת שרת מובנה — הטלפונים מתחברים ישירות לטלוויזיה, בלי מחשב.
+> גרסת פיתוח (debug), 0.5.0. האפליקציה כוללת שרת מובנה — הטלפונים מתחברים ישירות לטלוויזיה, בלי מחשב.
 
 ## מה צריך
 - טלוויזיה עם Android TV / Google TV (Android 8 ומעלה), או Chromecast with Google TV / Mi Box / Nvidia Shield.
